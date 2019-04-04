@@ -87,7 +87,7 @@ class BorisOperations
 	private:
 		//An array containing LPCSTR values representing
 		//the digits 0-9.
-		static std::vector<LPCSTR> numbers();
+		//static std::vector<LPCSTR> numbers();
 };
 
 #endif
