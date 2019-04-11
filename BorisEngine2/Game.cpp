@@ -38,7 +38,7 @@ void Game::Dispose()
 	ThreadManager::GetInstance()->Dispose();
 }
 
-void Game::Run(std::string startscene)
+void Game::Run(String startscene)
 {
 	if (initialised)
 	{
@@ -57,11 +57,29 @@ void Game::Run(std::string startscene)
 	}
 }
 
-int Game::CreateGameWindow(std::string windowTitle, int width, int height)
+int Game::CreateGameWindow(String windowTitle, int width, int height)
 {
 	SDL_Window_Manager* sdlWindowManager = SDL_Window_Manager::getInstance();
 	//Attempt to initialise an SDL window.
 	if (!sdlWindowManager->initWND(windowTitle, width, height))
+	{
+		//End the program if the window cannot be initialised.
+		return -1;
+	}
+	SDL_Renderer* renderer = sdlWindowManager->getSDLRenderer();
+	TextureManager::getInstance()->SetRenderer(renderer);
+	ResourceSetup(renderer);
+	Initialise(sdlWindowManager->getSDLWindow(), renderer);
+	Run();
+	Dispose();
+	return 0;
+}
+
+int Game::CreateGameWindow(String windowTitle, int width, int height, Icon icon)
+{
+	SDL_Window_Manager* sdlWindowManager = SDL_Window_Manager::getInstance();
+	//Attempt to initialise an SDL window.
+	if (!sdlWindowManager->initWND(windowTitle, width, height,icon))
 	{
 		//End the program if the window cannot be initialised.
 		return -1;

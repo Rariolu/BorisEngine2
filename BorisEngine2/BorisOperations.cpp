@@ -1,22 +1,6 @@
 #include "BorisOperations.h"
 #include<iostream>
 
-//std::vector<LPCSTR> BorisOperations::numbers()
-//{
-//	std::vector<LPCSTR> returner;
-//	returner.push_back("0");
-//	returner.push_back("1");
-//	returner.push_back("2");
-//	returner.push_back("3");
-//	returner.push_back("4");
-//	returner.push_back("5");
-//	returner.push_back("6");
-//	returner.push_back("7");
-//	returner.push_back("8");
-//	returner.push_back("9");
-//	return returner;
-//}
-
 LPCSTR BorisOperations::Char_to_LPCSTR(char c)
 {
 	std::ostringstream ss;
@@ -77,11 +61,9 @@ SDL_Rect BorisOperations::GetSDLRect(FloatRect frect)
 
 LPCSTR BorisOperations::Int_to_LPCSTR(int num)
 {
-	//std::vector<LPCSTR> nums = numbers();
 	if (num < 10 && num > -1)
 	{
 		return new char[1]{(char)( num + '0')};
-		//return nums.at(num);
 	}
 	std::cout << num << " isn't between 0 and 9. Needs to be between or equal to these numbers to be valid." << std::endl;
 	return "0";

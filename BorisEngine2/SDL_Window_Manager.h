@@ -9,7 +9,7 @@
 //#include "Textures\favicon.c"
 #include "favicon.c"
 #include "BorisConsoleManager.h"
-
+#include "Aliases.h"
 //using namespace std;
 
 //A class which is used to manage the SDL window resources and renderer.
@@ -19,7 +19,8 @@ class SDL_Window_Manager
 		//A method which attempts to initialise and open a window
 		//and returns a boolean that depends on whether or not it
 		//was successful.
-		bool initWND(std::string strWNDTitle, int iWidth, int iHeight);
+		bool initWND(String strWNDTitle, int iWidth, int iHeight);
+		bool initWND(String windowTitle, int width, int height, Icon icon);
 		//A method which checks for an error from within the SDL
 		//library and outputs it to the console if there is one.
 		void CheckSDLError(int line);

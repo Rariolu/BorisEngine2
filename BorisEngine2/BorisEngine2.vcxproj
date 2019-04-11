@@ -38,7 +38,7 @@
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v140</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
@@ -152,7 +152,7 @@ xcopy /Y "C:\CppLib\SDL2\SDL2_mixer-2.0.1\lib\x64\*.dll" "$(OutDir)"
 xcopy /Y "C:\CppLib\SDL2\SDL2_ttf-2.0.14\lib\x64\*.dll" "$(OutDir)"
 echo Copying Build Over
 xcopy /Y  "$(OutDir)BorisEngine2.dll" "C:\CppLib\BorisEngine\lib\x64\BorisEngine.dll"
-xcopy /Y  "$(OutDir)BorisEngine2.lib" "C:\CppLib\BorisEngine\lib\x64\BorisEngine.dll"
+xcopy /Y  "$(OutDir)BorisEngine2.lib" "C:\CppLib\BorisEngine\lib\x64\BorisEngine.lib"
 xcopy /Y "$(ProjectDir)*.h" "C:\CppLib\BorisEngine\include"
 xcopy /Y "$(ProjectDir)*.c" "C:\CppLib\BorisEngine\include"</Command>
     </PostBuildEvent>
@@ -182,6 +182,7 @@ xcopy /Y "$(ProjectDir)*.c" "C:\CppLib\BorisEngine\include"</Command>
     <ClCompile Include="Util.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Aliases.h" />
     <ClInclude Include="BooleanCarrier.h" />
     <ClInclude Include="BorisConsoleManager.h" />
     <ClInclude Include="BorisConstants.h" />

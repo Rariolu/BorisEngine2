@@ -6,8 +6,7 @@
 #include<iostream>
 #include"SceneManager.h"
 #include "SDL_Window_Manager.h"
-
-//using namespace std;
+#include "favicon.c"
 
 class Game
 {
@@ -21,10 +20,10 @@ class Game
 		//Dispose of sdl assets.
 		void Dispose();
 		//Run the gameplay, starting with the scene representing the given scene name.
-		void Run(std::string startscene);
+		void Run(String startscene);
 		virtual void Run() = 0;
-		int CreateGameWindow(std::string windowTitle, int width, int height);
-		
+		int CreateGameWindow(String windowTitle, int width, int height);
+		int CreateGameWindow(String windowTitle, int width, int height, Icon icon);
 	private:
 		virtual void ResourceSetup(SDL_Renderer* renderer)=0;
 		//A pointer to the sdl window.
