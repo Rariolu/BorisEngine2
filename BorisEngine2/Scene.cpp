@@ -4,7 +4,7 @@ FontManager* Scene::fontmanager = FontManager::GetInstance();
 TextureManager* Scene::textureManager = TextureManager::getInstance();
 SoundManager* Scene::soundManager = SoundManager::GetInstance();
 
-Scene::Scene(std::string backgroundimagename)
+Scene::Scene(String backgroundimagename)
 {
 	Texture* backTexture = textureManager->GetTexture(backgroundimagename);
 	if (backTexture)
@@ -218,7 +218,7 @@ void Scene::Render()
 }
 
 //Launch the scene
-std::string Scene::Run()
+String Scene::Run()
 {
 	if (initialised)
 	{
@@ -239,17 +239,64 @@ std::string Scene::Run()
 	return nextscene;
 }
 
-void Scene::SetNextScene(std::string scenename)
+void Scene::SetNextScene(String scenename)
 {
 	nextscene = scenename;
 }
 
-std::string Scene::GetMusicName()
+String Scene::GetMusicName()
 {
 	return musicName;
 }
 
-void Scene::SetMusicName(std::string musicname)
+void Scene::SetMusicName(String musicname)
 {
 	musicName = musicname;
+}
+
+bool Scene::GetInput()
+{
+	SDL_Event event;
+	while (SDL_PollEvent(&event))
+	{
+		switch (event.type)
+		{
+			//TODO: Add functions for other SDL events (these are good for my current projects).
+			case SDL_QUIT:
+			{
+				return false;
+			}
+			case SDL_KEYDOWN:
+			{
+				SDL_Keycode keycode = event.key.keysym.sym;
+				if (!KeyDown(keycode))
+				{
+					return false;
+				}
+			}
+			case SDL_MOUSEBUTTONDOWN:
+			{
+				SDL_MouseButtonEvent mousebutton = event.button;
+				if (!MouseDown(mousebutton))
+				{
+					return false;
+				}
+			}
+			default:
+			{
+				break;
+			}
+		}
+	}
+	return true;
+}
+
+bool Scene::KeyDown(SDL_Keycode key)
+{
+	return true;
+}
+
+bool Scene::MouseDown(SDL_MouseButtonEvent mousebutton)
+{
+	return true;
 }

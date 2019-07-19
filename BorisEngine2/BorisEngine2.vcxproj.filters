@@ -89,9 +89,6 @@
     <ClInclude Include="BorisConsoleManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="BorisConstants.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="BorisEngine.h">
       <Filter>Header Files</Filter>
     </ClInclude>

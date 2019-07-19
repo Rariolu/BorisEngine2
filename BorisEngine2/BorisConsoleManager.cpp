@@ -37,7 +37,7 @@ int BorisConsoleManager::print(void* data)
 	return 0;
 }
 
-void BorisConsoleManager::Print(std::string text)
+void BorisConsoleManager::Print(String text)
 {
 	Print((char*)BorisOperations::String_to_LPCSTR(text));
 }

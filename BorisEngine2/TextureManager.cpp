@@ -23,7 +23,13 @@ TextureManager* TextureManager::getInstance()
 	return _instance;
 }
 
-void TextureManager::AddTexture(std::string textureName,Texture* texture)//(LPCSTR textureName, Texture* texture)
+void TextureManager::AddTexture(String textureName, LPCSTR filename)//(LPCSTR textureName, LPCSTR filename)
+{
+	Texture* texture = new Texture(filename, theSDLRenderer);
+	AddTexture(textureName, texture);
+}
+
+void TextureManager::AddTexture(String textureName, Texture* texture)//(LPCSTR textureName, Texture* texture)
 {
 	if (!GetTexture(textureName))
 	{
@@ -38,13 +44,7 @@ void TextureManager::AddTexture(std::string textureName,Texture* texture)//(LPCS
 	BorisConsoleManager->Print(str);
 }
 
-void TextureManager::AddTexture(std::string textureName, LPCSTR filename)//(LPCSTR textureName, LPCSTR filename)
-{
-	Texture* texture = new Texture(filename, theSDLRenderer);
-	AddTexture(textureName, texture);
-}
-
-Texture* TextureManager::GetTexture(std::string textureName)
+Texture* TextureManager::GetTexture(String textureName)
 {
 	std::map<std::string, Texture*>::iterator txt = textureList.find(textureName);
 	if (txt != textureList.end())

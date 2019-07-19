@@ -31,7 +31,7 @@
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v140</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
@@ -84,7 +84,30 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>C:\CppLib\CppUtil\include;C:\CppLib\SDL2\SDL2-2.0.4\include;C:\CppLib\SDL2\SDL2_image-2.0.1\include;C:\CppLib\SDL2\SDL2_mixer-2.0.1\include;C:\CppLib\SDL2\SDL2_ttf-2.0.14\include;</AdditionalIncludeDirectories>
     </ClCompile>
+    <Link>
+      <AdditionalLibraryDirectories>C:\CppLib\CppUtil\lib\x86;C:\CppLib\SDL2\SDL2-2.0.4\lib\x86;C:\CppLib\SDL2\SDL2_image-2.0.1\lib\x86;C:\CppLib\SDL2\SDL2_mixer-2.0.1\lib\x86;C:\CppLib\SDL2\SDL2_ttf-2.0.14\lib\x86</AdditionalLibraryDirectories>
+      <AdditionalDependencies>CppUtil.lib;SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_ttf.lib;SDL2_mixer.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+    <PostBuildEvent>
+      <Command>echo Copying Util
+xcopy /Y "C:\CppLib\CppUtil\lib\x86\Debug" "$(OutDir)"
+echo copying SDL2.dll to debug directory
+xcopy /Y "C:\CppLib\SDL2\SDL2-2.0.4\lib\x86\SDL2.dll" "$(OutDir)"
+xcopy /Y "C:\CppLib\SDL2\SDL2_image-2.0.1\lib\x86\*.dll" "$(OutDir)"
+xcopy /Y "C:\CppLib\SDL2\SDL2_mixer-2.0.1\lib\x86\*.dll" "$(OutDir)"
+xcopy /Y "C:\CppLib\SDL2\SDL2_ttf-2.0.14\lib\x86\*.dll" "$(OutDir)"
+echo Copying Build Over
+copy /Y  "$(OutDir)BorisEngine2.dll" "C:\CppLib\BorisEngine\lib\x86\BorisEngine.dll"
+copy /Y  "$(OutDir)BorisEngine2.lib" "C:\CppLib\BorisEngine\lib\x86\BorisEngine.dll"
+echo Copying Build to Debug Directory
+copy /Y "$(OutDir)BorisEngine2.dll" "C:\CppLib\BorisEngine\lib\x86\Debug\BorisEngine.dll"
+copy /Y "$(OutDir)BorisEngine2.lib" "C:\CppLib\BorisEngine\lib\x86\Debug\BorisEngine.lib"
+echo Copying Header and C files
+xcopy /Y "$(ProjectDir)*.h" "C:\CppLib\BorisEngine\include"
+xcopy /Y "$(ProjectDir)*.c" "C:\CppLib\BorisEngine\include"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -107,8 +130,12 @@ xcopy /Y "C:\CppLib\SDL2\SDL2_image-2.0.1\lib\x64\*.dll" "$(OutDir)"
 xcopy /Y "C:\CppLib\SDL2\SDL2_mixer-2.0.1\lib\x64\*.dll" "$(OutDir)"
 xcopy /Y "C:\CppLib\SDL2\SDL2_ttf-2.0.14\lib\x64\*.dll" "$(OutDir)"
 echo Copying Build Over
-xcopy /Y  "$(OutDir)BorisEngine2.dll" "C:\CppLib\BorisEngine\lib\x64\BorisEngine.dll"
-xcopy /Y  "$(OutDir)BorisEngine2.lib" "C:\CppLib\BorisEngine\lib\x64\BorisEngine.dll"
+copy /Y  "$(OutDir)BorisEngine2.dll" "C:\CppLib\BorisEngine\lib\x64\BorisEngine.dll"
+copy /Y  "$(OutDir)BorisEngine2.lib" "C:\CppLib\BorisEngine\lib\x64\BorisEngine.dll"
+echo Copying Build to Debug Directory
+copy /Y "$(OutDir)BorisEngine2.dll" "C:\CppLib\BorisEngine\lib\x64\Debug\BorisEngine.dll"
+copy /Y "$(OutDir)BorisEngine2.lib" "C:\CppLib\BorisEngine\lib\x64\Debug\BorisEngine.lib"
+echo Copying Header and C files
 xcopy /Y "$(ProjectDir)*.h" "C:\CppLib\BorisEngine\include"
 xcopy /Y "$(ProjectDir)*.c" "C:\CppLib\BorisEngine\include"</Command>
     </PostBuildEvent>
@@ -120,11 +147,32 @@ xcopy /Y "$(ProjectDir)*.c" "C:\CppLib\BorisEngine\include"</Command>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>C:\CppLib\CppUtil\include;C:\CppLib\SDL2\SDL2-2.0.4\include;C:\CppLib\SDL2\SDL2_image-2.0.1\include;C:\CppLib\SDL2\SDL2_mixer-2.0.1\include;C:\CppLib\SDL2\SDL2_ttf-2.0.14\include;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalLibraryDirectories>C:\CppLib\CppUtil\lib\x86\Release;C:\CppLib\SDL2\SDL2-2.0.4\lib\x86;C:\CppLib\SDL2\SDL2_image-2.0.1\lib\x86;C:\CppLib\SDL2\SDL2_mixer-2.0.1\lib\x86;C:\CppLib\SDL2\SDL2_ttf-2.0.14\lib\x86;</AdditionalLibraryDirectories>
+      <AdditionalDependencies>CppUtil.lib;SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_ttf.lib;SDL2_mixer.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PostBuildEvent>
+      <Command>echo Copying Util
+xcopy /Y "C:\CppLib\CppUtil\lib\x86\Release\*.dll" "$(OutDir)"
+echo copying SDL2.dll to debug directory
+xcopy /Y "C:\CppLib\SDL2\SDL2-2.0.4\lib\x86\SDL2.dll" "$(OutDir)"
+xcopy /Y "C:\CppLib\SDL2\SDL2_image-2.0.1\lib\x86\*.dll" "$(OutDir)"
+xcopy /Y "C:\CppLib\SDL2\SDL2_mixer-2.0.1\lib\x86\*.dll" "$(OutDir)"
+xcopy /Y "C:\CppLib\SDL2\SDL2_ttf-2.0.14\lib\x86\*.dll" "$(OutDir)"
+echo Copying Build Over
+copy /Y  "$(OutDir)BorisEngine2.dll" "C:\CppLib\BorisEngine\lib\x86\BorisEngine.dll"
+copy /Y  "$(OutDir)BorisEngine2.lib" "C:\CppLib\BorisEngine\lib\x86\BorisEngine.lib"
+echo Copying Build to Release Directory
+copy /Y  "$(OutDir)BorisEngine2.dll" "C:\CppLib\BorisEngine\lib\x86\Release\BorisEngine.dll"
+copy /Y  "$(OutDir)BorisEngine2.lib" "C:\CppLib\BorisEngine\lib\x86\Release\BorisEngine.lib"
+echo Copying Header and C files
+xcopy /Y "$(ProjectDir)*.h" "C:\CppLib\BorisEngine\include"
+xcopy /Y "$(ProjectDir)*.c" "C:\CppLib\BorisEngine\include"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -151,8 +199,12 @@ xcopy /Y "C:\CppLib\SDL2\SDL2_image-2.0.1\lib\x64\*.dll" "$(OutDir)"
 xcopy /Y "C:\CppLib\SDL2\SDL2_mixer-2.0.1\lib\x64\*.dll" "$(OutDir)"
 xcopy /Y "C:\CppLib\SDL2\SDL2_ttf-2.0.14\lib\x64\*.dll" "$(OutDir)"
 echo Copying Build Over
-xcopy /Y  "$(OutDir)BorisEngine2.dll" "C:\CppLib\BorisEngine\lib\x64\BorisEngine.dll"
-xcopy /Y  "$(OutDir)BorisEngine2.lib" "C:\CppLib\BorisEngine\lib\x64\BorisEngine.lib"
+copy /Y  "$(OutDir)BorisEngine2.dll" "C:\CppLib\BorisEngine\lib\x64\BorisEngine.dll"
+copy /Y  "$(OutDir)BorisEngine2.lib" "C:\CppLib\BorisEngine\lib\x64\BorisEngine.lib"
+echo Copying Build to Release Directory
+copy /Y  "$(OutDir)BorisEngine2.dll" "C:\CppLib\BorisEngine\lib\x64\Release\BorisEngine.dll"
+copy /Y  "$(OutDir)BorisEngine2.lib" "C:\CppLib\BorisEngine\lib\x64\Release\BorisEngine.lib"
+echo Copying Header and C files
 xcopy /Y "$(ProjectDir)*.h" "C:\CppLib\BorisEngine\include"
 xcopy /Y "$(ProjectDir)*.c" "C:\CppLib\BorisEngine\include"</Command>
     </PostBuildEvent>
@@ -185,7 +237,6 @@ xcopy /Y "$(ProjectDir)*.c" "C:\CppLib\BorisEngine\include"</Command>
     <ClInclude Include="Aliases.h" />
     <ClInclude Include="BooleanCarrier.h" />
     <ClInclude Include="BorisConsoleManager.h" />
-    <ClInclude Include="BorisConstants.h" />
     <ClInclude Include="BorisEngine.h" />
     <ClInclude Include="BorisExternalInterface.h" />
     <ClInclude Include="BorisOperations.h" />

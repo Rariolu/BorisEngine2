@@ -14,16 +14,16 @@ class FontManager
 		//Destructor method.
 		~FontManager();
 		//Add a pointer to a "Font" instance with a std::string which can later be used to reference it.
-		void AddFont(std::string fontname, Font* font);
+		void AddFont(String fontname, Font* font);
 		//Give a std::string which representing a pointer to a "Font" instance to be returned.
-		Font* GetFont(std::string fontname);
+		Font* GetFont(String fontname);
 	private:
 		//Constructor method, private so that an instance can't be created outside of this class.
 		FontManager();
 		//A pointer to the only instance of this class.
 		static FontManager* _instance;
 		//A map using std::strings as keys and "Font" pointers as values.
-		std::map<std::string, Font*> fonts;
+		std::map<String, Font*> fonts;
 		static BorisConsoleManager* BorisConsoleManager;
 };
 

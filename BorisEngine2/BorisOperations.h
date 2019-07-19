@@ -11,6 +11,7 @@
 #include <map>
 #include <algorithm>
 #include <string>
+#include "Aliases.h"
 
 //using namespace std;
 
@@ -36,13 +37,31 @@ struct Vector2
 {
 	float  X;
 	float  Y;
-	std::string ToString() const
+	String ToString() const
 	{
 		return "{" + std::to_string(X) + "," + std::to_string(Y) + "}";
 	}
 	SDL_Point ToSDLPoint() const
 	{
 		return{ (int)X,(int)Y };
+	}
+	Vector2 operator*(float number)
+	{
+		return{X * number, Y * number};
+	}
+	void operator*=(float number)
+	{
+		X *= number;
+		Y *= number;
+	}
+	Vector2 operator+(Vector2 other)
+	{
+		return{X + other.X, Y + other.Y};
+	}
+	void operator+=(Vector2 other)
+	{
+		X += other.X;
+		Y += other.Y;
 	}
 };
 
@@ -62,24 +81,24 @@ class BorisOperations
 		static SDL_Rect GetExpandedRect(SDL_Rect rect, int expansion);
 		//A method which returns a std::string representing a given number
 		//padded with 0s to show a given amount of digits.
-		static std::string PadNumber(int num, int idealsize);
+		static String PadNumber(int num, int idealsize);
 		//A method which returns an LPCSTR value representing a given integer.
 		static LPCSTR Int_to_LPCSTR(int num);
 		//A method which returns an LPCSTR value representing a std::string.
-		static LPCSTR String_to_LPCSTR(std::string str);
+		static LPCSTR String_to_LPCSTR(String str);
 		//A method which returns an LPCSTR value representing a character.
 		static LPCSTR Char_to_LPCSTR(char c);
 		//A method which returns a boolean representing
 		//whether or not a given file path exists.
-		static bool FileExists(const std::string &filename);
+		static bool FileExists(const String &filename);
 		//A method which returns a std::string representing a character.
-		static std::string CharToString(char c);
+		static String CharToString(char c);
 		//A method which loops until there is no audio playing on
 		//any sdl audio channels.
 		static void WaitForMusicToStop();
 		//A method which creates a given directory if
 		//it doesn't already exist.
-		static void CreateFolder(std::string dirname);
+		static void CreateFolder(String dirname);
 		static float Lerp(float a, float b, float f);
 		static Vector2 Lerp(Vector2 a, Vector2 b, float f);
 		static FloatRect Lerp(FloatRect a, FloatRect b, float f);

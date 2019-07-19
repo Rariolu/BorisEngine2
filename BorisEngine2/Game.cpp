@@ -42,7 +42,7 @@ void Game::Run(String startscene)
 {
 	if (initialised)
 	{
-		std::string currentscene = startscene;
+		String currentscene = startscene;
 		bool loop = true;
 		while (sceneManager->GetScene(currentscene))
 		{

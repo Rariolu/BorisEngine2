@@ -23,9 +23,9 @@ SceneManager* SceneManager::GetInstance()
 	return _instance;
 }
 
-Scene* SceneManager::GetScene(std::string scenename)
+Scene* SceneManager::GetScene(String scenename)
 {
-	std::map<std::string, Scene*>::iterator scene = scenes.find(scenename);
+	std::map<String, Scene*>::iterator scene = scenes.find(scenename);
 	if (scene != scenes.end())
 	{
 		return scene->second;
@@ -33,7 +33,7 @@ Scene* SceneManager::GetScene(std::string scenename)
 	return NULL;
 }
 
-void SceneManager::AddScene(std::string scenename, Scene* scene)
+void SceneManager::AddScene(String scenename, Scene* scene)
 {
 	if (!GetScene(scenename) && scenename != "")
 	{

@@ -9,16 +9,16 @@ LPCSTR BorisOperations::Char_to_LPCSTR(char c)
 }
 
 //http://www.cplusplus.com/forum/beginner/4967/
-std::string BorisOperations::CharToString(char c)
+String BorisOperations::CharToString(char c)
 {
-	std::string str;
-	std::stringstream ss;
+	String str;
+	StringStream ss;
 	ss << c;
 	ss >> str;
 	return str;
 }
 
-void BorisOperations::CreateFolder(std::string dirname)
+void BorisOperations::CreateFolder(String dirname)
 {
 	if (!FileExists(dirname))
 	{
@@ -38,7 +38,7 @@ void BorisOperations::CreateFolder(std::string dirname)
 }
 
 //https://stackoverflow.com/questions/4316442/stdofstream-check-if-file-exists-before-writing
-bool BorisOperations::FileExists(const std::string& filename)
+bool BorisOperations::FileExists(const String& filename)
 {
 	struct stat buf;
 	return stat(filename.c_str(), &buf) != -1;
@@ -69,9 +69,9 @@ LPCSTR BorisOperations::Int_to_LPCSTR(int num)
 	return "0";
 }
 
-std::string BorisOperations::PadNumber(int num, int idealSize)
+String BorisOperations::PadNumber(int num, int idealSize)
 {
-	std::string strnumber = std::to_string(num);
+	String strnumber = std::to_string(num);
 
 	while (strnumber.size() < (decltype(strnumber.size()))idealSize)
 	{
@@ -90,7 +90,7 @@ int BorisOperations::Round(float value)
 	return (int)ceil(value);
 }
 
-LPCSTR BorisOperations::String_to_LPCSTR(std::string str)
+LPCSTR BorisOperations::String_to_LPCSTR(String str)
 {
 	std::ostringstream ss;
 	ss << str;

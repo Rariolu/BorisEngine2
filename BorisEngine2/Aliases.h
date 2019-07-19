@@ -4,5 +4,6 @@
 #include <iostream>
 
 using String = std::string;
+using StringStream = std::stringstream;
 
 #endif

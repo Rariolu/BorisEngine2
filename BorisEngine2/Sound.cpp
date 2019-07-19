@@ -41,7 +41,7 @@ Sound::Sound(LPCSTR filename, SoundType sound_type)
 			//cout << Mix_GetError() << endl;
 			if (music == 0)
 			{
-				std::string str = "Music '" + std::string(filename) + "' could not be loaded. " + std::string(SDL_GetError());
+				String str = "Music '" + String(filename) + "' could not be loaded. " + String(SDL_GetError());
 				BorisConsoleManager->Print(str);
 				//std::stringstream ss;
 				//ss << "Music '" << filename << "' could not be loaded. " << SDL_GetError();
@@ -50,7 +50,7 @@ Sound::Sound(LPCSTR filename, SoundType sound_type)
 			}
 			else
 			{
-				std::string str = "Music '" + std::string(filename) + "' was successfully loaded. ";
+				String str = "Music '" + String(filename) + "' was successfully loaded. ";
 				BorisConsoleManager->Print(str);
 				//std::stringstream ss;
 				//ss << "Music '" << filename << "' was successfully loaded. ";

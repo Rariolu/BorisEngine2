@@ -7,7 +7,7 @@ FontManager::FontManager()
 {
 	if (TTF_Init() != 0)
 	{
-		std::string str = "TTF_Init() Failed: " + std::string(SDL_GetError());
+		String str = "TTF_Init() Failed: " + String(SDL_GetError());
 		BorisConsoleManager->Print(str);
 		//std::stringstream ss;
 		//ss << "TTF_Init() Failed: " << SDL_GetError();
@@ -30,7 +30,7 @@ FontManager* FontManager::GetInstance()
 	return _instance;
 }
 
-void FontManager::AddFont(std::string fontname, Font* font)
+void FontManager::AddFont(String fontname, Font* font)
 {
 	if (!GetFont(fontname))
 	{
@@ -38,9 +38,9 @@ void FontManager::AddFont(std::string fontname, Font* font)
 	}
 }
 
-Font* FontManager::GetFont(std::string fontname)
+Font* FontManager::GetFont(String fontname)
 {
-	std::map<std::string, Font*>::iterator font = fonts.find(fontname);
+	std::map<String, Font*>::iterator font = fonts.find(fontname);
 	if (font != fonts.end())
 	{
 		return font->second;

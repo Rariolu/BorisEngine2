@@ -19,9 +19,9 @@ class SceneManager
 		//Destructor method.
 		~SceneManager();
 		//A method which returns a pointer to a scene of a given name.
-		Scene* GetScene(std::string scenename);
+		Scene* GetScene(String scenename);
 		//A method which adds a pointer to a scene using a given name as a key.
-		void AddScene(std::string scenename, Scene* scene);
+		void AddScene(String scenename, Scene* scene);
 	private:
 		//Constructor, private so that an instance can't be created outside of this class.
 		SceneManager();
@@ -29,7 +29,7 @@ class SceneManager
 		static SceneManager* _instance;
 		//A map which uses std::strings (scene names) as keys 
 		//and "Scene" pointers as values.
-		std::map<std::string, Scene*> scenes;
+		std::map<String, Scene*> scenes;
 		static BorisConsoleManager* BorisConsoleManager;
 };
 

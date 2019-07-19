@@ -137,7 +137,7 @@ void SDL_Window_Manager::SetSDLIcon(Icon iconStruct)
 
 void SDL_Window_Manager::CheckSDLError(int line = -1)
 {
-	std::string error = SDL_GetError();
+	String error = SDL_GetError();
 
 	if (error != "")
 	{

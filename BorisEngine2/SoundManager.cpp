@@ -13,7 +13,7 @@ bool SoundManager::Initialise()
 {
 	if (SDL_Init(SDL_INIT_AUDIO) != 0)
 	{
-		std::string str = "SDL_Init_AUDIO Failed: " + std::string(SDL_GetError());
+		String str = "SDL_Init_AUDIO Failed: " + String(SDL_GetError());
 		BorisConsoleManager->Print(str);
 		//std::stringstream ss;
 		//ss << "SDL_Init_AUDIO Failed: " << SDL_GetError();
@@ -23,7 +23,7 @@ bool SoundManager::Initialise()
 	}
 	if (Mix_OpenAudio(MIX_DEFAULT_FREQUENCY, MIX_DEFAULT_FORMAT, 2, 4096) != 0)
 	{
-		std::string str = "Mix_OpenAudio Failed: " + std::string(SDL_GetError());
+		String str = "Mix_OpenAudio Failed: " + String(SDL_GetError());
 		BorisConsoleManager->Print(str);
 		//std::stringstream ss;
 		//ss << "Mix_OpenAudio Failed: " << SDL_GetError();
@@ -50,9 +50,9 @@ SoundManager* SoundManager::GetInstance()
 	return _instance;
 }
 
-Sound* SoundManager::GetSound(std::string soundname)//(LPCSTR soundname)
+Sound* SoundManager::GetSound(String soundname)//(LPCSTR soundname)
 {
-	std::map<std::string, Sound*>::iterator sound = sounds.find(soundname);
+	std::map<String, Sound*>::iterator sound = sounds.find(soundname);
 	//map<LPCSTR, Sound*>::iterator sound = sounds.find(soundname);
 	if (sound != sounds.end())
 	{
@@ -61,7 +61,7 @@ Sound* SoundManager::GetSound(std::string soundname)//(LPCSTR soundname)
 	return NULL;
 }
 
-void SoundManager::AddSound(std::string soundname, LPCSTR filename, SoundType soundtype)//(LPCSTR soundname, LPCSTR filename, SoundType soundtype)
+void SoundManager::AddSound(String soundname, LPCSTR filename, SoundType soundtype)//(LPCSTR soundname, LPCSTR filename, SoundType soundtype)
 {
 	if (!GetSound(soundname))
 	{
@@ -72,7 +72,7 @@ void SoundManager::AddSound(std::string soundname, LPCSTR filename, SoundType so
 
 void SoundManager::DeleteSounds()
 {
-	for (std::map<std::string, Sound*>::iterator sound = sounds.begin(); sound != sounds.end(); ++sound)//(map<LPCSTR, Sound*>::iterator sound = sounds.begin(); sound != sounds.end(); ++sound)
+	for (std::map<String, Sound*>::iterator sound = sounds.begin(); sound != sounds.end(); ++sound)//(map<LPCSTR, Sound*>::iterator sound = sounds.begin(); sound != sounds.end(); ++sound)
 	{
 		delete sound->second;
 	}

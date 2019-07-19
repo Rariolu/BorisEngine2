@@ -30,12 +30,12 @@ class TextureManager
 		static TextureManager* getInstance();
 		//A method which adds a texture by loading one from
 		//a given file path.
-		void AddTexture(std::string texturename, LPCSTR theFilename);
+		void AddTexture(String texturename, LPCSTR theFilename);
 		//A method which adds a given texture.
-		void AddTexture(std::string texturename, Texture* texture);
+		void AddTexture(String texturename, Texture* texture);
 		//A method which returns a pointer to an instance
 		//of "Texture" depending on the given name.
-		Texture* GetTexture(std::string textureName);
+		Texture* GetTexture(String textureName);
 		//A method which deletes all stored textures.
 		void DeleteTextures();
 		//A method which sets the sdl renderer.

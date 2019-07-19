@@ -4,7 +4,7 @@ TextureManager* Sprite::texturemanager = TextureManager::getInstance();
 SoundManager* Sprite::soundmanager = SoundManager::GetInstance();
 BorisConsoleManager* Sprite::BorisConsoleManager = BorisConsoleManager::Instance();
 
-Sprite::Sprite(std::string textureName) : Sprite(texturemanager->GetTexture(textureName))
+Sprite::Sprite(String textureName) : Sprite(texturemanager->GetTexture(textureName))
 {
 
 }
@@ -22,7 +22,7 @@ Sprite::Sprite(Texture* _texture)
 
 void Sprite::MsgPosition()
 {
-	std::string msg = "X: " + std::to_string(position.X) + "; Y: " + std::to_string(position.Y) + "; W: " + std::to_string(position.W) + "; H: " + std::to_string(position.H) + ";";
+	String msg = "X: " + std::to_string(position.X) + "; Y: " + std::to_string(position.Y) + "; W: " + std::to_string(position.W) + "; H: " + std::to_string(position.H) + ";";
 	BorisConsoleManager->Print(msg);
 	//std::stringstream ss;
 	//ss << "X: " << position.X << " Y: " << position.Y << " W: " << position.W << " H: " << position.H;
@@ -133,7 +133,7 @@ void Sprite::SetTexture(Texture* _texture)
 	}
 }
 
-void Sprite::SetTexture(std::string textureName)
+void Sprite::SetTexture(String textureName)
 {
 	SetTexture(texturemanager->GetTexture(textureName));
 }

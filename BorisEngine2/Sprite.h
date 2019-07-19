@@ -15,7 +15,7 @@ enum SpriteType {BACKGROUND, REGULAR};
 class Sprite : public Renderable
 {
 	public:
-		Sprite(std::string textureName);
+		Sprite(String textureName);
 		//Constructor, takes a pointer to a "Texture" to be used for its appearance and dimensions.
 		Sprite(Texture* _texture);
 		//Destructor method.
@@ -45,7 +45,7 @@ class Sprite : public Renderable
 		//A method which sets the current texture of this class.
 		void SetTexture(Texture* texture);
 
-		void SetTexture(std::string textureName);
+		void SetTexture(String textureName);
 		//A method which returns the dimensions of this sprite.
 		SDL_Rect GetDimensions();
 		//A method that sets the dimensions of this sprite using an SDL_Rect value.
@@ -98,6 +98,7 @@ class Sprite : public Renderable
 		//A method which sets the scale of the sprite using separate X and Y values.
 		void SetAbsoluteScale(float x, float y);
 		float GetDistanceFrom(Sprite* sprite);
+
 	protected:
 		//A pointer to an instance of "TextureManager".
 		static TextureManager* texturemanager;

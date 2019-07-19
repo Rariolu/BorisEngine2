@@ -7,7 +7,7 @@ class BorisConsoleManager
 {
 public:
 	static BorisConsoleManager* Instance();
-	void Print(std::string text);
+	void Print(String text);
 	void Print(char* text);
 	//void Print(std::stringstream* ss);
 private:

@@ -16,7 +16,7 @@ Font::Font(LPCSTR filename, int fontSize, SDL_Renderer* _renderer, SDL_Color tex
 	if (!ttfFont)
 	{
 		ttfFont = {};
-		std::string str = " Failed to load \"" + std::string(filename) + "\" font : " + std::string(SDL_GetError());
+		String str = " Failed to load \"" + String(filename) + "\" font : " + String(SDL_GetError());
 		BorisConsoleManager->Print(str);
 		//std::stringstream ss;
 		//ss << " Failed to load \"" << filename << "\" font : " << SDL_GetError();
