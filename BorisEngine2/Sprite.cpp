@@ -32,7 +32,7 @@ void Sprite::MsgPosition()
 
 Sprite::~Sprite()
 {
-	delete texture;
+	
 }
 
 //Make the sprite appear in the window at its given position.

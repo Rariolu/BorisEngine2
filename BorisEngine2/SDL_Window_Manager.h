@@ -9,6 +9,7 @@
 //#include "Textures\favicon.c"
 #include "favicon.c"
 #include "BorisConsoleManager.h"
+#include "BorisOperations.h"
 #include "Aliases.h"
 //using namespace std;
 

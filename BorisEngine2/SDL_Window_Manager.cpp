@@ -4,28 +4,18 @@ BorisConsoleManager* SDL_Window_Manager::BorisConsoleManager = BorisConsoleManag
 
 SDL_Window_Manager* SDL_Window_Manager::pInstance = NULL;
 
-
-/*
-=================================================================================
-Constructor
-=================================================================================
-*/
 SDL_Window_Manager::SDL_Window_Manager()
 {
 
 }
-/*
-=================================================================================
-Singleton Design Pattern
-=================================================================================
-*/
+
 SDL_Window_Manager* SDL_Window_Manager::getInstance()
 {
-	if (pInstance == NULL)
+	if (!pInstance)
 	{
-		pInstance = new SDL_Window_Manager();
+		return pInstance = new SDL_Window_Manager();
 	}
-	return SDL_Window_Manager::pInstance;
+	return pInstance;
 }
 
 /*
@@ -39,34 +29,6 @@ SDL_Window_Manager* SDL_Window_Manager::getInstance()
 bool SDL_Window_Manager::initWND(String strWNDTitle, int iWidth, int iHeight)
 {
 	return initWND(strWNDTitle, iWidth, iHeight, favicon);
-	//// Initialize SDL's Video subsystem
-	//if (SDL_Init(SDL_INIT_VIDEO) < 0)
-	//{
-	//	BorisConsoleManager->Print("Failed to load SDL");
-	//	//cout << "Failed to init SDL\n";
-	//	return false;
-	//}
-	//mainWindow = SDL_CreateWindow(strWNDTitle.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
-	//	iWidth, iHeight, SDL_WINDOW_OPENGL);
-	//// Check that everything worked out okay
-	//if (!mainWindow)
-	//{
-	//	BorisConsoleManager->Print("Unable to create window.");
-	//	//cout << "Unable to create window\n";
-	//	CheckSDLError(__LINE__);
-	//	return false;
-	//}
-	//// Get the renderer
-	//theRenderer = SDL_CreateRenderer(mainWindow, -1, 0);
-	//if (theRenderer)
-	//{
-	//	std::cout << "Renderer creation succeeded" << std::endl;
-	//	SDL_SetRenderDrawColor(theRenderer, 0, 0, 100, 255);
-	//	SetSDLIcon();
-	//	return true;
-	//}
-	//std::cout << "Renderer creation failed" << std::endl;
-	//return false;
 }
 
 bool SDL_Window_Manager::initWND(String windowTitle, int width, int height, Icon icon)
@@ -93,13 +55,13 @@ bool SDL_Window_Manager::initWND(String windowTitle, int width, int height, Icon
 	theRenderer = SDL_CreateRenderer(mainWindow, -1, 0);
 	if (theRenderer)
 	{
-		std::cout << "Renderer creation succeeded" << std::endl;
+		BorisConsoleManager->Print("Renderer creation succeeded");
 
 		SDL_SetRenderDrawColor(theRenderer, 0, 0, 100, 255);
 		SetSDLIcon(icon);
 		return true;
 	}
-	std::cout << "Renderer creation failed" << std::endl;
+	BorisConsoleManager->Print("Renderer creation failed");
 	return false;
 }
 
@@ -142,20 +104,13 @@ void SDL_Window_Manager::CheckSDLError(int line = -1)
 	if (error != "")
 	{
 		BorisConsoleManager->Print("SLD Error : " + error);
-		//std::stringstream ss;
-		//ss << "SLD Error : " << error;
-		//BorisConsoleManager->Print(&ss);
-		//cout << "SLD Error : " << error << std::endl;
-
 		if (line != -1)
 		{
 			BorisConsoleManager->Print("Line : " + std::to_string(line));
-			//cout << "\nLine : " << line << std::endl;
 		}
 		SDL_ClearError();
 	}
 }
-
 
 SDL_Window* SDL_Window_Manager::getSDLWindow()
 {

@@ -31,7 +31,7 @@ class Scene
 		Sprite* AddSprite(Texture* texture, int layer);
 		Line* AddLine(SDL_Point a, SDL_Point b, int layer);
 		Line* AddLine(Vector2 a, Vector2 b, int layer);
-		
+		//Add item to be rendered (an instance of a child class of "Renderable").
 		void AddRenderable(Renderable* renderable, int layer);
 	protected:
 		//A method which sets a value for the next scene
@@ -61,6 +61,8 @@ class Scene
 		void DeleteSprite(Sprite* sprite,int layer);
 		//A method which removes a renderable from a given layer.
 		void DeleteRenderable(Renderable* renderable, int layer);
+
+		bool IsPreviouslyInitialised();
 	private:
 		//A pointer to the sdl renderer.
 		SDL_Renderer* _renderer;
@@ -108,6 +110,7 @@ class Scene
 		//A value representing the music that is currently playing.
 		String musicName = "";
 		BooleanCarrier* renderNow = new BooleanCarrier(true);
+		bool previouslyInitialised = false;
 };
 
 #endif

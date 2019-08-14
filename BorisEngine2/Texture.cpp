@@ -27,7 +27,7 @@ Texture::Texture(SDL_Texture* texture, SDL_Renderer* renderer, bool isTemplate)
 
 Texture::~Texture()
 {
-	delete this;
+	
 }
 
 int Texture::getHeight()

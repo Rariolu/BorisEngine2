@@ -23,15 +23,6 @@ BorisConsoleManager* BorisConsoleManager::Instance()
 
 int BorisConsoleManager::print(void* data)
 {
-	//try
-	//{
-	//	char* m = (char*)data;
-	//	cout << endl << m << endl;
-	//}
-	//catch (exception err)
-	//{
-	//	return -1;
-	//}
 	char* m = (char*)data;
 	std::cout << std::endl << m << std::endl;
 	return 0;

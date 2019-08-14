@@ -1,6 +1,7 @@
 #include "Game.h"
 
 SceneManager* Game::sceneManager = SceneManager::GetInstance();
+TextureManager* Game::textureManager = TextureManager::getInstance();
 
 BorisConsoleManager* Game::BorisConsoleManager = BorisConsoleManager::Instance();
 
@@ -49,11 +50,9 @@ void Game::Run(String startscene)
 			Scene* scene = sceneManager->GetScene(currentscene);
 			scene->Initialise(sdlRenderer);
 			BorisConsoleManager->Print(currentscene + " initialised and will run shortly.");
-			//cout << currentscene << " initialised and will run shortly." << endl;
 			currentscene = scene->Run();
 		}
 		BorisConsoleManager->Print("Game has ran out of scenes to run and hence will end.");
-		//cout << "Game has ran out of scenes to run and hence will end." << endl;
 	}
 }
 
@@ -66,13 +65,14 @@ int Game::CreateGameWindow(String windowTitle, int width, int height)
 		//End the program if the window cannot be initialised.
 		return -1;
 	}
-	SDL_Renderer* renderer = sdlWindowManager->getSDLRenderer();
-	TextureManager::getInstance()->SetRenderer(renderer);
-	ResourceSetup(renderer);
-	Initialise(sdlWindowManager->getSDLWindow(), renderer);
-	Run();
-	Dispose();
-	return 0;
+	return CreateGameWindow(sdlWindowManager);
+	//SDL_Renderer* renderer = sdlWindowManager->getSDLRenderer();
+	//TextureManager::getInstance()->SetRenderer(renderer);
+	//ResourceSetup(renderer);
+	//Initialise(sdlWindowManager->getSDLWindow(), renderer);
+	//Run();
+	//Dispose();
+	//return 0;
 }
 
 int Game::CreateGameWindow(String windowTitle, int width, int height, Icon icon)
@@ -84,6 +84,18 @@ int Game::CreateGameWindow(String windowTitle, int width, int height, Icon icon)
 		//End the program if the window cannot be initialised.
 		return -1;
 	}
+	return CreateGameWindow(sdlWindowManager);
+	//SDL_Renderer* renderer = sdlWindowManager->getSDLRenderer();
+	//TextureManager::getInstance()->SetRenderer(renderer);
+	//ResourceSetup(renderer);
+	//Initialise(sdlWindowManager->getSDLWindow(), renderer);
+	//Run();
+	//Dispose();
+	//return 0;
+}
+
+int Game::CreateGameWindow(SDL_Window_Manager* sdlWindowManager)
+{
 	SDL_Renderer* renderer = sdlWindowManager->getSDLRenderer();
 	TextureManager::getInstance()->SetRenderer(renderer);
 	ResourceSetup(renderer);

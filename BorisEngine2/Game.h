@@ -24,6 +24,10 @@ class Game
 		virtual void Run() = 0;
 		int CreateGameWindow(String windowTitle, int width, int height);
 		int CreateGameWindow(String windowTitle, int width, int height, Icon icon);
+		int CreateGameWindow(SDL_Window_Manager* sdlWindowManager);
+	protected:
+		static SceneManager* sceneManager;
+		static TextureManager* textureManager;
 	private:
 		virtual void ResourceSetup(SDL_Renderer* renderer)=0;
 		//A pointer to the sdl window.
@@ -33,7 +37,7 @@ class Game
 		//A bool representing whether or not the "Initialise" method has been called.
 		bool initialised = false;
 		//A pointer to an instance of "SceneManager".
-		static SceneManager* sceneManager;
+
 		static BorisConsoleManager* BorisConsoleManager;
 };
 

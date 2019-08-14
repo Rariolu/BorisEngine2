@@ -50,7 +50,6 @@ Line* Scene::AddLine(SDL_Point a, SDL_Point b, int layer)
 {
 	Line* line = new Line(GetRenderer(), a, b);
 	AddRenderable(line, layer);
-	//AddLine(line, layer);
 	return line;
 }
 
@@ -60,11 +59,6 @@ Line* Scene::AddLine(Vector2 a, Vector2 b, int layer)
 	SDL_Point sB = { (int)b.X,(int)b.Y };
 	return AddLine(sA,sB, layer);
 }
-
-//void Scene::AddLine(Line* line, int layer)
-//{
-//
-//}
 
 void Scene::AddRenderable(Renderable* renderable, int layer)
 {
@@ -91,6 +85,7 @@ void Scene::DeleteSprites()
 	{
 		delete i->second;
 	}
+	layered_sprites.clear();
 }
 
 float Scene::GetDeltaTime()
@@ -138,22 +133,12 @@ void Scene::Initialise(SDL_Renderer* renderer)
 			soundManager->GetSound(GetMusicName())->Play();
 		}
 	}
+	previouslyInitialised = true;
 }
 
 void Scene::DeleteSprite(Sprite* sprite,int layer)
 {
 	DeleteRenderable(sprite, layer);
-	//std::vector<Renderable*>* sprites = GetSpritesOfLayer(layer);
-	//for (std::vector<Renderable*>::iterator i = sprites->begin(); i < sprites->end(); i++)
-	//{
-	//	if ((*i) == sprite)
-	//	{
-	//		sprites->erase(i);
-	//		break;
-	//	}
-	//}
-	//delete sprite;
-	//sprite = NULL;
 }
 
 void Scene::DeleteRenderable(Renderable* renderable, int layer)
@@ -169,6 +154,11 @@ void Scene::DeleteRenderable(Renderable* renderable, int layer)
 	}
 	delete renderable;
 	renderable = NULL;
+}
+
+bool Scene::IsPreviouslyInitialised()
+{
+	return previouslyInitialised;
 }
 
 //int Scene::GetSpriteIteratorIndex(vector<Sprite*>::iterator iter,int layer)
@@ -196,9 +186,8 @@ void Scene::Render()
 		if (layered_sprites.size() > 0)
 		{
 			for (std::map<int, std::vector<Renderable*>*>::iterator layer = layered_sprites.begin(); layer != layered_sprites.end(); layer++)
-				//for (int layer = 0; layer < layers; layer++)
 			{
-				std::vector<Renderable*>* sprites = layer->second;//GetSpritesOfLayer(layer);
+				std::vector<Renderable*>* sprites = layer->second;
 				for (std::vector<Renderable*>::iterator i = sprites->begin(); i < sprites->end(); i++)
 				{
 					if ((*i)->IsActive())
@@ -211,10 +200,6 @@ void Scene::Render()
 		SDL_RenderPresent(_renderer);
 		renderNow->value = false;
 	}
-	//else
-	//{
-	//	std::cout << "False" << std::endl;
-	//}
 }
 
 //Launch the scene
