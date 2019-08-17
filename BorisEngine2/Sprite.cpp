@@ -11,11 +11,14 @@ Sprite::Sprite(String textureName) : Sprite(texturemanager->GetTexture(textureNa
 
 Sprite::Sprite(Texture* _texture)
 {
-	texture = _texture;
-	int textureWidth = texture->getWidth();
-	int textureHeight = texture->getHeight();
-	SetDimensions(textureWidth, textureHeight);
-	SetPosition({ 0,0,(float)textureWidth,(float)textureHeight });
+	if (_texture)
+	{
+		texture = _texture;
+		int textureWidth = texture->getWidth();
+		int textureHeight = texture->getHeight();
+		SetDimensions(textureWidth, textureHeight);
+		SetPosition({ 0,0,(float)textureWidth,(float)textureHeight });
+	}
 	scale = { 1,1 };
 	SetRotation(0);
 }
@@ -24,10 +27,6 @@ void Sprite::MsgPosition()
 {
 	String msg = "X: " + std::to_string(position.X) + "; Y: " + std::to_string(position.Y) + "; W: " + std::to_string(position.W) + "; H: " + std::to_string(position.H) + ";";
 	BorisConsoleManager->Print(msg);
-	//std::stringstream ss;
-	//ss << "X: " << position.X << " Y: " << position.Y << " W: " << position.W << " H: " << position.H;
-	//BorisConsoleManager->Print(&ss);
-	//cout << "X: " << position.X << " Y: " << position.Y << " W: " << position.W << " H: " << position.H << endl;
 }
 
 Sprite::~Sprite()
@@ -100,7 +99,7 @@ void Sprite::SetPosition(FloatRect _position)
 
 void Sprite::SetPosition(float x, float y)
 {
-	SetPosition({ x,y,position.W,position.H });
+	SetPosition({x,y,position.W,position.H});
 }
 
 void Sprite::SetPosition(Vector2 pos)
@@ -128,7 +127,10 @@ void Sprite::SetTexture(Texture* _texture)
 	if (texture != _texture)
 	{
 		texture = _texture;
-		SetDimensions(texture->getWidth(), texture->getHeight());
+		if (texture)
+		{
+			SetDimensions(texture->getWidth(), texture->getHeight());
+		}
 		SetRenderNow();
 	}
 }
@@ -215,16 +217,6 @@ void Sprite::ScaleSprite()
 	SetPosition({position.X,position.Y,dimension.w*scale.X,dimension.h*scale.Y});
 }
 
-//bool Sprite::IsActive()
-//{
-//	return active;
-//}
-//
-//void Sprite::SetActive(bool _active)
-//{
-//	active = _active;
-//}
-
 void Sprite::Translate(Vector2 translation)
 {
 	SetPosition({( position.X + translation.X),(position.Y + translation.Y),position.W,position.H });
@@ -232,7 +224,7 @@ void Sprite::Translate(Vector2 translation)
 
 bool Sprite::CollidesWith(SDL_Rect* boundary)
 {
-	return SDL_HasIntersection(&GetPosition(), boundary);
+	return SDL_HasIntersection(&GetPosition(), boundary) != 0;
 }
 
 bool Sprite::CollidesWith(Sprite* otherSprite)
@@ -243,7 +235,7 @@ bool Sprite::CollidesWith(Sprite* otherSprite)
 	}
 	return CollidesWith(&BorisOperations::GetExpandedRect(otherSprite->GetPosition(),10));
 }
-//Left mouse button pressed on the position of the sprite.
+
 bool Sprite::Clicked(SDL_Point* mouseposition)
 {
 	return IsActive() && SDL_PointInRect(mouseposition, &GetPosition());
@@ -263,4 +255,35 @@ SpriteType Sprite::GetSpriteType()
 float Sprite::GetDistanceFrom(Sprite* sprite)
 {
 	return BorisOperations::GetDistance(GetVec2Position(), sprite->GetVec2Position());
+}
+
+void Sprite::PlayAnimation(Animation* anim)
+{
+	if (anim->frames.size() > 0)
+	{
+		currentAnimation = anim;
+		SetTexture(anim->frames[0]);
+	}
+}
+
+void Sprite::Update(float deltaTime)
+{
+	if (currentAnimation)
+	{
+		currentAnimation->delta += deltaTime;
+		if (currentAnimation->delta >= currentAnimation->frameDuration)
+		{
+			currentAnimation->currentFrame++;
+			currentAnimation->delta = 0;
+			if (currentAnimation->currentFrame >= currentAnimation->frames.size())
+			{
+				currentAnimation->Reset();
+				currentAnimation = NULL;
+			}
+			else
+			{
+				SetTexture(currentAnimation->frames[currentAnimation->currentFrame]);
+			}
+		}
+	}
 }

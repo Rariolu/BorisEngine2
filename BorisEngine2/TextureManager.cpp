@@ -11,37 +11,37 @@ TextureManager::TextureManager()
 
 TextureManager::~TextureManager()
 {
-	//DeleteTextures();
+	DeleteTextures();
 }
 
 TextureManager* TextureManager::getInstance()
 {
-	if (_instance == NULL)
+	if (!_instance)
 	{
-		_instance = new TextureManager();
+		return _instance = new TextureManager();
 	}
 	return _instance;
 }
 
-void TextureManager::AddTexture(String textureName, LPCSTR filename)//(LPCSTR textureName, LPCSTR filename)
+Texture* TextureManager::AddTexture(String textureName, LPCSTR filename)//(LPCSTR textureName, LPCSTR filename)
 {
 	Texture* texture = new Texture(filename, theSDLRenderer);
-	AddTexture(textureName, texture);
+	return AddTexture(textureName, texture);
 }
 
-void TextureManager::AddTexture(String textureName, Texture* texture)//(LPCSTR textureName, Texture* texture)
+Texture* TextureManager::AddTexture(String textureName, Texture* texture)//(LPCSTR textureName, Texture* texture)
 {
-	if (!GetTexture(textureName))
+	Texture* t = GetTexture(textureName);
+	if (!t)
 	{
 		textureList.insert(make_pair(textureName, texture));
-	}
-	else
-	{
-		std::string str = "Unable to add" + textureName + "because a texture of that name has already been added.";
+		String str = "The current texture count is " + std::to_string(Count());//String(BorisOperations::Int_to_LPCSTR(Count()));
 		BorisConsoleManager->Print(str);
+		return texture;
 	}
-	std::string str = "The current texture count is " + std::string(BorisOperations::Int_to_LPCSTR(Count()));
+	String str = "Unable to add" + textureName + "because a texture of that name has already been added.";
 	BorisConsoleManager->Print(str);
+	return texture;
 }
 
 Texture* TextureManager::GetTexture(String textureName)
@@ -58,7 +58,11 @@ void TextureManager::DeleteTextures()
 {
 	for (std::map<std::string, Texture*>::iterator txt = textureList.begin(); txt != textureList.end(); txt++)
 	{
-		delete txt->second;
+		if (txt->second)
+		{
+			delete txt->second;
+			txt->second = NULL;
+		}
 	}
 	textureList.clear();
 }

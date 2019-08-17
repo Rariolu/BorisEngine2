@@ -52,20 +52,20 @@ class Texture
 		//which resembles a generic, blank texture.
 		static Texture* NANTexture(SDL_Renderer* renderer);
 	private:
+		//A method which attempts to load a given texture and returns
+		//a boolean which depends on whether or not the loading 
+		//was successful.
+		bool LoadTexture(SDL_Texture* texture);
+		//A method which returns a generic, blank SDL texture.
+		static SDL_Texture* BlankSDLTexture(SDL_Renderer* renderer);
 		//A value representing the texture in its SDL context.
 		SDL_Texture* sdlTexture;
 		//A value representing the width of the texture.
 		int width;
 		//A value representing the height of the texture.
 		int height;
-		//A method which attempts to load a given texture and returns
-		//a boolean which depends on whether or not the loading 
-		//was successful.
-		bool LoadTexture(SDL_Texture* texture);
 		//A pointer to the sdl renderer.
 		SDL_Renderer* mainRenderer;
-		//A method which returns a generic, blank SDL texture.
-		static SDL_Texture* BlankSDLTexture(SDL_Renderer* renderer);
 		static BorisConsoleManager* BorisConsoleManager;
 };
 

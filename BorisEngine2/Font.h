@@ -1,5 +1,5 @@
 #ifndef _FONT_H
-#define _ FONT_H
+#define _FONT_H
 
 #include<SDL_ttf.h>
 #include<Windows.h>
@@ -26,6 +26,8 @@ class Font
 		TTF_Font* GetFont();
 		//A method which creates a texture resembling given text and displays it differently depending on the given "TextType".
 		Texture* CreateTextTexture(LPCSTR text, TextType text_type);
+
+		Texture* CreateTextTexture(String text, TextType text_type);
 	private:
 		//A pointer to the "TTF_Font" value which represents the font information in the context of the sdl library.
 		TTF_Font* ttfFont;

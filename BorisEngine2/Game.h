@@ -26,6 +26,7 @@ class Game
 		int CreateGameWindow(String windowTitle, int width, int height, Icon icon);
 		int CreateGameWindow(SDL_Window_Manager* sdlWindowManager);
 	protected:
+		static FontManager* fontManager;
 		static SceneManager* sceneManager;
 		static TextureManager* textureManager;
 	private:

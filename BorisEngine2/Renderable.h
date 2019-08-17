@@ -19,7 +19,7 @@ struct Colour
 	}
 };
 
-//A class used (like an interface in C#) to represent all
+//A class used to represent all
 //classes that are "renderable". At the time of writing,
 //the comprehensive list of classes that inherit this one
 //includes Sprite and Line.

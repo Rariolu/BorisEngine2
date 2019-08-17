@@ -8,6 +8,7 @@
 #include"Util.h"
 #include "SoundManager.h"
 #include "Renderable.h"
+#include "Animation.h"
 
 //An enumeration which represents the two different types of sprites.
 enum SpriteType {BACKGROUND, REGULAR};
@@ -98,13 +99,17 @@ class Sprite : public Renderable
 		//A method which sets the scale of the sprite using separate X and Y values.
 		void SetAbsoluteScale(float x, float y);
 		float GetDistanceFrom(Sprite* sprite);
+		//Change texture to predetermined values at regular intervals.
+		void PlayAnimation(Animation* anim);
 
+		virtual void Update(float deltaTime);
 	protected:
 		//A pointer to an instance of "TextureManager".
 		static TextureManager* texturemanager;
 		//A pointer to an instance of "SoundManager".
 		static SoundManager* soundmanager;
 	private:
+		Animation* currentAnimation;
 		//A value representing the centre of the sprite.
 		SDL_Point centre;
 		//A value representing the original dimensions of the sprite.

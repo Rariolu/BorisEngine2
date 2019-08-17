@@ -409,6 +409,7 @@ xcopy /Y "$(ProjectDir)*.c" "C:\CppLib\BorisEngine\include"</Command>
     <ClCompile Include="BorisExternalInterface.cpp" />
     <ClCompile Include="BorisOperations.cpp" />
     <ClCompile Include="CSRand.cpp" />
+    <ClCompile Include="DigitSprite.cpp" />
     <ClCompile Include="ExternalResourceManager.cpp" />
     <ClCompile Include="favicon.c" />
     <ClCompile Include="Font.cpp" />
@@ -416,6 +417,7 @@ xcopy /Y "$(ProjectDir)*.c" "C:\CppLib\BorisEngine\include"</Command>
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Line.cpp" />
     <ClCompile Include="NAN.c" />
+    <ClCompile Include="PointsCounter.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="SDL_Window_Manager.cpp" />
@@ -430,17 +432,20 @@ xcopy /Y "$(ProjectDir)*.c" "C:\CppLib\BorisEngine\include"</Command>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Aliases.h" />
+    <ClInclude Include="Animation.h" />
     <ClInclude Include="BooleanCarrier.h" />
     <ClInclude Include="BorisConsoleManager.h" />
     <ClInclude Include="BorisEngine.h" />
     <ClInclude Include="BorisExternalInterface.h" />
     <ClInclude Include="BorisOperations.h" />
     <ClInclude Include="CSRand.h" />
+    <ClInclude Include="DigitSprite.h" />
     <ClInclude Include="ExternalResourceManager.h" />
     <ClInclude Include="Font.h" />
     <ClInclude Include="FontManager.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Line.h" />
+    <ClInclude Include="PointsCounter.h" />
     <ClInclude Include="Renderable.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneManager.h" />

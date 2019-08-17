@@ -1,5 +1,6 @@
 #include "Game.h"
 
+FontManager* Game::fontManager = FontManager::GetInstance();
 SceneManager* Game::sceneManager = SceneManager::GetInstance();
 TextureManager* Game::textureManager = TextureManager::getInstance();
 
@@ -44,7 +45,6 @@ void Game::Run(String startscene)
 	if (initialised)
 	{
 		String currentscene = startscene;
-		bool loop = true;
 		while (sceneManager->GetScene(currentscene))
 		{
 			Scene* scene = sceneManager->GetScene(currentscene);
