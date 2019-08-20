@@ -76,3 +76,8 @@ int TextureManager::Count()
 {
 	return textureList.size();
 }
+
+Texture* TextureManager::BlankTexture()
+{
+	return Texture::NANTexture(theSDLRenderer);
+}

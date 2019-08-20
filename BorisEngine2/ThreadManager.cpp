@@ -31,8 +31,7 @@ void ThreadManager::Dispose()
 	int j = 0;
 	for (std::vector<SDL_Thread*>::iterator i = threads.begin(); i < threads.end(); i++)
 	{
-		j++;
-		std::cout << j << std::endl;
+		std::cout << ++j << std::endl;
 		SDL_WaitThread((*i), NULL);
 	}
 	threads.clear();

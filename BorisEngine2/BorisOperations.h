@@ -63,6 +63,10 @@ struct Vector2
 		X += other.X;
 		Y += other.Y;
 	}
+	Vector2 operator-()
+	{
+		return{ -X,-Y };
+	}
 };
 
 //A class used to contain a bunch of miscellaneous subroutines.

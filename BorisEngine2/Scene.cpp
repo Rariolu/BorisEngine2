@@ -161,17 +161,6 @@ bool Scene::IsPreviouslyInitialised()
 	return previouslyInitialised;
 }
 
-//int Scene::GetSpriteIteratorIndex(vector<Sprite*>::iterator iter,int layer)
-//{
-//	vector<Sprite*>* sprites = GetSpritesOfLayer(layer);
-//	int index = std::distance(sprites->begin(), iter);
-//	if (index < sprites->size())
-//	{
-//		return index;
-//	}
-//	return -1;
-//}
-
 bool Scene::LayerExists(int layer)
 {
 	std::vector<Renderable*>* sprites = GetSpritesOfLayer(layer);
@@ -211,8 +200,6 @@ String Scene::Run()
 		while (loop && nextscene == "")
 		{
 			float elapsedTime = GetDeltaTime();
-			//float fps = 1.0f / (elapsedTime / 1000.0f);
-			//cout << fps << endl;
 			loop = GetInput();
 			if (loop)
 			{

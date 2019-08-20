@@ -43,6 +43,7 @@ class TextureManager
 		//A method which returns the amount of textures
 		//that have been stored.
 		int Count();
+		Texture* BlankTexture();
 	private:
 		//Constructor, private so that an instance can't be
 		//created outside of this class.
@@ -54,7 +55,7 @@ class TextureManager
 		//A map which uses std::strings (texture names) as keys
 		//and pointers to instances of "Texture" as values.
 		std::map<std::string, Texture*> textureList;
-		//The sdl renderer.
+		//The SDL renderer.
 		SDL_Renderer* theSDLRenderer;
 		static BorisConsoleManager* BorisConsoleManager;
 };

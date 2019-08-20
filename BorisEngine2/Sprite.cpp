@@ -212,10 +212,7 @@ void Sprite::SetRotation(float _rotation)
 	SetRenderNow();
 }
 
-void Sprite::ScaleSprite()
-{
-	SetPosition({position.X,position.Y,dimension.w*scale.X,dimension.h*scale.Y});
-}
+
 
 void Sprite::Translate(Vector2 translation)
 {
@@ -286,4 +283,36 @@ void Sprite::Update(float deltaTime)
 			}
 		}
 	}
+	velocity += constantForce*deltaTime;
+	Translate(velocity);
+}
+
+Vector2 Sprite::Force()
+{
+	return constantForce*mass;
+}
+
+Vector2 Sprite::GetVelocity()
+{
+	return velocity;
+}
+
+void Sprite::AddConstantForce(Vector2 force)
+{
+	constantForce += force;
+}
+
+float Sprite::GetMass()
+{
+	return mass;
+}
+
+void Sprite::SetMass(float m)
+{
+	mass = m;
+}
+
+void Sprite::ScaleSprite()
+{
+	SetPosition({ position.X,position.Y,dimension.w*scale.X,dimension.h*scale.Y });
 }

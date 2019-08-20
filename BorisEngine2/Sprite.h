@@ -69,12 +69,6 @@ class Sprite : public Renderable
 		float GetRotation();
 		//A method which sets the current rotation of the sprite.
 		void SetRotation(float _rotation);
-		//A method which returns a boolean representing
-		//whether or not the sprite is active.
-		//bool IsActive();
-		//A method which sets the current active state
-		//depending on the given boolean value.
-		//void SetActive(bool _active);
 		//A method which moves the sprite a certain amount
 		//depending on the given Vector2 value.
 		void Translate(Vector2 translation);
@@ -101,14 +95,34 @@ class Sprite : public Renderable
 		float GetDistanceFrom(Sprite* sprite);
 		//Change texture to predetermined values at regular intervals.
 		void PlayAnimation(Animation* anim);
-
+		//Update physics and animation.
 		virtual void Update(float deltaTime);
+
+		Vector2 Force();
+
+		Vector2 GetVelocity();
+
+		void AddConstantForce(Vector2 force);
+		
+		float GetMass();
+
+		void SetMass(float m);
 	protected:
 		//A pointer to an instance of "TextureManager".
 		static TextureManager* texturemanager;
 		//A pointer to an instance of "SoundManager".
 		static SoundManager* soundmanager;
 	private:
+		//A method which adjusts the size and position of
+		//the sprite depending on its scale.
+		void ScaleSprite();
+		//Mass, affects how forces are applied.
+		float mass;
+		//Current velocity
+		Vector2 velocity;
+		//Force that is applied constantly.
+		Vector2 constantForce;
+		//The animation that's currently running.
 		Animation* currentAnimation;
 		//A value representing the centre of the sprite.
 		SDL_Point centre;
@@ -124,9 +138,6 @@ class Sprite : public Renderable
 		int width;
 		//A value representing the height of the sprite.
 		int height;
-		//A method which adjusts the size and position of
-		//the sprite depending on its scale.
-		void ScaleSprite();
 		//A boolean which represents whether or not this
 		//sprite is active.
 		bool active = false;
@@ -135,6 +146,7 @@ class Sprite : public Renderable
 		FloatRect position;
 		//A value representing the sprite's current type.
 		SpriteType sprite_type = REGULAR;
+
 		static BorisConsoleManager* BorisConsoleManager;
 };
 
