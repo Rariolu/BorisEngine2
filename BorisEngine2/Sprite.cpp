@@ -275,7 +275,10 @@ void Sprite::Update(float deltaTime)
 			if (currentAnimation->currentFrame >= currentAnimation->frames.size())
 			{
 				currentAnimation->Reset();
-				currentAnimation = NULL;
+				if (!currentAnimation->loop)
+				{
+					currentAnimation = NULL;
+				}
 			}
 			else
 			{
@@ -297,9 +300,19 @@ Vector2 Sprite::GetVelocity()
 	return velocity;
 }
 
+void Sprite::SetVelocity(Vector2 vel)
+{
+	velocity = vel;
+}
+
 void Sprite::AddConstantForce(Vector2 force)
 {
 	constantForce += force;
+}
+
+void Sprite::AddImpulseForce(Vector2 force)
+{
+	velocity += force;
 }
 
 float Sprite::GetMass()
@@ -310,6 +323,13 @@ float Sprite::GetMass()
 void Sprite::SetMass(float m)
 {
 	mass = m;
+}
+
+void Sprite::ReconcileCollisionForces(Sprite* otherSprite)
+{
+	Vector2 result = -(Force() + otherSprite->Force());
+	SetVelocity(result / mass);
+	otherSprite->SetVelocity(result/otherSprite->GetMass());
 }
 
 void Sprite::ScaleSprite()

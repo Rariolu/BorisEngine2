@@ -13,8 +13,6 @@
 #include <string>
 #include "Aliases.h"
 
-//using namespace std;
-
 //A struct representing a rectangle using float values for X,Y, Width, and Height.
 struct FloatRect
 {
@@ -49,6 +47,10 @@ struct Vector2
 	{
 		return{X * number, Y * number};
 	}
+	Vector2 operator/(float number)
+	{
+		return (*this)*(1.0F / number);
+	}
 	void operator*=(float number)
 	{
 		X *= number;
@@ -66,6 +68,18 @@ struct Vector2
 	Vector2 operator-()
 	{
 		return{ -X,-Y };
+	}
+	Vector2 operator-(Vector2 other)
+	{
+		return{ X - other.X, Y - other.Y };
+	}
+	bool operator==(Vector2 other)
+	{
+		return X == other.X && Y == other.Y;
+	}
+	bool operator!=(Vector2 other)
+	{
+		return !(*this == other);
 	}
 };
 
@@ -107,10 +121,6 @@ class BorisOperations
 		static Vector2 Lerp(Vector2 a, Vector2 b, float f);
 		static FloatRect Lerp(FloatRect a, FloatRect b, float f);
 		static float GetDistance(Vector2 a, Vector2 b);
-	private:
-		//An array containing LPCSTR values representing
-		//the digits 0-9.
-		//static std::vector<LPCSTR> numbers();
 };
 
 #endif

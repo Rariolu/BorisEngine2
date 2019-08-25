@@ -18,6 +18,7 @@ Scene::Scene(String backgroundimagename)
 Scene::~Scene()
 {
 	delete renderNow;
+	renderNow = NULL;
 	DeleteSprites();
 }
 
@@ -25,26 +26,8 @@ Sprite* Scene::AddSprite(Texture* texture, int layer)
 {
 	Sprite* sprite = new Sprite(texture);
 	AddRenderable(sprite, layer);
-	//AddSprite(sprite, layer);
 	return sprite;
 }
-
-//void Scene::AddSprite(Sprite* sprite, int layer)
-//{
-//	layers = layer > layers - 1 ? layer + 1 : layers;
-//	layer = layer > 0 ? layer : 0;
-//	std::vector<Renderable*>* spriteLayer = GetSpritesOfLayer(layer);
-//	if (spriteLayer->size() > 0)//(LayerExists(layer))
-//	{
-//		spriteLayer->push_back(sprite);
-//	}
-//	else
-//	{
-//		std::vector<Renderable*>* spritearray = new std::vector<Renderable*>();
-//		spritearray->push_back(sprite);
-//		layered_sprites.insert(make_pair(layer, spritearray));
-//	}
-//}
 
 Line* Scene::AddLine(SDL_Point a, SDL_Point b, int layer)
 {
@@ -67,7 +50,7 @@ void Scene::AddRenderable(Renderable* renderable, int layer)
 	layers = layer > layers - 1 ? layer + 1 : layers;
 	layer = layer > 0 ? layer : 0;
 	std::vector<Renderable*>* spriteLayer = GetSpritesOfLayer(layer);
-	if (spriteLayer->size() > 0)//(LayerExists(layer))
+	if (spriteLayer->size() > 0)
 	{
 		spriteLayer->push_back(renderable);
 	}
@@ -83,7 +66,15 @@ void Scene::DeleteSprites()
 {
 	for (std::map<int, std::vector<Renderable*>*>::iterator i = layered_sprites.begin(); i != layered_sprites.end(); i++)
 	{
-		delete i->second;
+		std::vector<Renderable*>* vec = i->second;
+		for (std::vector<Renderable*>::iterator j = vec->begin(); j < vec->end(); j++)
+		{
+			delete (*j);
+			(*j) = NULL;
+		}
+		vec->clear();
+		delete vec;
+		vec = NULL;
 	}
 	layered_sprites.clear();
 }
@@ -121,8 +112,6 @@ void Scene::Initialise(SDL_Renderer* renderer)
 	SDL_RenderPresent(_renderer);
 	nextscene = "";
 	layered_sprites.clear();
-	//DeleteSprites();
-	//AddSprite(background, 0);
 	AddRenderable(background, 0);
 	if (GetMusicName() != Util::GetInstance()->GetCurrentMusic())
 	{

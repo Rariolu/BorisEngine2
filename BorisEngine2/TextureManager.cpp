@@ -74,7 +74,7 @@ void TextureManager::SetRenderer(SDL_Renderer* renderer)
 
 int TextureManager::Count()
 {
-	return textureList.size();
+	return (int)textureList.size();
 }
 
 Texture* TextureManager::BlankTexture()

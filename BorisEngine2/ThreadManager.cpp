@@ -23,7 +23,7 @@ ThreadManager* ThreadManager::GetInstance()
 
 int ThreadManager::ThreadCount()
 {
-	return threads.size();
+	return (int)threads.size();
 }
 
 void ThreadManager::Dispose()

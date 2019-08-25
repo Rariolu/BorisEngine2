@@ -8,14 +8,9 @@ LPCSTR BorisOperations::Char_to_LPCSTR(char c)
 	return _strdup(ss.str().c_str());
 }
 
-//http://www.cplusplus.com/forum/beginner/4967/
 String BorisOperations::CharToString(char c)
 {
-	String str;
-	StringStream ss;
-	ss << c;
-	ss >> str;
-	return str;
+	return String(1, c);
 }
 
 void BorisOperations::CreateFolder(String dirname)

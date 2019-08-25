@@ -102,11 +102,17 @@ class Sprite : public Renderable
 
 		Vector2 GetVelocity();
 
+		void SetVelocity(Vector2 vel);
+
 		void AddConstantForce(Vector2 force);
+
+		void AddImpulseForce(Vector2 force);
 		
 		float GetMass();
 
 		void SetMass(float m);
+
+		void ReconcileCollisionForces(Sprite* otherSprite);
 	protected:
 		//A pointer to an instance of "TextureManager".
 		static TextureManager* texturemanager;

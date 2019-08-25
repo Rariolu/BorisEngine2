@@ -9,6 +9,8 @@ struct Animation
 	float frameDuration;
 	int currentFrame;
 	float delta;
+	bool loop = false;
+	//Starts animation again.
 	void Reset()
 	{
 		currentFrame = 0;
