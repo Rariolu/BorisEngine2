@@ -275,7 +275,11 @@ void Sprite::Update(float deltaTime)
 			if (currentAnimation->currentFrame >= currentAnimation->frames.size())
 			{
 				currentAnimation->Reset();
-				if (!currentAnimation->loop)
+				if (currentAnimation->loop)
+				{
+					SetTexture(currentAnimation->frames[0]);
+				}
+				else
 				{
 					currentAnimation = NULL;
 				}
