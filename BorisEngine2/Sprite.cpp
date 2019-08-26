@@ -147,8 +147,7 @@ SDL_Rect Sprite::GetDimensions()
 
 void Sprite::SetDimensions(SDL_Rect _dimension)
 {
-	//TODO: Fix this operator BS.
-	//if (dimension != _dimension)
+	if (!SDL_RectEquals(&dimension,&_dimension))
 	{
 		dimension = _dimension;
 		width = dimension.w;

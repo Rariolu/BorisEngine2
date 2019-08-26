@@ -125,7 +125,7 @@ FloatRect BorisOperations::Lerp(FloatRect a, FloatRect b, float f)
 	float y = Lerp(a.Y, b.Y, f);
 	float w = Lerp(a.W, b.W, f);
 	float h = Lerp(a.H, b.H, f);
-	return{ x,y,w,h };
+	return {x, y, w, h};
 }
 
 float BorisOperations::GetDistance(Vector2 a, Vector2 b)
