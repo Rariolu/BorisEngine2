@@ -64,7 +64,7 @@ void Scene::AddRenderable(Renderable* renderable, int layer)
 
 void Scene::DeleteSprites()
 {
-	for (std::map<int, StdVec<Renderable*>*>::iterator i = layered_sprites.begin(); i != layered_sprites.end(); i++)
+	for (Dictionary<int, StdVec<Renderable*>*>::iterator i = layered_sprites.begin(); i != layered_sprites.end(); i++)
 	{
 		StdVec<Renderable*>* vec = i->second;
 		for (StdVec<Renderable*>::iterator j = vec->begin(); j < vec->end(); j++)
@@ -94,12 +94,12 @@ SDL_Renderer* Scene::GetRenderer()
 
 StdVec<Renderable*>* Scene::GetSpritesOfLayer(int layer)
 {
-	std::map<int, StdVec<Renderable*>*>::iterator i = layered_sprites.find(layer);
+	Dictionary<int, StdVec<Renderable*>*>::iterator i = layered_sprites.find(layer);
 	if (i != layered_sprites.end())
 	{
 		return i->second;
 	}
-	std::vector<Renderable*>* empty = new std::vector<Renderable*>();
+	StdVec<Renderable*>* empty = new StdVec<Renderable*>();
 	return empty;
 }
 
@@ -132,8 +132,8 @@ void Scene::DeleteSprite(Sprite* sprite,int layer)
 
 void Scene::DeleteRenderable(Renderable* renderable, int layer)
 {
-	std::vector<Renderable*>* renderables = GetSpritesOfLayer(layer);
-	for (std::vector<Renderable*>::iterator i = renderables->begin(); i < renderables->end(); i++)
+	StdVec<Renderable*>* renderables = GetSpritesOfLayer(layer);
+	for (StdVec<Renderable*>::iterator i = renderables->begin(); i < renderables->end(); i++)
 	{
 		if ((*i) == renderable)
 		{
@@ -152,7 +152,7 @@ bool Scene::IsPreviouslyInitialised()
 
 bool Scene::LayerExists(int layer)
 {
-	std::vector<Renderable*>* sprites = GetSpritesOfLayer(layer);
+	StdVec<Renderable*>* sprites = GetSpritesOfLayer(layer);
 	return sprites->size() > 0;
 }
 
@@ -163,10 +163,10 @@ void Scene::Render()
 		SDL_RenderClear(_renderer);
 		if (layered_sprites.size() > 0)
 		{
-			for (std::map<int, std::vector<Renderable*>*>::iterator layer = layered_sprites.begin(); layer != layered_sprites.end(); layer++)
+			for (Dictionary<int, StdVec<Renderable*>*>::iterator layer = layered_sprites.begin(); layer != layered_sprites.end(); layer++)
 			{
-				std::vector<Renderable*>* sprites = layer->second;
-				for (std::vector<Renderable*>::iterator i = sprites->begin(); i < sprites->end(); i++)
+				StdVec<Renderable*>* sprites = layer->second;
+				for (StdVec<Renderable*>::iterator i = sprites->begin(); i < sprites->end(); i++)
 				{
 					if ((*i)->IsActive())
 					{

@@ -61,7 +61,7 @@ void PointsCounter::SetPosition(Vector2 vec2)
 	}
 }
 
-std::vector<DigitSprite*> PointsCounter::DigitSprites()
+StdVec<DigitSprite*> PointsCounter::DigitSprites()
 {
 	return digitSprites;
 }

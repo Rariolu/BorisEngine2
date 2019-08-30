@@ -67,12 +67,12 @@ void Util::SetMusicVolume(int volume)
 	//cout << "Music volume has been set to " << volume << "." << endl;
 }
 
-std::string Util::GetCurrentMusic()
+String Util::GetCurrentMusic()
 {
 	return currentMusic;
 }
 
-void Util::SetCurrentMusic(std::string currentmusic)
+void Util::SetCurrentMusic(String currentmusic)
 {
 	currentMusic = currentmusic;
 }

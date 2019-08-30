@@ -25,7 +25,7 @@ SceneManager* SceneManager::GetInstance()
 
 Scene* SceneManager::GetScene(String scenename)
 {
-	std::map<String, Scene*>::iterator scene = scenes.find(scenename);
+	Dictionary<String, Scene*>::iterator scene = scenes.find(scenename);
 	if (scene != scenes.end())
 	{
 		return scene->second;
@@ -42,6 +42,5 @@ void SceneManager::AddScene(String scenename, Scene* scene)
 	if (scenename == "")
 	{
 		BorisConsoleManager->Print("Using an empty std::string for a scene name is illegal as this would create a runtime error. Please use a substantive name.");
-		//cout << "Using an empty std::string for a scene name is illegal as this would create a runtime error. Please use a substantive name." << endl;
 	}
 }

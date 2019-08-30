@@ -54,7 +54,7 @@ bool Texture::LoadTexture(SDL_Texture* texture)
 		return true;
 	}
 	LoadTexture(BlankSDLTexture(mainRenderer));
-	BorisConsoleManager->Print(std::string(SDL_GetError()));
+	BorisConsoleManager->Print(String(SDL_GetError()));
 	return false;
 }
 

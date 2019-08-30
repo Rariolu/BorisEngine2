@@ -12,55 +12,35 @@ Sound::Sound(LPCSTR filename, SoundType sound_type)
 			sound = Mix_LoadWAV(filename);
 			if (sound == 0)
 			{
-				std::string str = "Sound FX '" + std::string(filename) + "' could not be loaded. " + std::string(SDL_GetError());
+				String str = "Sound FX '" + String(filename) + "' could not be loaded. " + String(SDL_GetError());
 				BorisConsoleManager->Print(str);
-				//std::stringstream ss;
-				//ss << "Sound FX '" << filename << "' could not be loaded. " << SDL_GetError();
-				//BorisConsoleManager->Print(&ss);
-				//cout << "Sound FX '" << filename << "' could not be loaded. " << SDL_GetError() << endl;
 			}
 			else
 			{
 				Mix_VolumeChunk(sound, Util::GetInstance()->GetSFXVolume());
-				std::string str = "Sound FX '" + std::string(filename) + "' was successfully loaded. ";
+				String str = "Sound FX '" + String(filename) + "' was successfully loaded. ";
 				BorisConsoleManager->Print(str);
-				//std::stringstream ss;
-				//ss << "Sound FX '" << filename << "' was successfully loaded. ";
-				//BorisConsoleManager->Print(&ss);
-				//cout << "Sound FX '" << filename << "' was successfully loaded. " << endl;
 			}
+			break;
 		}
-		break;
 		case MUSIC:
 		{
 			music = Mix_LoadMUS(filename);
-			BorisConsoleManager->Print(std::string(Mix_GetError()));
-			//std::stringstream ss;
-			//ss << Mix_GetError();
-			//BorisConsoleManager->Print(&ss);
-			//cout << Mix_GetError() << endl;
-			if (music == 0)
+			BorisConsoleManager->Print(String(Mix_GetError()));
+			if (!music)
 			{
 				String str = "Music '" + String(filename) + "' could not be loaded. " + String(SDL_GetError());
 				BorisConsoleManager->Print(str);
-				//std::stringstream ss;
-				//ss << "Music '" << filename << "' could not be loaded. " << SDL_GetError();
-				//BorisConsoleManager->Print(&ss);
-				//cout << "Music '" << filename << "' could not be loaded. " << SDL_GetError() << endl;
 			}
 			else
 			{
 				String str = "Music '" + String(filename) + "' was successfully loaded. ";
 				BorisConsoleManager->Print(str);
-				//std::stringstream ss;
-				//ss << "Music '" << filename << "' was successfully loaded. ";
-				//BorisConsoleManager->Print(&ss);
-				//cout << "Music '" << filename << "' was successfully loaded. " << endl;
 			}
+			break;
 		}
-		break;
-	default:
-		break;
+		default:
+			break;
 	}
 }
 

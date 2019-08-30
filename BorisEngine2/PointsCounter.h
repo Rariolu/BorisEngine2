@@ -14,13 +14,13 @@ class PointsCounter
 		Vector2 GetPosition();
 		void SetPosition(float x, float y);
 		void SetPosition(Vector2 vec2);
-		std::vector<DigitSprite*> DigitSprites();
+		StdVec<DigitSprite*> DigitSprites();
 	private:
 		void UpdateDisplay();
 		Vector2 position;
 		int digitCount;
 		int value = 0;
-		std::vector<DigitSprite*> digitSprites;
+		StdVec<DigitSprite*> digitSprites;
 };
 
 #endif

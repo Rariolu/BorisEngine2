@@ -46,7 +46,7 @@ Texture* TextureManager::AddTexture(String textureName, Texture* texture)//(LPCS
 
 Texture* TextureManager::GetTexture(String textureName)
 {
-	std::map<std::string, Texture*>::iterator txt = textureList.find(textureName);
+	Dictionary<String, Texture*>::iterator txt = textureList.find(textureName);
 	if (txt != textureList.end())
 	{
 		return txt->second;
@@ -56,7 +56,7 @@ Texture* TextureManager::GetTexture(String textureName)
 
 void TextureManager::DeleteTextures()
 {
-	for (std::map<std::string, Texture*>::iterator txt = textureList.begin(); txt != textureList.end(); txt++)
+	for (Dictionary<String, Texture*>::iterator txt = textureList.begin(); txt != textureList.end(); txt++)
 	{
 		if (txt->second)
 		{

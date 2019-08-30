@@ -54,7 +54,7 @@ class TextureManager
 		static TextureManager* _instance;
 		//A map which uses std::strings (texture names) as keys
 		//and pointers to instances of "Texture" as values.
-		std::map<std::string, Texture*> textureList;
+		Dictionary<String, Texture*> textureList;
 		//The SDL renderer.
 		SDL_Renderer* theSDLRenderer;
 		static BorisConsoleManager* BorisConsoleManager;

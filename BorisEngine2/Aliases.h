@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <vector>
+#include <map>
 
 //Class aliases
 
@@ -12,8 +13,8 @@ using StringStream = std::stringstream;
 template<typename T>
 using StdVec = std::vector<T>;
 
-//template<typename T, typename U>
-//using Dictionary = std::map<T, U>;
+template<typename T, typename U>
+using Dictionary = std::map<T, U>;
 
 //Function simplification
 

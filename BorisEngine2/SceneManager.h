@@ -29,7 +29,7 @@ class SceneManager
 		static SceneManager* _instance;
 		//A map which uses std::strings (scene names) as keys 
 		//and "Scene" pointers as values.
-		std::map<String, Scene*> scenes;
+		Dictionary<String, Scene*> scenes;
 		static BorisConsoleManager* BorisConsoleManager;
 };
 

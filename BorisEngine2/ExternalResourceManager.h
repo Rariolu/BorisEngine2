@@ -8,7 +8,7 @@ class ExternalResourceManager
 {
 	public:
 	private:
-		static std::map<int, Scene*> _scenes;
+		static Dictionary<int, Scene*> _scenes;
 };
 
 #endif

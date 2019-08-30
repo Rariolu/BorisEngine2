@@ -34,9 +34,9 @@ class Util
 		//Destructor method.
 		~Util();
 		//A method which returns the name of the currently-playing song.
-		std::string GetCurrentMusic();
+		String GetCurrentMusic();
 		//A method which sets the current song.
-		void SetCurrentMusic(std::string currentmusic);
+		void SetCurrentMusic(String currentmusic);
 		//A method which increases the player's health by the given amount
 		//(to a maximum of 200).
 		void IncreaseHealth(int amount);
@@ -58,7 +58,7 @@ class Util
 		//An integer which represents the music volume.
 		int musicvolume = 75;
 		//A std::string which represents the currently-playing song.
-		std::string currentMusic;
+		String currentMusic;
 		static BorisConsoleManager* BorisConsoleManager;
 };
 

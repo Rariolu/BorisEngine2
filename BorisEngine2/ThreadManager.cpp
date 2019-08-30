@@ -39,7 +39,7 @@ void ThreadManager::Dispose()
 
 void ThreadManager::RunThread(SDL_ThreadFunction method, void* param)
 {
-	std::string* n = new std::string("Thread #" + std::to_string(ThreadCount()));
+	String* n = new String("Thread #" + std::to_string(ThreadCount()));
 	LPCSTR name = BorisOperations::String_to_LPCSTR(*n);
 	SDL_Thread* threadID = SDL_CreateThread(method, name, param);
 	threads.push_back(threadID);

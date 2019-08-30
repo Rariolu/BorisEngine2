@@ -9,10 +9,6 @@ FontManager::FontManager()
 	{
 		String str = "TTF_Init() Failed: " + String(SDL_GetError());
 		BorisConsoleManager->Print(str);
-		//std::stringstream ss;
-		//ss << "TTF_Init() Failed: " << SDL_GetError();
-		//BorisConsoleManager->Print(&ss);
-		//cout << "TTF_Init() Failed: " << SDL_GetError() << endl;
 	}
 }
 
@@ -40,7 +36,7 @@ void FontManager::AddFont(String fontname, Font* font)
 
 Font* FontManager::GetFont(String fontname)
 {
-	std::map<String, Font*>::iterator font = fonts.find(fontname);
+	Dictionary<String, Font*>::iterator font = fonts.find(fontname);
 	if (font != fonts.end())
 	{
 		return font->second;

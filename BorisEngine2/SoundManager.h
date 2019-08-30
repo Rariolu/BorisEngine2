@@ -29,7 +29,7 @@ class SoundManager
 		static SoundManager* _instance;
 		//A map that uses std::strings (sound names) as keys and pointers
 		//to instances of "Sound" as values.
-		std::map<String, Sound*> sounds;
+		Dictionary<String, Sound*> sounds;
 		//A method which attempts to initialise the instance and returns a boolean
 		//representing whether or not it was successful.
 		bool Initialise();

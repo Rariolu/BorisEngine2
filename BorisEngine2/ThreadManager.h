@@ -17,7 +17,7 @@ class ThreadManager
 	private:
 		ThreadManager();
 		~ThreadManager();
-		std::vector<SDL_Thread*> threads;
+		StdVec<SDL_Thread*> threads;
 		static ThreadManager* _instance;
 };
 

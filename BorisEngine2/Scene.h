@@ -93,7 +93,7 @@ class Scene
 		SDL_Renderer* _renderer;
 		//A map which uses integers (layers) as keys
 		//and Sprite arrays as values.
-		std::map<int, StdVec<Renderable*>*> layered_sprites;
+		Dictionary<int, StdVec<Renderable*>*> layered_sprites;
 		//A float value that contains the time stamp
 		//of the last time that the "GetDeltaTime"
 		//method was run.

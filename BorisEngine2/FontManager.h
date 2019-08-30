@@ -23,7 +23,7 @@ class FontManager
 		//A pointer to the only instance of this class.
 		static FontManager* _instance;
 		//A map using std::strings as keys and "Font" pointers as values.
-		std::map<String, Font*> fonts;
+		Dictionary<String, Font*> fonts;
 		static BorisConsoleManager* BorisConsoleManager;
 };
 

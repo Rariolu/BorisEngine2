@@ -15,20 +15,12 @@ bool SoundManager::Initialise()
 	{
 		String str = "SDL_Init_AUDIO Failed: " + String(SDL_GetError());
 		BorisConsoleManager->Print(str);
-		//std::stringstream ss;
-		//ss << "SDL_Init_AUDIO Failed: " << SDL_GetError();
-		//BorisConsoleManager->Print(&ss);
-		//cout << "SDL_Init_AUDIO Failed: " << SDL_GetError() << endl;
 		return false;
 	}
 	if (Mix_OpenAudio(MIX_DEFAULT_FREQUENCY, MIX_DEFAULT_FORMAT, 2, 4096) != 0)
 	{
 		String str = "Mix_OpenAudio Failed: " + String(SDL_GetError());
 		BorisConsoleManager->Print(str);
-		//std::stringstream ss;
-		//ss << "Mix_OpenAudio Failed: " << SDL_GetError();
-		//BorisConsoleManager->Print(&ss);
-		//cout << "Mix_OpenAudio Failed: " << SDL_GetError() << endl;
 		return false;
 	}
 	return true;
@@ -52,8 +44,7 @@ SoundManager* SoundManager::GetInstance()
 
 Sound* SoundManager::GetSound(String soundname)//(LPCSTR soundname)
 {
-	std::map<String, Sound*>::iterator sound = sounds.find(soundname);
-	//map<LPCSTR, Sound*>::iterator sound = sounds.find(soundname);
+	Dictionary<String, Sound*>::iterator sound = sounds.find(soundname);
 	if (sound != sounds.end())
 	{
 		return sound->second;
@@ -61,7 +52,7 @@ Sound* SoundManager::GetSound(String soundname)//(LPCSTR soundname)
 	return NULL;
 }
 
-void SoundManager::AddSound(String soundname, LPCSTR filename, SoundType soundtype)//(LPCSTR soundname, LPCSTR filename, SoundType soundtype)
+void SoundManager::AddSound(String soundname, LPCSTR filename, SoundType soundtype)
 {
 	if (!GetSound(soundname))
 	{
@@ -72,7 +63,7 @@ void SoundManager::AddSound(String soundname, LPCSTR filename, SoundType soundty
 
 void SoundManager::DeleteSounds()
 {
-	for (std::map<String, Sound*>::iterator sound = sounds.begin(); sound != sounds.end(); ++sound)//(map<LPCSTR, Sound*>::iterator sound = sounds.begin(); sound != sounds.end(); ++sound)
+	for (Dictionary<String, Sound*>::iterator sound = sounds.begin(); sound != sounds.end(); ++sound)//(map<LPCSTR, Sound*>::iterator sound = sounds.begin(); sound != sounds.end(); ++sound)
 	{
 		delete sound->second;
 	}
