@@ -25,7 +25,7 @@ TextureManager* TextureManager::getInstance()
 
 Texture* TextureManager::AddTexture(String textureName, LPCSTR filename)//(LPCSTR textureName, LPCSTR filename)
 {
-	Texture* texture = new Texture(filename, theSDLRenderer);
+	Texture* texture = new Texture(filename, sdlRenderer);
 	return AddTexture(textureName, texture);
 }
 
@@ -51,6 +51,10 @@ Texture* TextureManager::GetTexture(String textureName)
 	{
 		return txt->second;
 	}
+	if (sdlRenderer)
+	{
+		return BlankTexture();
+	}
 	return NULL;
 }
 
@@ -69,7 +73,7 @@ void TextureManager::DeleteTextures()
 
 void TextureManager::SetRenderer(SDL_Renderer* renderer)
 {
-	theSDLRenderer = renderer;
+	sdlRenderer = renderer;
 }
 
 int TextureManager::Count()
@@ -79,5 +83,5 @@ int TextureManager::Count()
 
 Texture* TextureManager::BlankTexture()
 {
-	return Texture::NANTexture(theSDLRenderer);
+	return Texture::NANTexture(sdlRenderer);
 }

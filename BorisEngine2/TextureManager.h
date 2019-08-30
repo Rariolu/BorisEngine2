@@ -56,7 +56,7 @@ class TextureManager
 		//and pointers to instances of "Texture" as values.
 		Dictionary<String, Texture*> textureList;
 		//The SDL renderer.
-		SDL_Renderer* theSDLRenderer;
+		SDL_Renderer* sdlRenderer;
 		static BorisConsoleManager* BorisConsoleManager;
 };
 
