@@ -16,11 +16,4 @@ using StdVec = std::vector<T>;
 template<typename T, typename U>
 using Dictionary = std::map<T, U>;
 
-//Function simplification
-
-//String ToString(int number)
-//{
-//	return std::to_string(number);
-//}
-
 #endif

@@ -5,7 +5,9 @@ StrTestMap ops =
 	{ "CharToLPCSTR",CharToLPCSTR },
 	{ "CharToStr",CharToStr },
 	{ "CreateFolder",CreateFolder },
-	{ "GetDistance",GetDistance },
+	{ "GetDistanceX",GetDistanceX },
+	{ "GetDistanceXY",GetDistanceXY },
+	{"GetDistanceY",GetDistanceY},
 	{ "GetFloatRect",GetFloatRect },
 	{ "GetSDLRect",GetSDLRect },
 	{ "IntToLPCSTR",IntToLPCSTR },
@@ -27,7 +29,7 @@ double OpsRunAll()
 		{
 			bool r = i->second();
 			count += r;
-			std::cout << i->first << ": " << BoolVal(r) << ";" << std::endl;
+			std::cout << i->first << ": " << BorisOperations::BoolToString(r) << ";" << std::endl;
 		}
 		return count / ops.size();
 	}
@@ -40,7 +42,8 @@ bool CharToLPCSTR()
 	LPCSTR lpcstrC = BorisOperations::Char_to_LPCSTR(c);
 	LPCSTR test = "t";
 	std::cout << "LPCSTR: " << lpcstrC << "; Test: " << test << ";" << std::endl;
-	return lpcstrC == test;
+	return !lstrcmp(lpcstrC, test);
+	//return lpcstrC == test;
 }
 
 bool CharToStr()
@@ -61,15 +64,33 @@ bool CreateFolder()
 		folderComplete = folder + std::to_string(number++);
 	}
 	while (BorisOperations::FileExists(folderComplete));
+
 	BorisOperations::CreateFolder(folderComplete);
 	return BorisOperations::FileExists(folderComplete);
 }
 
-bool GetDistance()
+bool GetDistanceX()
 {
 	float d = 4;
 	Vector2 a = { 0,0 };
 	Vector2 b = { d,0 };
+	return BorisOperations::GetDistance(a, b) == d;
+}
+
+bool GetDistanceXY()
+{
+	float d = 4;
+	float hyp = sqrt(2 * pow(d, 2));
+	Vector2 a = { 0,0 };
+	Vector2 b = { d,d };
+	return BorisOperations::GetDistance(a, b) == hyp;
+}
+
+bool GetDistanceY()
+{
+	float d = 4;
+	Vector2 a = { 0,0 };
+	Vector2 b = { 0,d };
 	return BorisOperations::GetDistance(a, b) == d;
 }
 
@@ -154,10 +175,10 @@ bool Round()
 	float num2 = 0.6;
 	float num3 = 0.5;
 	float num4 = 1;
-	float rnum1 = BorisOperations::Round(num1);
-	float rnum2 = BorisOperations::Round(num2);
-	float rnum3 = BorisOperations::Round(num3);
-	float rnum4 = BorisOperations::Round(num4);
+	float rnum1 = (float)BorisOperations::Round(num1);
+	float rnum2 = (float)BorisOperations::Round(num2);
+	float rnum3 = (float)BorisOperations::Round(num3);
+	float rnum4 = (float)BorisOperations::Round(num4);
 	return (rnum1 == 0) && (rnum2 == 1) && (rnum3 == 1) && (rnum4 == 1);
 }
 
@@ -193,9 +214,4 @@ bool Vec2Lerp()
 	Vector2 c = {2.5F, 2.5F};
 	Vector2 result = BorisOperations::Lerp(a, b, 0.5F);
 	return result == c;
-}
-
-String BoolVal(bool b)
-{
-	return b ? "true" : "false";
 }

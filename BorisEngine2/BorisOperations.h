@@ -15,6 +15,8 @@
 //A namespace used to contain a bunch of miscellaneous subroutines.
 namespace BorisOperations
 {
+	//Return "true" if b is true and "false" if b is false.
+	String BoolToString(bool b);
 	//A method which returns an LPCSTR value representing a character.
 	LPCSTR Char_to_LPCSTR(char c);
 	//A method which returns a std::string representing a character.
@@ -24,6 +26,7 @@ namespace BorisOperations
 	bool CreateFolder(String dirname);
 	//A method which returns a boolean representing
 	//whether or not a given file path exists.
+	//https://stackoverflow.com/questions/4316442/stdofstream-check-if-file-exists-before-writing
 	bool FileExists(const String &filename);
 	//Get the distance between two points.
 	float GetDistance(Vector2 a, Vector2 b);

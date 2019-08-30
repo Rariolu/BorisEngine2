@@ -180,7 +180,6 @@ void Scene::Render()
 	}
 }
 
-//Launch the scene
 String Scene::Run()
 {
 	if (initialised)
@@ -234,6 +233,7 @@ bool Scene::GetInput()
 				{
 					return false;
 				}
+				break;
 			}
 			case SDL_MOUSEBUTTONDOWN:
 			{
@@ -242,6 +242,7 @@ bool Scene::GetInput()
 				{
 					return false;
 				}
+				break;
 			}
 			default:
 			{

@@ -11,7 +11,9 @@ double OpsRunAll();
 bool CharToLPCSTR();
 bool CharToStr();
 bool CreateFolder();
-bool GetDistance();
+bool GetDistanceX();
+bool GetDistanceXY();
+bool GetDistanceY();
 bool GetFloatRect();
 bool GetSDLRect();
 bool IntToLPCSTR();
@@ -22,7 +24,5 @@ bool RandomNumber();
 bool Round();
 bool Split();
 bool Vec2Lerp();
-
-String BoolVal(bool b);
 
 #endif

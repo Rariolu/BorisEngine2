@@ -2,12 +2,14 @@
 
 namespace BorisOperations
 {
+	String BoolToString(bool b)
+	{
+		return b ? "true" : "false";
+	}
+
 	LPCSTR Char_to_LPCSTR(char c)
 	{
-		return new char[1]{ c };
-		//std::ostringstream ss;
-		//ss << c;
-		//return _strdup(ss.str().c_str());
+		return new char[2] {c, '\0'};
 	}
 
 	String CharToString(char c)
@@ -37,7 +39,6 @@ namespace BorisOperations
 		return true;
 	}
 
-	//https://stackoverflow.com/questions/4316442/stdofstream-check-if-file-exists-before-writing
 	bool FileExists(const String& filename)
 	{
 		struct stat buf;
@@ -115,7 +116,7 @@ namespace BorisOperations
 	int Round(float value)
 	{
 		//return (int)ceil(value);
-		return round(value);
+		return (int)round(value);
 	}
 
 	StdVec<String> Split(String str, String delimiter)
