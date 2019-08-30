@@ -1,126 +1,58 @@
 #ifndef _BorisOperations_H
 #define _BorisOperations_H
 
+#include "Vector2.h"
+#include "FloatRect.h"
 #include <cstring>
 #include <iostream>
 #include <sstream>
 #include <Windows.h>
-#include <SDL.h>
 #include <SDL_mixer.h>
 #include <vector>
 #include <map>
 #include <algorithm>
-#include <string>
-#include "Aliases.h"
 
-//A struct representing a rectangle using float values for X,Y, Width, and Height.
-struct FloatRect
+//A namespace used to contain a bunch of miscellaneous subroutines.
+namespace BorisOperations
 {
-	float X;
-	float Y;
-	float W;
-	float H;
-	bool operator==(const FloatRect& other) const
-	{
-		return X == other.X && Y == other.Y && W == other.W && H == other.H;
-	}
-	bool operator!=(const FloatRect& other) const
-	{
-		return !(*this == other);
-	}
-};
-
-//A struct which represents an onscreen position using an X and Y value.
-struct Vector2
-{
-	float  X;
-	float  Y;
-	String ToString() const
-	{
-		return "{" + std::to_string(X) + "," + std::to_string(Y) + "}";
-	}
-	SDL_Point ToSDLPoint() const
-	{
-		return{ (int)X,(int)Y };
-	}
-	Vector2 operator*(float number)
-	{
-		return{X * number, Y * number};
-	}
-	Vector2 operator/(float number)
-	{
-		return (*this)*(1.0F / number);
-	}
-	void operator*=(float number)
-	{
-		X *= number;
-		Y *= number;
-	}
-	Vector2 operator+(Vector2 other)
-	{
-		return{X + other.X, Y + other.Y};
-	}
-	void operator+=(Vector2 other)
-	{
-		X += other.X;
-		Y += other.Y;
-	}
-	Vector2 operator-()
-	{
-		return{ -X,-Y };
-	}
-	Vector2 operator-(Vector2 other)
-	{
-		return{ X - other.X, Y - other.Y };
-	}
-	bool operator==(Vector2 other)
-	{
-		return X == other.X && Y == other.Y;
-	}
-	bool operator!=(Vector2 other)
-	{
-		return !(*this == other);
-	}
-};
-
-//A class used to contain a bunch of miscellaneous subroutines.
-class BorisOperations
-{
-	public:
-		//Get an SDL_Rect value from a given FloatRect value.
-		static SDL_Rect GetSDLRect(FloatRect frect);
-		//A method which rounds a float value and returns the resulting integer.
-		static int Round(float value);
-		//Get a FloatRect value from a given SDL_Rect value.
-		static FloatRect GetFloatRect(SDL_Rect sdlRect);
-		//A method which returns a random number between the two given values.
-		static int RandomNumber(int min, int max);
-		//A method which returns an SDL_Rect which has been augmented by a given amount.
-		static SDL_Rect GetExpandedRect(SDL_Rect rect, int expansion);
-		//A method which returns a std::string representing a given number
-		//padded with 0s to show a given amount of digits.
-		static String PadNumber(int num, int idealsize);
-		//A method which returns an LPCSTR value representing a given integer.
-		static LPCSTR Int_to_LPCSTR(int num);
-		//A method which returns an LPCSTR value representing a std::string.
-		static LPCSTR String_to_LPCSTR(String str);
-		//A method which returns an LPCSTR value representing a character.
-		static LPCSTR Char_to_LPCSTR(char c);
-		//A method which returns a boolean representing
-		//whether or not a given file path exists.
-		static bool FileExists(const String &filename);
-		//A method which returns a std::string representing a character.
-		static String CharToString(char c);
-		//A method which loops until there is no audio playing on
-		//any sdl audio channels.
-		static void WaitForMusicToStop();
-		//A method which creates a given directory if
-		//it doesn't already exist.
-		static void CreateFolder(String dirname);
-		static float Lerp(float a, float b, float f);
-		static Vector2 Lerp(Vector2 a, Vector2 b, float f);
-		static FloatRect Lerp(FloatRect a, FloatRect b, float f);
-		static float GetDistance(Vector2 a, Vector2 b);
-};
+	//A method which returns an LPCSTR value representing a character.
+	LPCSTR Char_to_LPCSTR(char c);
+	//A method which returns a std::string representing a character.
+	String CharToString(char c);
+	//A method which creates a given directory if
+	//it doesn't already exist.
+	bool CreateFolder(String dirname);
+	//A method which returns a boolean representing
+	//whether or not a given file path exists.
+	bool FileExists(const String &filename);
+	//Get the distance between two points.
+	float GetDistance(Vector2 a, Vector2 b);
+	//A method which returns an SDL_Rect which has been augmented by a given amount.
+	SDL_Rect GetExpandedRect(SDL_Rect rect, int expansion);
+	//Get a FloatRect value from a given SDL_Rect value.
+	FloatRect GetFloatRect(SDL_Rect sdlRect);
+	//Get an SDL_Rect value from a given FloatRect value.
+	SDL_Rect GetSDLRect(FloatRect frect);
+	//A method which returns an LPCSTR value representing a given integer.
+	LPCSTR Int_to_LPCSTR(int num);
+	float Lerp(float a, float b, float f);
+	Vector2 Lerp(Vector2 a, Vector2 b, float f);
+	FloatRect Lerp(FloatRect a, FloatRect b, float f);
+	//A method which returns a std::string representing a given number
+	//padded with 0s to show a given amount of digits.
+	String PadNumber(int num, int idealsize);
+	//A method which returns a random number between the two given values.
+	int RandomNumber(int min, int max);
+	//A method which rounds a float value and returns the resulting integer.
+	int Round(float value);
+	//Separates a string using a given value to separate the segments.
+	//https://stackoverflow.com/questions/14265581/parse-split-a-string-in-c-using-string-delimiter-standard-c
+	StdVec<String> Split(String str, String delimiter);
+	//A method which returns an LPCSTR value representing a std::string.
+	LPCSTR String_to_LPCSTR(String str);
+	//A method which loops until there is no audio playing on
+	//any sdl audio channels.
+	void WaitForMusicToStop();
+}
 
 #endif

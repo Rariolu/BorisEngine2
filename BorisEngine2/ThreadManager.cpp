@@ -29,7 +29,7 @@ int ThreadManager::ThreadCount()
 void ThreadManager::Dispose()
 {
 	int j = 0;
-	for (std::vector<SDL_Thread*>::iterator i = threads.begin(); i < threads.end(); i++)
+	for (StdVec<SDL_Thread*>::iterator i = threads.begin(); i < threads.end(); i++)
 	{
 		std::cout << ++j << std::endl;
 		SDL_WaitThread((*i), NULL);

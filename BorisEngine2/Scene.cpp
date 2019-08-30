@@ -49,14 +49,14 @@ void Scene::AddRenderable(Renderable* renderable, int layer)
 	renderNow->value = true;
 	layers = layer > layers - 1 ? layer + 1 : layers;
 	layer = layer > 0 ? layer : 0;
-	std::vector<Renderable*>* spriteLayer = GetSpritesOfLayer(layer);
+	StdVec<Renderable*>* spriteLayer = GetSpritesOfLayer(layer);
 	if (spriteLayer->size() > 0)
 	{
 		spriteLayer->push_back(renderable);
 	}
 	else
 	{
-		std::vector<Renderable*>* spritearray = new std::vector<Renderable*>();
+		StdVec<Renderable*>* spritearray = new StdVec<Renderable*>();
 		spritearray->push_back(renderable);
 		layered_sprites.insert(make_pair(layer, spritearray));
 	}
@@ -64,10 +64,10 @@ void Scene::AddRenderable(Renderable* renderable, int layer)
 
 void Scene::DeleteSprites()
 {
-	for (std::map<int, std::vector<Renderable*>*>::iterator i = layered_sprites.begin(); i != layered_sprites.end(); i++)
+	for (std::map<int, StdVec<Renderable*>*>::iterator i = layered_sprites.begin(); i != layered_sprites.end(); i++)
 	{
-		std::vector<Renderable*>* vec = i->second;
-		for (std::vector<Renderable*>::iterator j = vec->begin(); j < vec->end(); j++)
+		StdVec<Renderable*>* vec = i->second;
+		for (StdVec<Renderable*>::iterator j = vec->begin(); j < vec->end(); j++)
 		{
 			delete (*j);
 			(*j) = NULL;
@@ -92,9 +92,9 @@ SDL_Renderer* Scene::GetRenderer()
 	return _renderer;
 }
 
-std::vector<Renderable*>* Scene::GetSpritesOfLayer(int layer)
+StdVec<Renderable*>* Scene::GetSpritesOfLayer(int layer)
 {
-	std::map<int, std::vector<Renderable*>*>::iterator i = layered_sprites.find(layer);
+	std::map<int, StdVec<Renderable*>*>::iterator i = layered_sprites.find(layer);
 	if (i != layered_sprites.end())
 	{
 		return i->second;

@@ -8,14 +8,21 @@ using test = std::function<bool()>;
 using StrTestMap = std::map<String, test>;
 
 double OpsRunAll();
-bool CharToStr();
 bool CharToLPCSTR();
+bool CharToStr();
+bool CreateFolder();
 bool GetDistance();
 bool GetFloatRect();
 bool GetSDLRect();
+bool IntToLPCSTR();
+bool IntToLPCSTRSingleDigit();
 bool Lerp();
+bool PadNumber();
+bool RandomNumber();
+bool Round();
+bool Split();
+bool Vec2Lerp();
 
-StrTestMap GetOps();
 String BoolVal(bool b);
 
 #endif

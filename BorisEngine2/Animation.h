@@ -6,7 +6,7 @@
 struct Animation
 {
 	//The textures that are used in order.
-	std::vector<Texture*> frames;
+	StdVec<Texture*> frames;
 	//The amount of time that each frame lasts.
 	float frameDuration;
 	//The index of the frame currently being used.

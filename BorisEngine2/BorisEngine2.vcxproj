@@ -441,6 +441,7 @@ xcopy /Y "$(ProjectDir)*.c" "C:\CppLib\BorisEngine\include"</Command>
     <ClInclude Include="CSRand.h" />
     <ClInclude Include="DigitSprite.h" />
     <ClInclude Include="ExternalResourceManager.h" />
+    <ClInclude Include="FloatRect.h" />
     <ClInclude Include="Font.h" />
     <ClInclude Include="FontManager.h" />
     <ClInclude Include="Game.h" />
@@ -458,6 +459,7 @@ xcopy /Y "$(ProjectDir)*.c" "C:\CppLib\BorisEngine\include"</Command>
     <ClInclude Include="TextureManager.h" />
     <ClInclude Include="ThreadManager.h" />
     <ClInclude Include="Util.h" />
+    <ClInclude Include="Vector2.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -49,7 +49,7 @@ class Scene
 		static TextureManager* textureManager;
 		//A method which returns a pointer to an array containing pointers
 		//to sprites that are contained on the given layer.
-		std::vector<Renderable*>* GetSpritesOfLayer(int layer);
+		StdVec<Renderable*>* GetSpritesOfLayer(int layer);
 		//A method which returns a boolean representing whether or not
 		//there are sprites on a layer determined by a given index.
 		bool LayerExists(int layer);
@@ -93,7 +93,7 @@ class Scene
 		SDL_Renderer* _renderer;
 		//A map which uses integers (layers) as keys
 		//and Sprite arrays as values.
-		std::map<int, std::vector<Renderable*>*> layered_sprites;
+		std::map<int, StdVec<Renderable*>*> layered_sprites;
 		//A float value that contains the time stamp
 		//of the last time that the "GetDeltaTime"
 		//method was run.
