@@ -35,8 +35,6 @@ Texture* TextureManager::AddTexture(String textureName, Texture* texture)//(LPCS
 	if (!t)
 	{
 		textureList.insert(make_pair(textureName, texture));
-		String str = "The current texture count is " + std::to_string(Count());//String(BorisOperations::Int_to_LPCSTR(Count()));
-		BorisConsoleManager->Print(str);
 		return texture;
 	}
 	String str = "Unable to add" + textureName + "because a texture of that name has already been added.";
@@ -51,11 +49,17 @@ Texture* TextureManager::GetTexture(String textureName)
 	{
 		return txt->second;
 	}
-	if (sdlRenderer)
-	{
-		return BlankTexture();
-	}
 	return NULL;
+}
+
+Texture* TextureManager::GetTextureOrBlank(String textureName)
+{
+	Texture* t = GetTexture(textureName);
+	if (t)
+	{
+		return t;
+	}
+	return BlankTexture();
 }
 
 void TextureManager::DeleteTextures()

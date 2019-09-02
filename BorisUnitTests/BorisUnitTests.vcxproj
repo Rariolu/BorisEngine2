@@ -21,9 +21,13 @@
   <ItemGroup>
     <ClCompile Include="OpsTest.cpp" />
     <ClCompile Include="program.cpp" />
+    <ClCompile Include="SpriteTests.cpp" />
+    <ClCompile Include="Tests.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="OpsTest.h" />
+    <ClInclude Include="SpriteTests.h" />
+    <ClInclude Include="Tests.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{4b5a56a3-e16c-4104-9cfe-dc0237687dfa}</ProjectGuid>

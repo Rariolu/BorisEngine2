@@ -31,28 +31,30 @@ class Util
 		int GetMusicVolume();
 		//A method which sets the current music volume.
 		void SetMusicVolume(int volume);
-		//Destructor method.
-		~Util();
 		//A method which returns the name of the currently-playing song.
 		String GetCurrentMusic();
 		//A method which sets the current song.
 		void SetCurrentMusic(String currentmusic);
 		//A method which increases the player's health by the given amount
 		//(to a maximum of 200).
-		void IncreaseHealth(int amount);
+		void IncreaseHealth(double amount);
 		//A method which returns the player's health.
-		int GetHealth();
+		double GetHealth();
+		void SetMaxHealth(double max);
+		double GetMaxHealth();
 	private:
 		//Constructor, private so that an instance can't be made outside the class.
 		Util();
+		//Destructor method.
+		~Util();
 		//A pointer to the only instance of this class.
 		static Util* _instance;
 		//An integer which represents the amount of points.
 		int points = 0;
 		//An integer which represents the player's health.
-		int health = 200;
+		double health = 200;
 		//An integer which represents the maximum possible health.
-		const int max_health = 200;
+		double max_health = 200;
 		//An integer which represents the sound effects volume.
 		int sfxvolume = 75;
 		//An integer which represents the music volume.

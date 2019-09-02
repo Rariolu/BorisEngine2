@@ -12,7 +12,6 @@ PointsCounter::PointsCounter(Font* font, int digits)
 	for (int i = 0; i < digits; i++)
 	{
 		DigitSprite* ds = new DigitSprite(font);
-
 		digitSprites.push_back(ds);
 	}
 }
@@ -30,20 +29,19 @@ PointsCounter::~PointsCounter()
 	digitSprites.clear();
 }
 
-int PointsCounter::GetValue()
+StdVec<DigitSprite*> PointsCounter::DigitSprites()
 {
-	return value;
-}
-
-void PointsCounter::SetValue(int val)
-{
-	value = val >= 0 && val <= pow(10,digitCount)-1 ? val : value;
-	UpdateDisplay();
+	return digitSprites;
 }
 
 Vector2 PointsCounter::GetPosition()
 {
 	return position;
+}
+
+int PointsCounter::GetValue()
+{
+	return value;
 }
 
 void PointsCounter::SetPosition(float x, float y)
@@ -61,10 +59,12 @@ void PointsCounter::SetPosition(Vector2 vec2)
 	}
 }
 
-StdVec<DigitSprite*> PointsCounter::DigitSprites()
+void PointsCounter::SetValue(int val)
 {
-	return digitSprites;
+	value = val >= 0 && val <= pow(10,digitCount)-1 ? val : value;
+	UpdateDisplay();
 }
+
 
 void PointsCounter::UpdateDisplay()
 {

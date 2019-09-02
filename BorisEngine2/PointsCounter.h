@@ -9,12 +9,12 @@ class PointsCounter
 		PointsCounter(Font* font);
 		PointsCounter(Font* font, int digits);
 		~PointsCounter();
-		int GetValue();
-		void SetValue(int val);
+		StdVec<DigitSprite*> DigitSprites();
 		Vector2 GetPosition();
+		int GetValue();
 		void SetPosition(float x, float y);
 		void SetPosition(Vector2 vec2);
-		StdVec<DigitSprite*> DigitSprites();
+		void SetValue(int val);
 	private:
 		void UpdateDisplay();
 		Vector2 position;

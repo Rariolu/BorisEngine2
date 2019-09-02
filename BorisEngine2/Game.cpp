@@ -66,13 +66,6 @@ int Game::CreateGameWindow(String windowTitle, int width, int height)
 		return -1;
 	}
 	return CreateGameWindow(sdlWindowManager);
-	//SDL_Renderer* renderer = sdlWindowManager->getSDLRenderer();
-	//TextureManager::getInstance()->SetRenderer(renderer);
-	//ResourceSetup(renderer);
-	//Initialise(sdlWindowManager->getSDLWindow(), renderer);
-	//Run();
-	//Dispose();
-	//return 0;
 }
 
 int Game::CreateGameWindow(String windowTitle, int width, int height, Icon icon)
@@ -85,13 +78,6 @@ int Game::CreateGameWindow(String windowTitle, int width, int height, Icon icon)
 		return -1;
 	}
 	return CreateGameWindow(sdlWindowManager);
-	//SDL_Renderer* renderer = sdlWindowManager->getSDLRenderer();
-	//TextureManager::getInstance()->SetRenderer(renderer);
-	//ResourceSetup(renderer);
-	//Initialise(sdlWindowManager->getSDLWindow(), renderer);
-	//Run();
-	//Dispose();
-	//return 0;
 }
 
 int Game::CreateGameWindow(SDL_Window_Manager* sdlWindowManager)

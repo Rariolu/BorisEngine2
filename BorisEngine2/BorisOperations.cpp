@@ -69,12 +69,8 @@ namespace BorisOperations
 
 	LPCSTR Int_to_LPCSTR(int num)
 	{
-		if (num < 10 && num > -1)
-		{
-			return new char[1]{ (char)(num + '0') };
-		}
-		std::cout << num << " isn't between 0 and 9. Needs to be between or equal to these numbers to be valid." << std::endl;
-		return "0";
+		//TODO: Optimize this.
+		return String_to_LPCSTR(std::to_string(num));
 	}
 
 	float Lerp(float a, float b, float f)

@@ -2,27 +2,30 @@
 
 StrTestMap ops =
 {
-	{ "CharToLPCSTR",CharToLPCSTR },
-	{ "CharToStr",CharToStr },
-	{ "CreateFolder",CreateFolder },
-	{ "GetDistanceX",GetDistanceX },
-	{ "GetDistanceXY",GetDistanceXY },
+	{"CharToLPCSTR",CharToLPCSTR},
+	{"CharToStr",CharToStr},
+	{"CreateFolder",CreateFolder},
+	{"FloatRectLerp",FloatRectLerp},
+	{"GetDistanceX",GetDistanceX},
+	{"GetDistanceXY",GetDistanceXY},
 	{"GetDistanceY",GetDistanceY},
-	{ "GetFloatRect",GetFloatRect },
-	{ "GetSDLRect",GetSDLRect },
-	{ "IntToLPCSTR",IntToLPCSTR },
-	{ "IntToLPCSTRSingleDigit",IntToLPCSTRSingleDigit },
-	{ "Lerp",Lerp },
-	{ "PadNumber",PadNumber },
-	{ "RandomNumber",RandomNumber },
-	{ "Round",Round },
-	{ "Split",Split },
-	{ "Vec2Lerp",Vec2Lerp }
+	{"GetFloatRect",GetFloatRect},
+	{"GetSDLRect",GetSDLRect},
+	{"IntToLPCSTR",IntToLPCSTR},
+	{"IntToLPCSTRSingleDigit",IntToLPCSTRSingleDigit},
+	{"Lerp",Lerp},
+	{"PadNumber",PadNumber},
+	{"RandomNumber",RandomNumber},
+	{"Round",Round},
+	{"Split",Split},
+	{"StringToLPCSTR",StringToLPCSTR},
+	{"Vec2Lerp",Vec2Lerp}
 };
 
 double OpsRunAll()
 {
-	if (ops.size() > 0)
+	return RunTests(ops);
+	/*if (ops.size() > 0)
 	{
 		double count = 0;
 		for (StrTestMap::iterator i = ops.begin(); i != ops.end(); i++)
@@ -33,7 +36,7 @@ double OpsRunAll()
 		}
 		return count / ops.size();
 	}
-	return 1;
+	return 1;*/
 }
 
 bool CharToLPCSTR()
@@ -41,9 +44,7 @@ bool CharToLPCSTR()
 	char c = 't';
 	LPCSTR lpcstrC = BorisOperations::Char_to_LPCSTR(c);
 	LPCSTR test = "t";
-	std::cout << "LPCSTR: " << lpcstrC << "; Test: " << test << ";" << std::endl;
 	return !lstrcmp(lpcstrC, test);
-	//return lpcstrC == test;
 }
 
 bool CharToStr()
@@ -67,6 +68,15 @@ bool CreateFolder()
 
 	BorisOperations::CreateFolder(folderComplete);
 	return BorisOperations::FileExists(folderComplete);
+}
+
+bool FloatRectLerp()
+{
+	FloatRect a = { 0,0,50,100 };
+	FloatRect b = { 5,5,100,200 };
+	FloatRect c = { 2.5F,2.5F,75,150 };
+	FloatRect result = BorisOperations::Lerp(a, b, 0.5F);
+	return result == c;
 }
 
 bool GetDistanceX()
@@ -119,7 +129,7 @@ bool IntToLPCSTR()
 	int n = 56;
 	LPCSTR lpcstrN = BorisOperations::Int_to_LPCSTR(n);
 	LPCSTR test = "56";
-	return lpcstrN == test;
+	return !lstrcmp(lpcstrN, test);
 }
 
 bool IntToLPCSTRSingleDigit()
@@ -127,7 +137,7 @@ bool IntToLPCSTRSingleDigit()
 	int n = 5;
 	LPCSTR lpcstrN = BorisOperations::Int_to_LPCSTR(n);
 	LPCSTR test = "5";
-	return lpcstrN == test;
+	return !lstrcmp(lpcstrN, test);
 }
 
 bool Lerp()
@@ -161,7 +171,7 @@ bool RandomNumber()
 	int matches = 0;
 	for (int i = 0; i < numbers.size()-1; i++)
 	{
-		for (int j = i + 1; j < numbers.size(); j++)
+		for (int j = i + 1; j < (int)numbers.size(); j++)
 		{
 			matches += numbers[i] == numbers[j];
 		}
@@ -171,10 +181,10 @@ bool RandomNumber()
 
 bool Round()
 {
-	float num1 = 0.4;
-	float num2 = 0.6;
-	float num3 = 0.5;
-	float num4 = 1;
+	float num1 = 0.4F;
+	float num2 = 0.6F;
+	float num3 = 0.5F;
+	float num4 = 1.0F;
 	float rnum1 = (float)BorisOperations::Round(num1);
 	float rnum2 = (float)BorisOperations::Round(num2);
 	float rnum3 = (float)BorisOperations::Round(num3);
@@ -195,16 +205,24 @@ bool Split()
 	};
 	String delimiter = " ";
 	String sentence;
-	for (int i = 0; i < test.size(); i++)
+	for (int i = 0; i < (int)test.size(); i++)
 	{
 		sentence += test[i];
-		if (i < test.size() - 1)
+		if (i < (int)test.size() - 1)
 		{
 			sentence += delimiter;
 		}
 	}
 	StdVec<String> segments = BorisOperations::Split(sentence, delimiter);
 	return segments == test;
+}
+
+bool StringToLPCSTR()
+{
+	String str = "Hello World.";
+	LPCSTR lpcstr = BorisOperations::String_to_LPCSTR(str);
+	LPCSTR test = "Hello World.";
+	return !lstrcmp(lpcstr, test);
 }
 
 bool Vec2Lerp()

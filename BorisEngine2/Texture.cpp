@@ -53,8 +53,11 @@ bool Texture::LoadTexture(SDL_Texture* texture)
 		SDL_QueryTexture(sdlTexture, NULL, NULL, &width, &height);
 		return true;
 	}
-	LoadTexture(BlankSDLTexture(mainRenderer));
-	BorisConsoleManager->Print(String(SDL_GetError()));
+	if (mainRenderer)
+	{
+		LoadTexture(BlankSDLTexture(mainRenderer));
+		BorisConsoleManager->Print(String(SDL_GetError()));
+	}
 	return false;
 }
 

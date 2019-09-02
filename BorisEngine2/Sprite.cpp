@@ -166,11 +166,6 @@ SDL_Point Sprite::GetCentre()
 	return centre;
 }
 
-//void Sprite::SetCentre(SDL_Point _centre)
-//{
-//	centre = _centre;
-//}
-
 Vector2 Sprite::GetScale()
 {
 	return scale;
@@ -211,8 +206,6 @@ void Sprite::SetRotation(float _rotation)
 	SetRenderNow();
 }
 
-
-
 void Sprite::Translate(Vector2 translation)
 {
 	SetPosition({( position.X + translation.X),(position.Y + translation.Y),position.W,position.H });
@@ -229,7 +222,7 @@ bool Sprite::CollidesWith(Sprite* otherSprite)
 	{
 		return false;
 	}
-	return CollidesWith(&BorisOperations::GetExpandedRect(otherSprite->GetPosition(),10));
+	return CollidesWith(&BorisOperations::GetExpandedRect(otherSprite->GetPosition(),2));
 }
 
 bool Sprite::Clicked(SDL_Point* mouseposition)
@@ -255,10 +248,13 @@ float Sprite::GetDistanceFrom(Sprite* sprite)
 
 void Sprite::PlayAnimation(Animation* anim)
 {
-	if (anim->frames.size() > 0)
+	if (anim)
 	{
-		currentAnimation = anim;
-		SetTexture(anim->frames[0]);
+		if (anim->frames.size() > 0)
+		{
+			currentAnimation = anim;
+			SetTexture(anim->frames[0]);
+		}
 	}
 }
 

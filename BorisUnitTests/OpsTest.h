@@ -1,16 +1,13 @@
 #ifndef _OPS_TEST_H
 #define _OPS_TEST_H
 
-#include "BorisOperations.h"
-#include <functional>
-
-using test = std::function<bool()>;
-using StrTestMap = std::map<String, test>;
+#include "Tests.h"
 
 double OpsRunAll();
 bool CharToLPCSTR();
 bool CharToStr();
 bool CreateFolder();
+bool FloatRectLerp();
 bool GetDistanceX();
 bool GetDistanceXY();
 bool GetDistanceY();
@@ -23,6 +20,7 @@ bool PadNumber();
 bool RandomNumber();
 bool Round();
 bool Split();
+bool StringToLPCSTR();
 bool Vec2Lerp();
 
 #endif

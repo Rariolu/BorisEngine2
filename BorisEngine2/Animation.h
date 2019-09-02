@@ -3,6 +3,7 @@
 
 #include "Texture.h"
 
+//A collection of textures that are set at regular intervals.
 struct Animation
 {
 	//The textures that are used in order.

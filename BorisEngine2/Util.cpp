@@ -28,8 +28,6 @@ void Util::Reset()
 	_instance = new Util();
 	_instance->SetMusicVolume(musicvolume);
 	_instance->SetSFXVolume(sfxvolume);
-	BorisConsoleManager->Print("Current health is: " + std::to_string(_instance->GetHealth()) + ".");
-	//cout << "Current health is: " << _instance->GetHealth() << endl;
 }
 
 void Util::IncreasePoints(int amount)
@@ -51,7 +49,6 @@ void Util::SetSFXVolume(int volume)
 {
 	sfxvolume = volume;
 	BorisConsoleManager->Print("SFX volume has been set to " + std::to_string(volume) + ".");
-	//cout << "SFX volume has been set to " << volume << "." << endl;
 }
 
 int Util::GetMusicVolume()
@@ -64,7 +61,6 @@ void Util::SetMusicVolume(int volume)
 	musicvolume = volume;
 	Mix_VolumeMusic(volume);
 	BorisConsoleManager->Print("Music volume has been set to " + std::to_string(volume));
-	//cout << "Music volume has been set to " << volume << "." << endl;
 }
 
 String Util::GetCurrentMusic()
@@ -77,22 +73,27 @@ void Util::SetCurrentMusic(String currentmusic)
 	currentMusic = currentmusic;
 }
 
-void Util::IncreaseHealth(int amount)
+void Util::IncreaseHealth(double amount)
 {
 	health += amount;
-	if (health > max_health)
-	{
-		health = max_health;
-	}
-	if (health < 0)
-	{
-		health = 0;
-	}
+	health = health > max_health ? max_health :
+	(
+		health < 0 ? 0 : health
+	);
 	BorisConsoleManager->Print("Current health is: " + std::to_string(health) + ".");
-	//cout << "Current health is: " << health << endl;
 }
 
-int Util::GetHealth()
+double Util::GetHealth()
 {
 	return health;
+}
+
+void Util::SetMaxHealth(double max)
+{
+	max_health = max;
+}
+
+double Util::GetMaxHealth()
+{
+	return max_health;
 }

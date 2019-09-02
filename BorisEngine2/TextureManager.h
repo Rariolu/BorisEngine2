@@ -36,6 +36,7 @@ class TextureManager
 		//A method which returns a pointer to an instance
 		//of "Texture" depending on the given name.
 		Texture* GetTexture(String textureName);
+		Texture* GetTextureOrBlank(String textureName);
 		//A method which deletes all stored textures.
 		void DeleteTextures();
 		//A method which sets the sdl renderer.

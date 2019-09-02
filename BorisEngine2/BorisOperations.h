@@ -4,12 +4,9 @@
 #include "Vector2.h"
 #include "FloatRect.h"
 #include <cstring>
-#include <iostream>
 #include <sstream>
 #include <Windows.h>
 #include <SDL_mixer.h>
-#include <vector>
-#include <map>
 #include <algorithm>
 
 //A namespace used to contain a bunch of miscellaneous subroutines.
