@@ -58,14 +58,7 @@ void Game::Run(String startscene)
 
 int Game::CreateGameWindow(String windowTitle, int width, int height)
 {
-	SDL_Window_Manager* sdlWindowManager = SDL_Window_Manager::getInstance();
-	//Attempt to initialise an SDL window.
-	if (!sdlWindowManager->initWND(windowTitle, width, height))
-	{
-		//End the program if the window cannot be initialised.
-		return -1;
-	}
-	return CreateGameWindow(sdlWindowManager);
+	return CreateGameWindow(windowTitle, width, height, favicon);
 }
 
 int Game::CreateGameWindow(String windowTitle, int width, int height, Icon icon)

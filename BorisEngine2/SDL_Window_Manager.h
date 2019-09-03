@@ -4,34 +4,29 @@
 
 
 #include <SDL.h>
-#include <string>
-#include <iostream>
-//#include "Textures\favicon.c"
 #include "favicon.c"
 #include "BorisConsoleManager.h"
 #include "BorisOperations.h"
 #include "Aliases.h"
-//using namespace std;
 
 //A class which is used to manage the SDL window resources and renderer.
 class SDL_Window_Manager
 {
 	public:
+		//A method which returns a pointer to the only instance of this class.
+		static SDL_Window_Manager* getInstance();
+		//A method which checks for an error from within the SDL
+		//library and outputs it to the console if there is one.
+		void CheckSDLError(int line);
 		//A method which attempts to initialise and open a window
 		//and returns a boolean that depends on whether or not it
 		//was successful.
 		bool initWND(String strWNDTitle, int iWidth, int iHeight);
 		bool initWND(String windowTitle, int width, int height, Icon icon);
-		//A method which checks for an error from within the SDL
-		//library and outputs it to the console if there is one.
-		void CheckSDLError(int line);
-		//A method which returns a pointer to the SDL window.
-		SDL_Window* getSDLWindow();
 		//A method which returns a pointer to the SDL renderer.
 		SDL_Renderer* getSDLRenderer();
-		//A method which returns a pointer to the only instance of this class.
-		static SDL_Window_Manager* getInstance();
-
+		//A method which returns a pointer to the SDL window.
+		SDL_Window* getSDLWindow();
 		void SetSDLIcon(Icon icon);
 	private:
 		//Constructor, private so that an instance can only be created
@@ -39,14 +34,12 @@ class SDL_Window_Manager
 		SDL_Window_Manager();
 		//A method which sets the taskbar icon and thumbnail of the window.
 		void SetSDLIcon();
-
-		
 		//A pointer to the only instance of this class.
-		static SDL_Window_Manager* pInstance;
+		static SDL_Window_Manager* instance;
 		//A pointer to the SDL window.
 		SDL_Window *mainWindow;
 		//A pointer to the SDL renderer.
-		SDL_Renderer* theRenderer;
+		SDL_Renderer* sdlRenderer;
 		static BorisConsoleManager* BorisConsoleManager;
 
 };
