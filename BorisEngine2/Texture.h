@@ -43,6 +43,7 @@ class Texture
 		int getHeight();
 		//A method which returns the sdl texture.
 		SDL_Texture* getSDLTexture();
+		void SetSDLRenderer(SDL_Renderer* renderer);
 		//A method which renders this texture using a given source rectangle and destination rectangle.
 		void Render(SDL_Rect* sourceRect, SDL_Rect* destRect);
 		//A method which renders this texture using a given source rectangle, destination rectangle,

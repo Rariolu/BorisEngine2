@@ -1,6 +1,7 @@
+#ifndef _NAN_C
+#define _NAN_C
+
 /* GIMP RGBA C-Source image dump (NAN.c) */
-
-
 //A struct which is used to represent a null texture (i.e. a texture which should've been loaded from memory but couldn't be because of an invalid file path).
 
 static const struct {
@@ -361,3 +362,5 @@ static const struct {
   "\377\303\303\303\377\303\303\303\377\303\303\303\377\303\303\303\377\303"
   "\303\303\377\303\303\303\377\303\303\303\377",
 };
+
+#endif

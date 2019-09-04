@@ -73,15 +73,15 @@ void Sound::Play()
 
 void Sound::Play(int volume)
 {
-	SoundWrap* wrap = NULL;
+	SoundWrap* wrap;
 	switch (soundType)
 	{
-	case SFX:
-		wrap = new SoundWrap(sound, volume);
-		break;
-	case MUSIC:
-		wrap = new SoundWrap(music, volume);
-		break;
+		case SFX:
+			wrap = new SoundWrap(sound, volume);
+			break;
+		case MUSIC:
+			wrap = new SoundWrap(music, volume);
+			break;
 	}
 	if (wrap)
 	{

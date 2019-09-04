@@ -19,7 +19,6 @@
 //An enumeration which represents the 2 different types of audio.
 //enum SoundType { SFX, MUSIC };
 
-
 class Sound
 {
 	public:

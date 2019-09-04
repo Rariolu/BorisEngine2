@@ -25,18 +25,6 @@ StrTestMap ops =
 double OpsRunAll()
 {
 	return RunTests(ops);
-	/*if (ops.size() > 0)
-	{
-		double count = 0;
-		for (StrTestMap::iterator i = ops.begin(); i != ops.end(); i++)
-		{
-			bool r = i->second();
-			count += r;
-			std::cout << i->first << ": " << BorisOperations::BoolToString(r) << ";" << std::endl;
-		}
-		return count / ops.size();
-	}
-	return 1;*/
 }
 
 bool CharToLPCSTR()
@@ -169,7 +157,7 @@ bool RandomNumber()
 		numbers.push_back(number);
 	}
 	int matches = 0;
-	for (int i = 0; i < numbers.size()-1; i++)
+	for (int i = 0; i < (int)numbers.size()-1; i++)
 	{
 		for (int j = i + 1; j < (int)numbers.size(); j++)
 		{

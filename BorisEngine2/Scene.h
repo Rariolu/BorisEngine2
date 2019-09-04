@@ -34,7 +34,7 @@ class Scene
 		//It is virtual so it can be overridden when necessary.
 		virtual void Initialise(SDL_Renderer* renderer);
 
-
+		void SetRenderer(SDL_Renderer* renderer);
 	protected:
 		//A method which sets a value for the next scene
 		//to be run and causes this scene to subsequently close.

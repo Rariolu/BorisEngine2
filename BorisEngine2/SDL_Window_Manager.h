@@ -1,7 +1,5 @@
-
 #ifndef  _SDLWINDOWMANAGER_H
 #define _SDLWINDOWMANAGER_H
-
 
 #include <SDL.h>
 #include "favicon.c"
@@ -27,6 +25,7 @@ class SDL_Window_Manager
 		SDL_Renderer* getSDLRenderer();
 		//A method which returns a pointer to the SDL window.
 		SDL_Window* getSDLWindow();
+		//https://caedesnotes.wordpress.com/2015/04/13/how-to-integrate-your-sdl2-window-icon-or-any-image-into-your-executable/
 		void SetSDLIcon(Icon icon);
 	private:
 		//Constructor, private so that an instance can only be created

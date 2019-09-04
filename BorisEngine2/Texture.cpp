@@ -45,6 +45,11 @@ SDL_Texture* Texture::getSDLTexture()
 	return sdlTexture;
 }
 
+void Texture::SetSDLRenderer(SDL_Renderer* renderer)
+{
+	mainRenderer = renderer;
+}
+
 bool Texture::LoadTexture(SDL_Texture* texture)
 {
 	sdlTexture = texture;
@@ -70,25 +75,27 @@ SDL_Texture* Texture::BlankSDLTexture(SDL_Renderer* renderer)
 {
 		// these masks are needed to tell SDL_CreateRGBSurface(From)
 		// to assume the data it gets is byte-wise RGB(A) data
-		Uint32 rmask, gmask, bmask, amask;
-	#if SDL_BYTEORDER == SDL_BIG_ENDIAN
-		int shift = (my_icon.bytes_per_pixel == 3) ? 8 : 0;
-		rmask = 0xff000000 >> shift;
-		gmask = 0x00ff0000 >> shift;
-		bmask = 0x0000ff00 >> shift;
-		amask = 0x000000ff >> shift;
-	#else // little endian, like x86
-		rmask = 0x000000ff;
-		gmask = 0x0000ff00;
-		bmask = 0x00ff0000;
-		amask = (NonApplicableTexture.bytes_per_pixel == 3) ? 0 : 0xff000000;
-	#endif
-		SDL_Surface* nansurface = SDL_CreateRGBSurfaceFrom((void*)NonApplicableTexture.pixel_data, NonApplicableTexture.width,
-			NonApplicableTexture.height, NonApplicableTexture.bytes_per_pixel * 8, NonApplicableTexture.bytes_per_pixel*NonApplicableTexture.width,
-			rmask, gmask, bmask, amask);
 
-		SDL_Texture* nantexture = SDL_CreateTextureFromSurface(renderer, nansurface);
-		return nantexture;
+	//	Uint32 rmask, gmask, bmask, amask;
+	//#if SDL_BYTEORDER == SDL_BIG_ENDIAN
+	//	int shift = (NonApplicableTexture.bytes_per_pixel == 3) ? 8 : 0;
+	//	rmask = 0xff000000 >> shift;
+	//	gmask = 0x00ff0000 >> shift;
+	//	bmask = 0x0000ff00 >> shift;
+	//	amask = 0x000000ff >> shift;
+	//#else // little endian, like x86
+	//	rmask = 0x000000ff;
+	//	gmask = 0x0000ff00;
+	//	bmask = 0x00ff0000;
+	//	amask = (NonApplicableTexture.bytes_per_pixel == 3) ? 0 : 0xff000000;
+	//#endif
+	//	SDL_Surface* nansurface = SDL_CreateRGBSurfaceFrom((void*)NonApplicableTexture.pixel_data, NonApplicableTexture.width,
+	//		NonApplicableTexture.height, NonApplicableTexture.bytes_per_pixel * 8, NonApplicableTexture.bytes_per_pixel*NonApplicableTexture.width,
+	//		rmask, gmask, bmask, amask);
+
+	SDL_Surface* nansurface = BorisOperations::CreateSurface(NonApplicableTexture.bytes_per_pixel, (void*)NonApplicableTexture.pixel_data, NonApplicableTexture.width, NonApplicableTexture.height, NonApplicableTexture.bytes_per_pixel * 8, NonApplicableTexture.bytes_per_pixel*NonApplicableTexture.width);
+	SDL_Texture* nantexture = SDL_CreateTextureFromSurface(renderer, nansurface);
+	return nantexture;
 }
 
 void Texture::Render(SDL_Rect* sourceRect, SDL_Rect* destRect)

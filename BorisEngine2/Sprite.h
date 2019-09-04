@@ -79,6 +79,7 @@ class Sprite : public Renderable
 		void SetMass(float m);
 		//A method that sets the current location and dimensions using a given FloatRect value.
 		void SetPosition(FloatRect _position);
+		void SetPosition(int x, int y);
 		//A method that sets the current location and dimensions using given X and Y values.
 		void SetPosition(float x, float y);
 		void SetPosition(Vector2 pos);

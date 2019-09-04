@@ -97,6 +97,11 @@ void Sprite::SetPosition(FloatRect _position)
 	}
 }
 
+void Sprite::SetPosition(int x, int y)
+{
+	SetPosition((float)x, (float)y);
+}
+
 void Sprite::SetPosition(float x, float y)
 {
 	SetPosition({x,y,position.W,position.H});

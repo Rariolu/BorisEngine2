@@ -6,6 +6,7 @@
 #include <cstring>
 #include <sstream>
 #include <Windows.h>
+#include <SDL.h>
 #include <SDL_mixer.h>
 #include <algorithm>
 
@@ -21,6 +22,7 @@ namespace BorisOperations
 	//A method which creates a given directory if
 	//it doesn't already exist.
 	bool CreateFolder(String dirname);
+	SDL_Surface* CreateSurface(unsigned int bytesPerPixel, void *pixels, int width, int height, int depth, int pitch);
 	//A method which returns a boolean representing
 	//whether or not a given file path exists.
 	//https://stackoverflow.com/questions/4316442/stdofstream-check-if-file-exists-before-writing

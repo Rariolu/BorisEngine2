@@ -125,6 +125,11 @@ void Scene::Initialise(SDL_Renderer* renderer)
 	previouslyInitialised = true;
 }
 
+void Scene::SetRenderer(SDL_Renderer* renderer)
+{
+	_renderer = renderer;
+}
+
 void Scene::DeleteSprite(Sprite* sprite,int layer)
 {
 	DeleteRenderable(sprite, layer);

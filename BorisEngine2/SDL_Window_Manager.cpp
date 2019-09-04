@@ -77,7 +77,6 @@ SDL_Window* SDL_Window_Manager::getSDLWindow()
 	return mainWindow;
 }
 
-//https://caedesnotes.wordpress.com/2015/04/13/how-to-integrate-your-sdl2-window-icon-or-any-image-into-your-executable/
 void SDL_Window_Manager::SetSDLIcon()
 {
 	SetSDLIcon(favicon);
@@ -87,22 +86,24 @@ void SDL_Window_Manager::SetSDLIcon(Icon iconStruct)
 {
 	// these masks are needed to tell SDL_CreateRGBSurface(From)
 	// to assume the data it gets is byte-wise RGB(A) data
-	Uint32 rmask, gmask, bmask, amask;
-	#if SDL_BYTEORDER == SDL_BIG_ENDIAN
-		int shift = (my_icon.bytes_per_pixel == 3) ? 8 : 0;
-		rmask = 0xff000000 >> shift;
-		gmask = 0x00ff0000 >> shift;
-		bmask = 0x0000ff00 >> shift;
-		amask = 0x000000ff >> shift;
-	#else // little endian, like x86
-		rmask = 0x000000ff;
-		gmask = 0x0000ff00;
-		bmask = 0x00ff0000;
-		amask = (iconStruct.bytes_per_pixel == 3) ? 0 : 0xff000000;
-	#endif
-	SDL_Surface* icon = SDL_CreateRGBSurfaceFrom((void*)iconStruct.pixel_data, iconStruct.width,
-		iconStruct.height, iconStruct.bytes_per_pixel * 8, iconStruct.bytes_per_pixel*iconStruct.width,
-		rmask, gmask, bmask, amask);
+
+	//Uint32 rmask, gmask, bmask, amask;
+	//#if SDL_BYTEORDER == SDL_BIG_ENDIAN
+	//	int shift = (iconStruct.bytes_per_pixel == 3) ? 8 : 0;
+	//	rmask = 0xff000000 >> shift;
+	//	gmask = 0x00ff0000 >> shift;
+	//	bmask = 0x0000ff00 >> shift;
+	//	amask = 0x000000ff >> shift;
+	//#else // little endian, like x86
+	//	rmask = 0x000000ff;
+	//	gmask = 0x0000ff00;
+	//	bmask = 0x00ff0000;
+	//	amask = (iconStruct.bytes_per_pixel == 3) ? 0 : 0xff000000;
+	//#endif
+	//SDL_Surface* icon = SDL_CreateRGBSurfaceFrom((void*)iconStruct.pixel_data, iconStruct.width,
+	//	iconStruct.height, iconStruct.bytes_per_pixel * 8, iconStruct.bytes_per_pixel*iconStruct.width,
+	//	rmask, gmask, bmask, amask);
+	SDL_Surface* icon = BorisOperations::CreateSurface(iconStruct.bytes_per_pixel, (void*)iconStruct.pixel_data, iconStruct.width, iconStruct.height, iconStruct.bytes_per_pixel * 8, iconStruct.bytes_per_pixel*iconStruct.width);
 
 	SDL_SetWindowIcon(getSDLWindow(), icon);
 	SDL_FreeSurface(icon);

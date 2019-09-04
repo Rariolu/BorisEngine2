@@ -78,6 +78,13 @@ void TextureManager::DeleteTextures()
 void TextureManager::SetRenderer(SDL_Renderer* renderer)
 {
 	sdlRenderer = renderer;
+	if (textureList.size() > 0)
+	{
+		for (Dictionary<String, Texture*>::iterator i = textureList.begin(); i != textureList.end(); i++)
+		{
+			i->second->SetSDLRenderer(renderer);
+		}
+	}
 }
 
 int TextureManager::Count()
@@ -87,5 +94,11 @@ int TextureManager::Count()
 
 Texture* TextureManager::BlankTexture()
 {
-	return Texture::NANTexture(sdlRenderer);
+	String nanKey = "[NAN Texture]";
+	Texture* t = GetTexture(nanKey);
+	if (t)
+	{
+		return t;
+	}
+	return AddTexture(nanKey,Texture::NANTexture(sdlRenderer));
 }
