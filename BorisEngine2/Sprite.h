@@ -39,17 +39,20 @@ class Sprite : public Renderable
 		//A method which returns the dimensions of this sprite.
 		SDL_Rect GetDimensions();
 		float GetDistanceFrom(Sprite* sprite);
-		//A method which returns the current location and dimensions of this sprite.
-		SDL_Rect GetPosition();
 		FloatRect GetFloatPosition();
 		float GetMass();
+		//A method which returns the current location and dimensions of this sprite.
+		SDL_Rect GetPosition();
+		
+		
 		//A method which returns a float representing the current rotation
 		//of the sprite.
 		float GetRotation();
-		//A method which returns a Vector2 representing the scale of the sprite.
-		Vector2 GetScale();
 		//A method which returns the current sprite type.
 		SpriteType GetSpriteType();
+		//A method which returns a Vector2 representing the scale of the sprite.
+		Vector2 GetScale();
+
 		//A method which returns the pointer to the "Texture" instance of this class.
 		Texture* GetTexture();
 		Vector2 GetVec2Position();

@@ -6,7 +6,9 @@ StrTestMap spriteTests =
 	{"ClickPositive",ClickPositive},
 	{"CollisionNegative",CollisionNegative},
 	{"CollisionPositive",CollisionPositive},
-	{"InactiveVsActiveCollision",InactiveVsActiveCollision}
+	{"InactiveVsActiveCollision",InactiveVsActiveCollision},
+	{"VelocityNegative",VelocityNegative},
+	{"VelocityPositive",VelocityPositive}
 };
 
 TextureManager* textureManager = TextureManager::getInstance();
@@ -74,4 +76,26 @@ bool InactiveVsActiveCollision()
 	s3.SetPosition(s1.GetDimensions().w / 2, s1.GetDimensions().h / 2);
 	s3.SetActive(false);
 	return s1.CollidesWith(&s2) && (!s1.CollidesWith(&s3));
+}
+
+bool VelocityNegative()
+{
+	Sprite s1(block1Name);
+	Vector2 v = { 1,1 };
+	s1.SetVelocity(v);
+	s1.Update(1);
+	FloatRect pos = { 0.5F,0.5F,s1.GetDimensions().w ,s1.GetDimensions().h };
+	return s1.GetFloatPosition() != pos;
+}
+
+bool VelocityPositive()
+{
+	Sprite s1(block1Name);
+	Vector2 v = { 1,1 };
+	s1.SetVelocity(v);
+	s1.Update(0.5);
+	FloatRect pos = s1.GetFloatPosition();
+	pos.X = 0.5F;
+	pos.Y = 0.5F;
+	return s1.GetFloatPosition() == pos;
 }

@@ -23,15 +23,138 @@ Sprite::Sprite(Texture* _texture)
 	SetRotation(0);
 }
 
+Sprite::~Sprite()
+{
+
+}
+
+void Sprite::AddConstantForce(Vector2 force)
+{
+	constantForce += force;
+}
+
+void Sprite::AddImpulseForce(Vector2 force)
+{
+	velocity += force;
+}
+
+bool Sprite::CollidesWith(SDL_Rect* boundary)
+{
+	return SDL_HasIntersection(&GetPosition(), boundary) != 0;
+}
+
+bool Sprite::CollidesWith(Sprite* otherSprite)
+{
+	if (!IsActive() || !otherSprite->IsActive())
+	{
+		return false;
+	}
+	return CollidesWith(&BorisOperations::GetExpandedRect(otherSprite->GetPosition(), 2));
+}
+
+bool Sprite::Clicked(SDL_Point* mouseposition)
+{
+	return IsActive() && SDL_PointInRect(mouseposition, &GetPosition());
+}
+
+Vector2 Sprite::Force()
+{
+	return constantForce*mass;
+}
+
+SDL_Point Sprite::GetCentre()
+{
+	return centre;
+}
+
+SDL_Rect Sprite::GetDimensions()
+{
+	return dimension;
+}
+
+float Sprite::GetDistanceFrom(Sprite* sprite)
+{
+	return BorisOperations::GetDistance(GetVec2Position(), sprite->GetVec2Position());
+}
+
+FloatRect Sprite::GetFloatPosition()
+{
+	return position;
+}
+
+float Sprite::GetMass()
+{
+	return mass;
+}
+
+SDL_Rect Sprite::GetPosition()
+{
+	return BorisOperations::GetSDLRect(position);
+}
+
+float Sprite::GetRotation()
+{
+	return rotation;
+}
+
+SpriteType Sprite::GetSpriteType()
+{
+	return sprite_type;
+}
+
+Vector2 Sprite::GetScale()
+{
+	return scale;
+}
+
+Texture* Sprite::GetTexture()
+{
+	return texture;
+}
+
+Vector2 Sprite::GetVec2Position()
+{
+	return{ position.X,position.Y };
+}
+
+Vector2 Sprite::GetVelocity()
+{
+	return velocity;
+}
+
+void Sprite::LerpPosition(FloatRect destination, float f)
+{
+	SetPosition(BorisOperations::Lerp(position, destination, f));
+}
+
+void Sprite::LerpPosition(Vector2 destination, float f)
+{
+	SetPosition(BorisOperations::Lerp(GetVec2Position(), destination, f));
+}
+
 void Sprite::MsgPosition()
 {
 	String msg = "X: " + std::to_string(position.X) + "; Y: " + std::to_string(position.Y) + "; W: " + std::to_string(position.W) + "; H: " + std::to_string(position.H) + ";";
 	BorisConsoleManager->Print(msg);
 }
 
-Sprite::~Sprite()
+void Sprite::PlayAnimation(Animation* anim)
 {
-	
+	if (anim)
+	{
+		if (anim->frames.size() > 0)
+		{
+			currentAnimation = anim;
+			SetTexture(anim->frames[0]);
+		}
+	}
+}
+
+void Sprite::ReconcileCollisionForces(Sprite* otherSprite)
+{
+	Vector2 result = -(Force() + otherSprite->Force());
+	SetVelocity(result / mass);
+	otherSprite->SetVelocity(result / otherSprite->GetMass());
 }
 
 //Make the sprite appear in the window at its given position.
@@ -71,19 +194,37 @@ void Sprite::RenderRotated(SDL_Rect* source, SDL_Rect* dest)
 	}
 }
 
-SDL_Rect Sprite::GetPosition()
+void Sprite::SetAbsoluteScale(Vector2 _scale)
 {
-	return BorisOperations::GetSDLRect(position);
+	scale.X = _scale.X;
+	scale.Y = _scale.Y;
+	ScaleSprite();
 }
 
-FloatRect Sprite::GetFloatPosition()
+void Sprite::SetAbsoluteScale(float x, float y)
 {
-	return position;
+	SetAbsoluteScale({ x,y });
 }
 
-Vector2 Sprite::GetVec2Position()
+void Sprite::SetDimensions(SDL_Rect _dimension)
 {
-	return{ position.X,position.Y };
+	if (!SDL_RectEquals(&dimension, &_dimension))
+	{
+		dimension = _dimension;
+		width = dimension.w;
+		height = dimension.h;
+		SetRenderNow();
+	}
+}
+
+void Sprite::SetDimensions(int _width, int _height)
+{
+	SetDimensions({ 0,0,_width,_height });
+}
+
+void Sprite::SetMass(float m)
+{
+	mass = m;
 }
 
 void Sprite::SetPosition(FloatRect _position)
@@ -112,19 +253,28 @@ void Sprite::SetPosition(Vector2 pos)
 	SetPosition(pos.X, pos.Y);
 }
 
-void Sprite::LerpPosition(FloatRect destination,float f)
+void Sprite::SetRotation(float _rotation)
 {
-	SetPosition(BorisOperations::Lerp(position, destination, f));
+	rotation = _rotation;
+	SetRenderNow();
 }
 
-void Sprite::LerpPosition(Vector2 destination, float f)
+void Sprite::SetScale(Vector2 _scale)
 {
-	SetPosition(BorisOperations::Lerp(GetVec2Position(), destination, f));
+	scale.X *= _scale.X;
+	scale.Y *= _scale.Y;
+	ScaleSprite();
 }
 
-Texture* Sprite::GetTexture()
+void Sprite::SetScale(float x, float y)
 {
-	return texture;
+	SetScale({ x,y });
+}
+
+void Sprite::SetSpriteType(SpriteType type)
+{
+	sprite_type = type;
+	SetRenderNow();
 }
 
 void Sprite::SetTexture(Texture* _texture)
@@ -145,122 +295,14 @@ void Sprite::SetTexture(String textureName)
 	SetTexture(texturemanager->GetTexture(textureName));
 }
 
-SDL_Rect Sprite::GetDimensions()
+void Sprite::SetVelocity(Vector2 vel)
 {
-	return dimension;
-}
-
-void Sprite::SetDimensions(SDL_Rect _dimension)
-{
-	if (!SDL_RectEquals(&dimension,&_dimension))
-	{
-		dimension = _dimension;
-		width = dimension.w;
-		height = dimension.h;
-		SetRenderNow();
-	}
-}
-
-void Sprite::SetDimensions(int _width, int _height)
-{
-	SetDimensions({ 0,0,_width,_height });
-}
-
-SDL_Point Sprite::GetCentre()
-{
-	return centre;
-}
-
-Vector2 Sprite::GetScale()
-{
-	return scale;
-}
-
-void Sprite::SetScale(Vector2 _scale)
-{
-	scale.X *= _scale.X;
-	scale.Y *= _scale.Y;
-	ScaleSprite();
-}
-
-void Sprite::SetScale(float x, float y)
-{
-	SetScale({ x,y });
-}
-
-void Sprite::SetAbsoluteScale(Vector2 _scale)
-{
-	scale.X = _scale.X;
-	scale.Y = _scale.Y;
-	ScaleSprite();
-}
-
-void Sprite::SetAbsoluteScale(float x, float y)
-{
-	SetAbsoluteScale({ x,y });
-}
-
-float Sprite::GetRotation()
-{
-	return rotation;
-}
-
-void Sprite::SetRotation(float _rotation)
-{
-	rotation = _rotation;
-	SetRenderNow();
+	velocity = vel;
 }
 
 void Sprite::Translate(Vector2 translation)
 {
 	SetPosition({( position.X + translation.X),(position.Y + translation.Y),position.W,position.H });
-}
-
-bool Sprite::CollidesWith(SDL_Rect* boundary)
-{
-	return SDL_HasIntersection(&GetPosition(), boundary) != 0;
-}
-
-bool Sprite::CollidesWith(Sprite* otherSprite)
-{
-	if (!IsActive() || !otherSprite->IsActive())
-	{
-		return false;
-	}
-	return CollidesWith(&BorisOperations::GetExpandedRect(otherSprite->GetPosition(),2));
-}
-
-bool Sprite::Clicked(SDL_Point* mouseposition)
-{
-	return IsActive() && SDL_PointInRect(mouseposition, &GetPosition());
-}
-
-void Sprite::SetSpriteType(SpriteType type)
-{
-	sprite_type = type;
-	SetRenderNow();
-}
-
-SpriteType Sprite::GetSpriteType()
-{
-	return sprite_type;
-}
-
-float Sprite::GetDistanceFrom(Sprite* sprite)
-{
-	return BorisOperations::GetDistance(GetVec2Position(), sprite->GetVec2Position());
-}
-
-void Sprite::PlayAnimation(Animation* anim)
-{
-	if (anim)
-	{
-		if (anim->frames.size() > 0)
-		{
-			currentAnimation = anim;
-			SetTexture(anim->frames[0]);
-		}
-	}
 }
 
 void Sprite::Update(float deltaTime)
@@ -291,49 +333,7 @@ void Sprite::Update(float deltaTime)
 		}
 	}
 	velocity += constantForce*deltaTime;
-	Translate(velocity);
-}
-
-Vector2 Sprite::Force()
-{
-	return constantForce*mass;
-}
-
-Vector2 Sprite::GetVelocity()
-{
-	return velocity;
-}
-
-void Sprite::SetVelocity(Vector2 vel)
-{
-	velocity = vel;
-}
-
-void Sprite::AddConstantForce(Vector2 force)
-{
-	constantForce += force;
-}
-
-void Sprite::AddImpulseForce(Vector2 force)
-{
-	velocity += force;
-}
-
-float Sprite::GetMass()
-{
-	return mass;
-}
-
-void Sprite::SetMass(float m)
-{
-	mass = m;
-}
-
-void Sprite::ReconcileCollisionForces(Sprite* otherSprite)
-{
-	Vector2 result = -(Force() + otherSprite->Force());
-	SetVelocity(result / mass);
-	otherSprite->SetVelocity(result/otherSprite->GetMass());
+	Translate(velocity*deltaTime);
 }
 
 void Sprite::ScaleSprite()

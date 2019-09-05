@@ -12,5 +12,7 @@ bool ClickPositive();
 bool CollisionNegative();
 bool CollisionPositive();
 bool InactiveVsActiveCollision();
+bool VelocityNegative();
+bool VelocityPositive();
 
 #endif
