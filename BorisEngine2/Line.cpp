@@ -37,7 +37,7 @@ void Line::SetColour(Colour colour)
 
 void Line::ResetCoordinates(SDL_Point pointA, SDL_Point pointB)
 {
-	//if (a != pointA || b != pointB)
+	if ((!BorisOperations::SDL_PointEquals(&a,&pointA)) || (!BorisOperations::SDL_PointEquals(&b,&pointB)))
 	{
 		a = pointA;
 		b = pointB;

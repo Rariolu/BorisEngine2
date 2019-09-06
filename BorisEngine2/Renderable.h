@@ -5,10 +5,10 @@
 
 struct Colour
 {
-	int R;
-	int G;
-	int B;
-	int A;
+	Uint8 R;
+	Uint8 G;
+	Uint8 B;
+	Uint8 A;
 	bool operator==(const Colour& other) const
 	{
 		return R == other.R && G == other.G && B == other.B && A == other.A;

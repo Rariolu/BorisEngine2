@@ -2,6 +2,10 @@
 
 StrTestMap spriteTests =
 {
+	{"Centre",Centre},
+	{"CentreXShifted",CentreXShifted},
+	{"CentreXYShifted",CentreXYShifted},
+	{"CentreYShifted",CentreYShifted},
 	{"ClickNegative",ClickNegative},
 	{"ClickPositive",ClickPositive},
 	{"CollisionNegative",CollisionNegative},
@@ -26,7 +30,48 @@ double SpriteRunAll()
 		textureManager->AddTexture(block2Name, "Textures\\block2.png");
 		return RunTests(spriteTests);
 	}
-	return 1;
+	return 0;
+}
+
+double SpriteTestsSize()
+{
+	return (double)spriteTests.size();
+}
+
+bool Centre()
+{
+	Sprite s1(block1Name);
+	s1.SetPosition({ 0,0,80,80 });
+	SDL_Point centre = s1.GetCentre();
+	SDL_Point test = { 40,40 };
+	return (centre.x == test.x) && (centre.y == test.y);
+}
+
+bool CentreXShifted()
+{
+	Sprite s1(block1Name);
+	s1.SetPosition({ 10,0,80,80 });
+	SDL_Point centre = s1.GetCentre();
+	SDL_Point test = { 50,40 };
+	return (centre.x == test.x) && (centre.y == test.y);
+}
+
+bool CentreXYShifted()
+{
+	Sprite s1(block1Name);
+	s1.SetPosition({ 10,10,80,80 });
+	SDL_Point centre = s1.GetCentre();
+	SDL_Point test = { 50,50 };
+	return (centre.x == test.x) && (centre.y == test.y);
+}
+
+bool CentreYShifted()
+{
+	Sprite s1(block1Name);
+	s1.SetPosition({ 0,10,80,80 });
+	SDL_Point centre = s1.GetCentre();
+	SDL_Point test = { 40,50 };
+	return (centre.x == test.x) && (centre.y == test.y);
 }
 
 bool ClickNegative()

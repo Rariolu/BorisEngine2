@@ -4,6 +4,7 @@
 #include "Tests.h"
 
 double OpsRunAll();
+double OpsSize();
 bool CharToLPCSTR();
 bool CharToStr();
 bool CreateFolder();
@@ -22,5 +23,6 @@ bool Round();
 bool Split();
 bool StringToLPCSTR();
 bool Vec2Lerp();
+bool Vec2ToSDLPoint();
 
 #endif

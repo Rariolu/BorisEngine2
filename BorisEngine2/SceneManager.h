@@ -9,7 +9,6 @@
 #include "Scene.h"
 #include "BorisConsoleManager.h"
 
-//using namespace std;
 //Create a class used to store pointers to instances of "Scene" so that they can be easily accessed when necessary.
 class SceneManager
 {

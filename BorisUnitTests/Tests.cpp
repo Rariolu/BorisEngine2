@@ -11,7 +11,7 @@ double RunTests(StrTestMap tests)
 			count += r;
 			std::cout << i->first << ": " << BorisOperations::BoolToString(r) << ";" << std::endl;
 		}
-		return count / tests.size();
+		return count;
 	}
-	return 1;
+	return (double)tests.size();
 }

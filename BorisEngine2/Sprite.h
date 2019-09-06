@@ -39,6 +39,7 @@ class Sprite : public Renderable
 		//A method which returns the dimensions of this sprite.
 		SDL_Rect GetDimensions();
 		float GetDistanceFrom(Sprite* sprite);
+		Vector2 GetFloatCentre();
 		FloatRect GetFloatPosition();
 		float GetMass();
 		//A method which returns the current location and dimensions of this sprite.
@@ -121,7 +122,8 @@ class Sprite : public Renderable
 		//The animation that's currently running.
 		Animation* currentAnimation;
 		//A value representing the centre of the sprite.
-		SDL_Point centre;
+		//SDL_Point centre;
+		
 		//A value representing the original dimensions of the sprite.
 		SDL_Rect dimension;
 		//A value representing the scale of the sprite.

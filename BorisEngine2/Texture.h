@@ -23,7 +23,6 @@
 #include "NAN.c"
 
 #include "BorisConsoleManager.h"
-//using namespace std;
 
 //A class which represents an image.
 class Texture

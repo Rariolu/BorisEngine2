@@ -5,13 +5,16 @@ int main(int argc, char *argv[])
 {
 	double total = 0;
 	double opsCount = OpsRunAll();
-	std::cout << "Ops: " << opsCount * 100 << "%" << std::endl;
 	total += opsCount;
+	opsCount /= OpsSize();
+	std::cout << "Ops: " << opsCount * 100 << "%" << std::endl;
+
 	double spriteCount = SpriteRunAll();
-	std::cout << "Sprite tests: " << spriteCount * 100 << "%" << std::endl;
 	total += spriteCount;
-	//total /= 2;
-	//std::cout << "Total: " << total * 100 << "%" << std::endl;
+	spriteCount /= SpriteTestsSize();
+	std::cout << "Sprite tests: " << spriteCount * 100 << "%" << std::endl;
+	total /= OpsSize() + SpriteTestsSize();
+	std::cout << "Total: " << total * 100 << "%" << std::endl;
 	system("pause");
 	return 0;
 }

@@ -47,11 +47,17 @@ namespace BorisOperations
 	int RandomNumber(int min, int max);
 	//A method which rounds a float value and returns the resulting integer.
 	int Round(float value);
+	//Returns true if both points have the same memory address
+	//or if their X and Y values are identical.
+	bool SDL_PointEquals(SDL_Point* a, SDL_Point* b);
 	//Separates a string using a given value to separate the segments.
 	//https://stackoverflow.com/questions/14265581/parse-split-a-string-in-c-using-string-delimiter-standard-c
 	StdVec<String> Split(String str, String delimiter);
 	//A method which returns an LPCSTR value representing a std::string.
 	LPCSTR String_to_LPCSTR(String str);
+	//Converts a Vector2 into SDL_Point
+	//by rounding the X and Y values.
+	SDL_Point Vector2ToSDLPoint(Vector2 vec2);
 	//A method which loops until there is no audio playing on
 	//any sdl audio channels.
 	void WaitForMusicToStop();

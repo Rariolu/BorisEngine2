@@ -8,8 +8,6 @@
 #include <Windows.h>
 #include "BorisConsoleManager.h"
 
-//using namespace std;
-
 //A class used to contain gameplay information and settings.
 class Util
 {

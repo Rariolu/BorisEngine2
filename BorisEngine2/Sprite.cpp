@@ -64,7 +64,7 @@ Vector2 Sprite::Force()
 
 SDL_Point Sprite::GetCentre()
 {
-	return centre;
+	return BorisOperations::Vector2ToSDLPoint(GetFloatCentre());
 }
 
 SDL_Rect Sprite::GetDimensions()
@@ -75,6 +75,11 @@ SDL_Rect Sprite::GetDimensions()
 float Sprite::GetDistanceFrom(Sprite* sprite)
 {
 	return BorisOperations::GetDistance(GetVec2Position(), sprite->GetVec2Position());
+}
+
+Vector2 Sprite::GetFloatCentre()
+{
+	return{ position.X + (position.W / 2),position.Y + (position.H / 2) };
 }
 
 FloatRect Sprite::GetFloatPosition()
@@ -160,6 +165,7 @@ void Sprite::ReconcileCollisionForces(Sprite* otherSprite)
 //Make the sprite appear in the window at its given position.
 void Sprite::Render()
 {
+	//RenderRotated(&dimension, &GetPosition());
 	if (!rotation)
 	{
 		Render(&dimension, &GetPosition());
@@ -186,11 +192,11 @@ void Sprite::RenderRotated(SDL_Rect* source, SDL_Rect* dest)
 {
 	if (GetSpriteType() == REGULAR)
 	{
-		texture->Render(source, dest, rotation, &centre);
+		texture->Render(source, dest, rotation, &GetCentre());
 	}
 	else
 	{
-		texture->Render(NULL, NULL, rotation, &centre);
+		texture->Render(NULL, NULL, rotation, &GetCentre());
 	}
 }
 
@@ -232,8 +238,8 @@ void Sprite::SetPosition(FloatRect _position)
 	if (_position != position)
 	{
 		position = _position;
-		centre.x = BorisOperations::Round(position.W / 2);
-		centre.y = BorisOperations::Round(position.H / 2);
+		//centre.x = BorisOperations::Round(position.W / 2);
+		//centre.y = BorisOperations::Round(position.H / 2);
 		SetRenderNow();
 	}
 }

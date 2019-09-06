@@ -4,6 +4,7 @@
 #include "Renderable.h"
 #include "SDL_rect.h"
 #include "SDL_render.h"
+#include "BorisOperations.h"
 
 class Line : public Renderable
 {

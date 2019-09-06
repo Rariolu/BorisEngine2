@@ -19,12 +19,18 @@ StrTestMap ops =
 	{"Round",Round},
 	{"Split",Split},
 	{"StringToLPCSTR",StringToLPCSTR},
-	{"Vec2Lerp",Vec2Lerp}
+	{"Vec2Lerp",Vec2Lerp},
+	{"Vec2ToSDLPoint",Vec2ToSDLPoint }
 };
 
 double OpsRunAll()
 {
 	return RunTests(ops);
+}
+
+double OpsSize()
+{
+	return (double)ops.size();
 }
 
 bool CharToLPCSTR()
@@ -220,4 +226,12 @@ bool Vec2Lerp()
 	Vector2 c = {2.5F, 2.5F};
 	Vector2 result = BorisOperations::Lerp(a, b, 0.5F);
 	return result == c;
+}
+
+bool Vec2ToSDLPoint()
+{
+	Vector2 vec2 = { 1.5F, 1.4F };
+	SDL_Point result = BorisOperations::Vector2ToSDLPoint(vec2);
+	SDL_Point test = { 2,1 };
+	return BorisOperations::SDL_PointEquals(&result, &test);
 }

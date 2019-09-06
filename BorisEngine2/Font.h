@@ -10,8 +10,6 @@
 //Create an enumeration for the different possible ways of displaying text.
 enum TextType { SOLID, BLENDED, SHADED };
 
-//using namespace std;
-
 //Create a class representing a specific font.
 class Font
 {

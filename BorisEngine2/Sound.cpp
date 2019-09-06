@@ -73,7 +73,7 @@ void Sound::Play()
 
 void Sound::Play(int volume)
 {
-	SoundWrap* wrap;
+	SoundWrap* wrap=NULL;
 	switch (soundType)
 	{
 		case SFX:

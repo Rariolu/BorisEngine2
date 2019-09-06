@@ -41,7 +41,6 @@ namespace BorisOperations
 
 	SDL_Surface* CreateSurface(unsigned int bytesPerPixel, void *pixels, int width, int height, int depth, int pitch)
 	{
-		//return NULL;
 		Uint32 rmask, gmask, bmask, amask;
 		#if SDL_BYTEORDER == SDL_BIG_ENDIAN
 				int shift = (bytesPerPixel == 3) ? 8 : 0;
@@ -134,6 +133,15 @@ namespace BorisOperations
 		return (int)round(value);
 	}
 
+	bool SDL_PointEquals(SDL_Point* a, SDL_Point* b)
+	{
+		if (a == b)
+		{
+			return true;
+		}
+		return (a->x == b->x) && (a->y == b->y);
+	}
+
 	StdVec<String> Split(String str, String delimiter)
 	{
 		StdVec<String> result;
@@ -156,6 +164,11 @@ namespace BorisOperations
 		return _strdup(ss.str().c_str());
 	}
 
+	SDL_Point Vector2ToSDLPoint(Vector2 vec2)
+	{
+		return{ Round(vec2.X),Round(vec2.Y) };
+	}
+
 	void WaitForMusicToStop()
 	{
 		int num = 0;
@@ -170,7 +183,4 @@ namespace BorisOperations
 			}
 		}
 	}
-
-
-
 }
