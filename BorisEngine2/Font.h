@@ -20,22 +20,23 @@ class Font
 		Font(LPCSTR filename, int fontSize, SDL_Renderer* _renderer, SDL_Color text_colour, SDL_Color background_colour);
 		//Destructor method.
 		~Font();
-		//Returns a pointer to the "TTF_Font" value which represents the font information in the context of the sdl library.
-		TTF_Font* GetFont();
 		//A method which creates a texture resembling given text and displays it differently depending on the given "TextType".
 		Texture* CreateTextTexture(LPCSTR text, TextType text_type);
-
+		//A method which creates a texture resembling given text and displays it differently depending on the given "TextType".
 		Texture* CreateTextTexture(String text, TextType text_type);
+		//Returns a pointer to the "TTF_Font" value which represents the font information in the context of the sdl library.
+		TTF_Font* GetFont();
+
 	private:
-		//A pointer to the "TTF_Font" value which represents the font information in the context of the sdl library.
-		TTF_Font* ttfFont;
+		//A value used for the background colour of the text.
+		SDL_Color backgroundColour;
+		static BorisConsoleManager* BorisConsoleManager;
 		//A pointer to the sdl renderer used in the current window.
 		SDL_Renderer* renderer;
 		//A value used for the foreground colour of the text.
 		SDL_Color textColour;
-		//A value used for the background colour of the text.
-		SDL_Color backgroundColour;
-		static BorisConsoleManager* BorisConsoleManager;
+		//A pointer to the "TTF_Font" value which represents the font information in the context of the sdl library.
+		TTF_Font* ttfFont;
 };
 
 #endif

@@ -27,29 +27,28 @@ Font::~Font()
 	ttfFont = NULL;
 }
 
-TTF_Font* Font::GetFont()
-{
-	return ttfFont;
-}
-
-Texture* Font::CreateTextTexture(LPCSTR text, TextType text_type)//, SDL_Color text_colour, SDL_Color background_colour)
+Texture* Font::CreateTextTexture(LPCSTR text, TextType text_type)
 {
 	SDL_Surface* surface = NULL;
 	if (ttfFont)
 	{
 		switch (text_type)
 		{
-		case SOLID:
-			surface = TTF_RenderText_Solid(ttfFont, text, textColour);
-			break;
-		case BLENDED:
-			surface = TTF_RenderText_Blended(ttfFont, text, textColour);
-			break;
-		case SHADED:
-			surface = TTF_RenderText_Shaded(ttfFont, text, textColour, backgroundColour);
-			break;
-		default:
-			break;
+			case SOLID:
+			{
+				surface = TTF_RenderText_Solid(ttfFont, text, textColour);
+				break;
+			}
+			case BLENDED:
+			{
+				surface = TTF_RenderText_Blended(ttfFont, text, textColour);
+				break;
+			}
+			case SHADED:
+			{
+				surface = TTF_RenderText_Shaded(ttfFont, text, textColour, backgroundColour);
+				break;
+			}
 		}
 		SDL_Texture* sdltexture = SDL_CreateTextureFromSurface(renderer, surface);
 		SDL_FreeSurface(surface);
@@ -61,4 +60,9 @@ Texture* Font::CreateTextTexture(LPCSTR text, TextType text_type)//, SDL_Color t
 Texture* Font::CreateTextTexture(String text, TextType text_type)
 {
 	return CreateTextTexture(BorisOperations::String_to_LPCSTR(text), text_type);
+}
+
+TTF_Font* Font::GetFont()
+{
+	return ttfFont;
 }
