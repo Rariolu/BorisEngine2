@@ -2,6 +2,8 @@
 
 StrTestMap spriteTests =
 {
+	{"AnimationCheck",AnimationCheck},
+	{"AnimationSkipFrame",AnimationSkipFrame},
 	{"Centre",Centre},
 	{"CentreXShifted",CentreXShifted},
 	{"CentreXYShifted",CentreXYShifted},
@@ -19,6 +21,7 @@ TextureManager* textureManager = TextureManager::getInstance();
 
 String block1Name = "block1";
 String block2Name = "block2";
+String block3Name = "block3";
 
 double SpriteRunAll()
 {
@@ -28,7 +31,22 @@ double SpriteRunAll()
 		textureManager->SetRenderer(sdlWindowManager->getSDLRenderer());
 		textureManager->AddTexture(block1Name, "Textures\\block1.png");
 		textureManager->AddTexture(block2Name, "Textures\\block2.png");
-		return RunTests(spriteTests);
+		textureManager->AddTexture(block3Name, "Textures\\block3.png");
+		double t = RunTests(spriteTests);
+
+		// Delete our OpengL context
+		SDL_GL_DeleteContext(sdlWindowManager->getSDLWindow());
+
+		// Destroy the window
+		SDL_DestroyWindow(sdlWindowManager->getSDLWindow());
+
+		// Quit IMG system
+		IMG_Quit();
+
+		// Shutdown SDL 2
+		SDL_Quit();
+
+		return t;
 	}
 	return 0;
 }
@@ -36,6 +54,45 @@ double SpriteRunAll()
 double SpriteTestsSize()
 {
 	return (double)spriteTests.size();
+}
+
+bool AnimationCheck()
+{
+	Animation anim;
+	anim.frameDuration = 0.25F;
+	Texture* b1 = textureManager->GetTexture(block1Name);
+	Texture* b2 = textureManager->GetTexture(block2Name);
+	Texture* b3 = textureManager->GetTexture(block3Name);
+	anim.frames.push_back(b2);
+	anim.frames.push_back(b3);
+	Sprite s1(b1);
+	s1.PlayAnimation(&anim);
+	Texture* firstFrame = s1.GetTexture();
+	s1.Update(0.26F);
+	Texture* secondFrame = s1.GetTexture();
+	bool firstCorrect = firstFrame == b2 && firstFrame != b1;
+	bool secondCorrect = secondFrame == b3;
+	return firstCorrect && secondCorrect;
+}
+
+bool AnimationSkipFrame()
+{
+	Animation anim;
+	anim.frameDuration = 0.25F;
+	Texture* b1 = textureManager->GetTexture(block1Name);
+	Texture* b2 = textureManager->GetTexture(block2Name);
+	Texture* b3 = textureManager->GetTexture(block3Name);
+	anim.frames.push_back(b2);
+	anim.frames.push_back(b3);
+	anim.frames.push_back(b1);
+	Sprite s1(b1);
+	s1.PlayAnimation(&anim);
+	Texture* firstFrame = s1.GetTexture();
+	s1.Update(0.51F);
+	Texture* secondFrame = s1.GetTexture();
+	bool firstCorrect = firstFrame == b2 && firstFrame != b1;
+	bool secondCorrect = secondFrame == b1;
+	return firstCorrect && secondCorrect;
 }
 
 bool Centre()
@@ -129,7 +186,7 @@ bool VelocityNegative()
 	Vector2 v = { 1,1 };
 	s1.SetVelocity(v);
 	s1.Update(1);
-	FloatRect pos = { 0.5F,0.5F,s1.GetDimensions().w ,s1.GetDimensions().h };
+	FloatRect pos = { 0.5F,0.5F,(float)s1.GetDimensions().w ,(float)s1.GetDimensions().h };
 	return s1.GetFloatPosition() != pos;
 }
 

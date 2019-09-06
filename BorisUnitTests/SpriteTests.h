@@ -5,9 +5,12 @@
 #include "Sprite.h"
 #include "TextureManager.h"
 #include "SDL_Window_Manager.h"
+#include "Animation.h"
 
 double SpriteRunAll();
 double SpriteTestsSize();
+bool AnimationCheck();
+bool AnimationSkipFrame();
 bool Centre();
 bool CentreXShifted();
 bool CentreXYShifted();

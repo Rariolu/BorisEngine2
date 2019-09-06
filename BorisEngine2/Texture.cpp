@@ -1,6 +1,6 @@
 #include "Texture.h"
 
-BorisConsoleManager* Texture::BorisConsoleManager = BorisConsoleManager::Instance();
+BorisConsoleManager* Texture::borisConsoleManager = BorisConsoleManager::Instance();
 
 Texture::Texture(LPCSTR filename, SDL_Renderer* renderer) : Texture(IMG_LoadTexture(renderer,filename),renderer)
 {
@@ -35,19 +35,41 @@ int Texture::getHeight()
 	return height;
 }
 
-int Texture::getWidth()
-{
-	return width;
-}
-
 SDL_Texture* Texture::getSDLTexture()
 {
 	return sdlTexture;
 }
 
+int Texture::getWidth()
+{
+	return width;
+}
+
+Texture* Texture::NANTexture(SDL_Renderer* renderer)
+{
+	return new Texture(BlankSDLTexture(renderer), renderer, true);
+}
+
+void Texture::Render(SDL_Rect* sourceRect, SDL_Rect* destRect)
+{
+	SDL_RenderCopy(mainRenderer, sdlTexture, sourceRect, destRect);
+}
+
+void Texture::Render(SDL_Rect* sourceRect, SDL_Rect* destRect, double rotAngle, SDL_Point* spriteCentre)
+{
+	SDL_RenderCopyEx(mainRenderer, sdlTexture, sourceRect, destRect, rotAngle, spriteCentre, SDL_FLIP_NONE);
+}
+
 void Texture::SetSDLRenderer(SDL_Renderer* renderer)
 {
 	mainRenderer = renderer;
+}
+
+SDL_Texture* Texture::BlankSDLTexture(SDL_Renderer* renderer)
+{
+	SDL_Surface* nansurface = BorisOperations::CreateSurface(NonApplicableTexture.bytes_per_pixel, (void*)NonApplicableTexture.pixel_data, NonApplicableTexture.width, NonApplicableTexture.height, NonApplicableTexture.bytes_per_pixel * 8, NonApplicableTexture.bytes_per_pixel*NonApplicableTexture.width);
+	SDL_Texture* nantexture = SDL_CreateTextureFromSurface(renderer, nansurface);
+	return nantexture;
 }
 
 bool Texture::LoadTexture(SDL_Texture* texture)
@@ -61,29 +83,7 @@ bool Texture::LoadTexture(SDL_Texture* texture)
 	if (mainRenderer)
 	{
 		LoadTexture(BlankSDLTexture(mainRenderer));
-		BorisConsoleManager->Print(SDL_GetError());
+		borisConsoleManager->Print(SDL_GetError());
 	}
 	return false;
-}
-
-Texture* Texture::NANTexture(SDL_Renderer* renderer)
-{
-	return new Texture(BlankSDLTexture(renderer), renderer,true);
-}
-
-SDL_Texture* Texture::BlankSDLTexture(SDL_Renderer* renderer)
-{
-	SDL_Surface* nansurface = BorisOperations::CreateSurface(NonApplicableTexture.bytes_per_pixel, (void*)NonApplicableTexture.pixel_data, NonApplicableTexture.width, NonApplicableTexture.height, NonApplicableTexture.bytes_per_pixel * 8, NonApplicableTexture.bytes_per_pixel*NonApplicableTexture.width);
-	SDL_Texture* nantexture = SDL_CreateTextureFromSurface(renderer, nansurface);
-	return nantexture;
-}
-
-void Texture::Render(SDL_Rect* sourceRect, SDL_Rect* destRect)
-{
-	SDL_RenderCopy(mainRenderer, sdlTexture, sourceRect, destRect);
-}
-
-void Texture::Render(SDL_Rect* sourceRect, SDL_Rect* destRect, double rotAngle, SDL_Point* spriteCentre)
-{
-	SDL_RenderCopyEx(mainRenderer, sdlTexture, sourceRect, destRect, rotAngle, spriteCentre, SDL_FLIP_NONE);
 }

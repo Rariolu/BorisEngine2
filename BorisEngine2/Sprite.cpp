@@ -318,9 +318,9 @@ void Sprite::Update(float deltaTime)
 		currentAnimation->delta += deltaTime;
 		if (currentAnimation->delta >= currentAnimation->frameDuration)
 		{
-			currentAnimation->currentFrame++;
+			currentAnimation->currentFrame+=(int)(currentAnimation->delta/currentAnimation->frameDuration);
 			currentAnimation->delta = 0;
-			if (currentAnimation->currentFrame >= currentAnimation->frames.size())
+			if (currentAnimation->currentFrame >= (int)currentAnimation->frames.size())
 			{
 				currentAnimation->Reset();
 				if (currentAnimation->loop)

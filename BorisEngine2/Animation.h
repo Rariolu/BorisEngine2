@@ -11,9 +11,9 @@ struct Animation
 	//The amount of time that each frame lasts.
 	float frameDuration;
 	//The index of the frame currently being used.
-	int currentFrame;
+	int currentFrame = 0;
 	//The amount of time that has accumulated since the last change of frame.
-	float delta;
+	float delta = 0;
 	//Boolean representing whether or not the animation should be repeated after it has been played.
 	bool loop = false;
 	//Starts animation again.
