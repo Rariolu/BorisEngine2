@@ -4,12 +4,17 @@ BorisConsoleManager* BorisConsoleManager::_instance = NULL;
 
 BorisConsoleManager::BorisConsoleManager()
 {
-
+	printFunction = COutPrint;
 }
 
 BorisConsoleManager::~BorisConsoleManager()
 {
 
+}
+
+void BorisConsoleManager::COutPrint(char* c)
+{
+	std::cout << std::endl << c << std::endl;
 }
 
 BorisConsoleManager* BorisConsoleManager::Instance()
@@ -24,7 +29,7 @@ BorisConsoleManager* BorisConsoleManager::Instance()
 int BorisConsoleManager::print(void* data)
 {
 	char* m = (char*)data;
-	std::cout << std::endl << m << std::endl;
+	printFunction(m);
 	return 0;
 }
 
@@ -37,6 +42,11 @@ void BorisConsoleManager::Print(char* text)
 {
 	void* voir = (void*)(text);
 	ThreadManager::GetInstance()->RunThread(&print, voir);
+}
+
+void BorisConsoleManager::SetPrintFunction(std::function<void(char*)> fn)
+{
+	printFunction = fn;
 }
 
 //void BorisConsoleManager::Print(std::stringstream* ss)

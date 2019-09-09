@@ -2,7 +2,7 @@
 
 TextureManager* Sprite::texturemanager = TextureManager::getInstance();
 SoundManager* Sprite::soundmanager = SoundManager::GetInstance();
-BorisConsoleManager* Sprite::BorisConsoleManager = BorisConsoleManager::Instance();
+BorisConsoleManager* Sprite::borisConsoleManager = BorisConsoleManager::Instance();
 
 Sprite::Sprite(String textureName) : Sprite(texturemanager->GetTexture(textureName))
 {
@@ -140,7 +140,7 @@ void Sprite::LerpPosition(Vector2 destination, float f)
 void Sprite::MsgPosition()
 {
 	String msg = "X: " + std::to_string(position.X) + "; Y: " + std::to_string(position.Y) + "; W: " + std::to_string(position.W) + "; H: " + std::to_string(position.H) + ";";
-	BorisConsoleManager->Print(msg);
+	borisConsoleManager->Print(msg);
 }
 
 void Sprite::PlayAnimation(Animation* anim)
@@ -217,8 +217,6 @@ void Sprite::SetDimensions(SDL_Rect _dimension)
 	if (!SDL_RectEquals(&dimension, &_dimension))
 	{
 		dimension = _dimension;
-		width = dimension.w;
-		height = dimension.h;
 		SetRenderNow();
 	}
 }

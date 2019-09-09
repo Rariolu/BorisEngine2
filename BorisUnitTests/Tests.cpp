@@ -7,7 +7,16 @@ double RunTests(StrTestMap tests)
 		double count = 0;
 		for (StrTestMap::iterator i = tests.begin(); i != tests.end(); i++)
 		{
-			bool r = i->second();
+			bool r;
+			try
+			{
+				r = i->second();
+			}
+			catch(std::exception err)
+			{
+				r = false;
+				std::cout << "Error: \"" << err.what() << "\"" << std::endl;
+			}
 			count += r;
 			std::cout << i->first << ": " << BorisOperations::BoolToString(r) << ";" << std::endl;
 		}

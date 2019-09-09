@@ -32,6 +32,7 @@ double SpriteRunAll()
 		textureManager->AddTexture(block1Name, "Textures\\block1.png");
 		textureManager->AddTexture(block2Name, "Textures\\block2.png");
 		textureManager->AddTexture(block3Name, "Textures\\block3.png");
+
 		double t = RunTests(spriteTests);
 
 		// Delete our OpengL context
@@ -101,7 +102,7 @@ bool Centre()
 	s1.SetPosition({ 0,0,80,80 });
 	SDL_Point centre = s1.GetCentre();
 	SDL_Point test = { 40,40 };
-	return (centre.x == test.x) && (centre.y == test.y);
+	return BorisOperations::SDL_PointEquals(&centre, &test);
 }
 
 bool CentreXShifted()
@@ -110,7 +111,7 @@ bool CentreXShifted()
 	s1.SetPosition({ 10,0,80,80 });
 	SDL_Point centre = s1.GetCentre();
 	SDL_Point test = { 50,40 };
-	return (centre.x == test.x) && (centre.y == test.y);
+	return BorisOperations::SDL_PointEquals(&centre, &test);
 }
 
 bool CentreXYShifted()
@@ -119,7 +120,7 @@ bool CentreXYShifted()
 	s1.SetPosition({ 10,10,80,80 });
 	SDL_Point centre = s1.GetCentre();
 	SDL_Point test = { 50,50 };
-	return (centre.x == test.x) && (centre.y == test.y);
+	return BorisOperations::SDL_PointEquals(&centre, &test);
 }
 
 bool CentreYShifted()
@@ -128,7 +129,7 @@ bool CentreYShifted()
 	s1.SetPosition({ 0,10,80,80 });
 	SDL_Point centre = s1.GetCentre();
 	SDL_Point test = { 40,50 };
-	return (centre.x == test.x) && (centre.y == test.y);
+	return BorisOperations::SDL_PointEquals(&centre, &test);
 }
 
 bool ClickNegative()

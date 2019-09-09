@@ -44,8 +44,6 @@ class Sprite : public Renderable
 		float GetMass();
 		//A method which returns the current location and dimensions of this sprite.
 		SDL_Rect GetPosition();
-		
-		
 		//A method which returns a float representing the current rotation
 		//of the sprite.
 		float GetRotation();
@@ -53,7 +51,6 @@ class Sprite : public Renderable
 		SpriteType GetSpriteType();
 		//A method which returns a Vector2 representing the scale of the sprite.
 		Vector2 GetScale();
-
 		//A method which returns the pointer to the "Texture" instance of this class.
 		Texture* GetTexture();
 		Vector2 GetVec2Position();
@@ -113,39 +110,36 @@ class Sprite : public Renderable
 		//A method which adjusts the size and position of
 		//the sprite depending on its scale.
 		void ScaleSprite();
-		//Mass, affects how forces are applied.
-		float mass;
-		//Current velocity
-		Vector2 velocity;
+
+		//A boolean which represents whether or not this
+		//sprite is active.
+		bool active = false;
 		//Force that is applied constantly.
 		Vector2 constantForce;
 		//The animation that's currently running.
 		Animation* currentAnimation;
-		//A value representing the centre of the sprite.
-		//SDL_Point centre;
-		
 		//A value representing the original dimensions of the sprite.
 		SDL_Rect dimension;
-		//A value representing the scale of the sprite.
-		Vector2 scale;
-		//A value representing the rotation of the sprite.
-		float rotation;
-		//A value representing the sprite's texture.
-		Texture* texture;
-		//A value representing the width of the sprite.
-		int width;
 		//A value representing the height of the sprite.
-		int height;
-		//A boolean which represents whether or not this
-		//sprite is active.
-		bool active = false;
+		//int height;
+		//Mass, affects how forces are applied.
+		float mass;
 		//A FloatRect which is used to represent 
 		//the position and dimensions of the sprite
 		FloatRect position;
+		//A value representing the rotation of the sprite.
+		float rotation;
+		//A value representing the scale of the sprite.
+		Vector2 scale;
 		//A value representing the sprite's current type.
 		SpriteType sprite_type = REGULAR;
-
-		static BorisConsoleManager* BorisConsoleManager;
+		//A value representing the sprite's texture.
+		Texture* texture;
+		//Current velocity
+		Vector2 velocity;
+		//A value representing the width of the sprite.
+		//int width;
+		static BorisConsoleManager* borisConsoleManager;
 };
 
 #endif // ! _SPRITE_H

@@ -435,7 +435,6 @@ xcopy /Y "$(ProjectDir)*.c" "C:\CppLib\BorisEngine\include"</Command>
     <ClInclude Include="Animation.h" />
     <ClInclude Include="BooleanCarrier.h" />
     <ClInclude Include="BorisConsoleManager.h" />
-    <ClInclude Include="BorisEngine.h" />
     <ClInclude Include="BorisExternalInterface.h" />
     <ClInclude Include="BorisOperations.h" />
     <ClInclude Include="CSRand.h" />
