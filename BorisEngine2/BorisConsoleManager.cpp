@@ -2,21 +2,6 @@
 
 BorisConsoleManager* BorisConsoleManager::_instance = NULL;
 
-BorisConsoleManager::BorisConsoleManager()
-{
-	printFunction = COutPrint;
-}
-
-BorisConsoleManager::~BorisConsoleManager()
-{
-
-}
-
-void BorisConsoleManager::COutPrint(char* c)
-{
-	std::cout << std::endl << c << std::endl;
-}
-
 BorisConsoleManager* BorisConsoleManager::Instance()
 {
 	if (!_instance)
@@ -24,13 +9,6 @@ BorisConsoleManager* BorisConsoleManager::Instance()
 		_instance = new BorisConsoleManager();
 	}
 	return _instance;
-}
-
-int BorisConsoleManager::print(void* data)
-{
-	char* m = (char*)data;
-	printFunction(m);
-	return 0;
 }
 
 void BorisConsoleManager::Print(String text)
@@ -47,6 +25,28 @@ void BorisConsoleManager::Print(char* text)
 void BorisConsoleManager::SetPrintFunction(std::function<void(char*)> fn)
 {
 	printFunction = fn;
+}
+
+BorisConsoleManager::BorisConsoleManager()
+{
+	printFunction = COutPrint;
+}
+
+BorisConsoleManager::~BorisConsoleManager()
+{
+
+}
+
+void BorisConsoleManager::COutPrint(char* c)
+{
+	std::cout << std::endl << c << std::endl;
+}
+
+int BorisConsoleManager::print(void* data)
+{
+	char* m = (char*)data;
+	printFunction(m);
+	return 0;
 }
 
 //void BorisConsoleManager::Print(std::stringstream* ss)

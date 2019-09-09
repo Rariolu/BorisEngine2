@@ -16,8 +16,8 @@ class BorisConsoleManager
 		BorisConsoleManager();
 		~BorisConsoleManager();
 		static void COutPrint(char* c);
-		static BorisConsoleManager* _instance;
 		static int print(void* data);
+		static BorisConsoleManager* _instance;
 		static std::function<void(char*)> printFunction;
 };
 
