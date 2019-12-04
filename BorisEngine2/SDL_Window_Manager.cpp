@@ -32,6 +32,21 @@ void SDL_Window_Manager::CheckSDLError(int line = -1)
 	}
 }
 
+void SDL_Window_Manager::Dispose()
+{
+	// Delete our OpengL context
+	SDL_GL_DeleteContext(mainWindow);
+
+	// Destroy the window
+	SDL_DestroyWindow(mainWindow);
+
+	// Quit IMG system
+	IMG_Quit();
+
+	// Shutdown SDL 2
+	SDL_Quit();
+}
+
 bool SDL_Window_Manager::initWND(String strWNDTitle, int iWidth, int iHeight)
 {
 	return initWND(strWNDTitle, iWidth, iHeight, favicon);

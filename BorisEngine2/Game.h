@@ -30,17 +30,17 @@ class Game
 		static FontManager* fontManager;
 		//A pointer to an instance of "SceneManager".
 		static SceneManager* sceneManager;
-		static TextureManager* textureManager;
 		static SDL_Window_Manager* sdlWindowManager;
+		static TextureManager* textureManager;
 	private:
 		virtual void ResourceSetup(SDL_Renderer* renderer)=0;
-		//A pointer to the sdl window.
-		SDL_Window* sdlWindow;
-		//A pointer to the sdl renderer.
-		SDL_Renderer* sdlRenderer;
+		static BorisConsoleManager* borisConsoleManager;
 		//A bool representing whether or not the "Initialise" method has been called.
 		bool initialised = false;
-		static BorisConsoleManager* BorisConsoleManager;
+		//A pointer to the sdl renderer.
+		SDL_Renderer* sdlRenderer;
+		//A pointer to the sdl window.
+		SDL_Window* sdlWindow;
 };
 
 #endif

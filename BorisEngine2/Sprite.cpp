@@ -28,15 +28,15 @@ Sprite::~Sprite()
 
 }
 
-void Sprite::AddConstantForce(Vector2 force)
-{
-	constantForce += force;
-}
+//void Sprite::AddConstantForce(Vector2 force)
+//{
+//	constantForce += force;
+//}
 
-void Sprite::AddImpulseForce(Vector2 force)
-{
-	velocity += force;
-}
+//void Sprite::AddImpulseForce(Vector2 force)
+//{
+//	velocity += force;
+//}
 
 bool Sprite::CollidesWith(SDL_Rect* boundary)
 {
@@ -122,10 +122,10 @@ Vector2 Sprite::GetVec2Position()
 	return{ position.X,position.Y };
 }
 
-Vector2 Sprite::GetVelocity()
-{
-	return velocity;
-}
+//Vector2 Sprite::GetVelocity()
+//{
+//	return velocity;
+//}
 
 void Sprite::LerpPosition(FloatRect destination, float f)
 {
@@ -155,12 +155,12 @@ void Sprite::PlayAnimation(Animation* anim)
 	}
 }
 
-void Sprite::ReconcileCollisionForces(Sprite* otherSprite)
-{
-	Vector2 result = -(Force() + otherSprite->Force());
-	SetVelocity(result / mass);
-	otherSprite->SetVelocity(result / otherSprite->GetMass());
-}
+//void Sprite::ReconcileCollisionForces(Sprite* otherSprite)
+//{
+//	Vector2 result = -(Force() + otherSprite->Force());
+//	SetVelocity(result / mass);
+//	otherSprite->SetVelocity(result / otherSprite->GetMass());
+//}
 
 //Make the sprite appear in the window at its given position.
 void Sprite::Render()
@@ -299,10 +299,10 @@ void Sprite::SetTexture(String textureName)
 	SetTexture(texturemanager->GetTexture(textureName));
 }
 
-void Sprite::SetVelocity(Vector2 vel)
-{
-	velocity = vel;
-}
+//void Sprite::SetVelocity(Vector2 vel)
+//{
+//	velocity = vel;
+//}
 
 void Sprite::Translate(Vector2 translation)
 {
@@ -336,8 +336,8 @@ void Sprite::Update(float deltaTime)
 			}
 		}
 	}
-	velocity += constantForce*deltaTime;
-	Translate(velocity*deltaTime);
+	/*velocity += constantForce*deltaTime;
+	Translate(velocity*deltaTime);*/
 }
 
 void Sprite::ScaleSprite()

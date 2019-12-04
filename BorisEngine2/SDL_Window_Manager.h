@@ -2,6 +2,7 @@
 #define _SDLWINDOWMANAGER_H
 
 #include <SDL.h>
+#include <SDL_image.h>
 #include "favicon.c"
 #include "BorisConsoleManager.h"
 #include "BorisOperations.h"
@@ -16,6 +17,7 @@ class SDL_Window_Manager
 		//A method which checks for an error from within the SDL
 		//library and outputs it to the console if there is one.
 		void CheckSDLError(int line);
+		void Dispose();
 		//A method which attempts to initialise and open a window
 		//and returns a boolean that depends on whether or not it
 		//was successful.

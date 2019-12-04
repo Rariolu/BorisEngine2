@@ -5,7 +5,7 @@ SceneManager* Game::sceneManager = SceneManager::GetInstance();
 TextureManager* Game::textureManager = TextureManager::getInstance();
 SDL_Window_Manager* Game::sdlWindowManager = SDL_Window_Manager::getInstance();
 
-BorisConsoleManager* Game::BorisConsoleManager = BorisConsoleManager::Instance();
+BorisConsoleManager* Game::borisConsoleManager = BorisConsoleManager::Instance();
 
 Game::Game()
 {
@@ -64,17 +64,18 @@ int Game::CreateNewWindow(String windowTitle, int width, int height, Icon icon)
 
 void Game::Dispose()
 {
-	// Delete our OpengL context
-	SDL_GL_DeleteContext(sdlWindow);
+	sdlWindowManager->Dispose();
+	//// Delete our OpengL context
+	//SDL_GL_DeleteContext(sdlWindow);
 
-	// Destroy the window
-	SDL_DestroyWindow(sdlWindow);
+	//// Destroy the window
+	//SDL_DestroyWindow(sdlWindow);
 
-	// Quit IMG system
-	IMG_Quit();
+	//// Quit IMG system
+	//IMG_Quit();
 
-	// Shutdown SDL 2
-	SDL_Quit();
+	//// Shutdown SDL 2
+	//SDL_Quit();
 
 	ThreadManager::GetInstance()->Dispose();
 }
@@ -95,9 +96,9 @@ void Game::Run(String startscene)
 		{
 			Scene* scene = sceneManager->GetScene(currentscene);
 			scene->Initialise(sdlRenderer);
-			BorisConsoleManager->Print(currentscene + " initialised and will run shortly.");
+			borisConsoleManager->Print(currentscene + " initialised and will run shortly.");
 			currentscene = scene->Run();
 		}
-		BorisConsoleManager->Print("Game has ran out of scenes to run and hence will end.");
+		borisConsoleManager->Print("Game has ran out of scenes to run and hence will end.");
 	}
 }

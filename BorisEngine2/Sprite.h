@@ -21,8 +21,9 @@ class Sprite : public Renderable
 		Sprite(Texture* _texture);
 		//Destructor method.
 		~Sprite();
-		void AddConstantForce(Vector2 force);
-		void AddImpulseForce(Vector2 force);
+		//void AddConstantForce(Vector2 force);
+		//void AddImpulseForce(Vector2 force);
+
 		//A method which returns a boolean value which represents
 		//whether or not this sprite collides with a given SDL_Rect.
 		bool CollidesWith(SDL_Rect* boundary);
@@ -95,7 +96,8 @@ class Sprite : public Renderable
 		//A method which sets the current texture of this class.
 		void SetTexture(Texture* texture);
 		void SetTexture(String textureName);
-		void SetVelocity(Vector2 vel);
+		//void SetVelocity(Vector2 vel);
+		
 		//A method which moves the sprite a certain amount
 		//depending on the given Vector2 value.
 		void Translate(Vector2 translation);
@@ -136,7 +138,8 @@ class Sprite : public Renderable
 		//A value representing the sprite's texture.
 		Texture* texture;
 		//Current velocity
-		Vector2 velocity;
+		//Vector2 velocity;
+
 		//A value representing the width of the sprite.
 		//int width;
 		static BorisConsoleManager* borisConsoleManager;

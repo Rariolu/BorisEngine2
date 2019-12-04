@@ -1,6 +1,7 @@
 #include "BorisConsoleManager.h"
 
 BorisConsoleManager* BorisConsoleManager::_instance = NULL;
+std::function<void(char*)> BorisConsoleManager::printFunction = NULL;
 
 BorisConsoleManager* BorisConsoleManager::Instance()
 {
@@ -45,7 +46,8 @@ void BorisConsoleManager::COutPrint(char* c)
 int BorisConsoleManager::print(void* data)
 {
 	char* m = (char*)data;
-	printFunction(m);
+	//printFunction(m);
+	COutPrint(m);
 	return 0;
 }
 
