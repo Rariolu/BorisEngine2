@@ -437,6 +437,7 @@ xcopy /Y "$(ProjectDir)*.c" "C:\CppLib\BorisEngine\include"</Command>
     <ClInclude Include="BorisConsoleManager.h" />
     <ClInclude Include="BorisExternalInterface.h" />
     <ClInclude Include="BorisOperations.h" />
+    <ClInclude Include="Circle.h" />
     <ClInclude Include="CSRand.h" />
     <ClInclude Include="DigitSprite.h" />
     <ClInclude Include="ExternalResourceManager.h" />
@@ -445,6 +446,7 @@ xcopy /Y "$(ProjectDir)*.c" "C:\CppLib\BorisEngine\include"</Command>
     <ClInclude Include="FontManager.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Line.h" />
+    <ClInclude Include="LineEquation.h" />
     <ClInclude Include="PointsCounter.h" />
     <ClInclude Include="Renderable.h" />
     <ClInclude Include="Scene.h" />

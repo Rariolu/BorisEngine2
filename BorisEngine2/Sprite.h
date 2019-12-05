@@ -55,14 +55,18 @@ class Sprite : public Renderable
 		//A method which returns the pointer to the "Texture" instance of this class.
 		Texture* GetTexture();
 		Vector2 GetVec2Position();
-		Vector2 GetVelocity();
+
+		//Vector2 GetVelocity();
+
 		void LerpPosition(FloatRect destination, float f);
 		void LerpPosition(Vector2 destination, float f);
 		//A method which outputs the current position of the sprite.
 		void MsgPosition();
 		//Change texture to predetermined values at regular intervals.
 		void PlayAnimation(Animation* anim);
-		void ReconcileCollisionForces(Sprite* otherSprite);
+		
+		//void ReconcileCollisionForces(Sprite* otherSprite);
+		
 		//A method which renders this sprite.
 		void Render();
 		//A method which renders this sprite using given source and destination rectangles.
@@ -80,11 +84,11 @@ class Sprite : public Renderable
 		void SetDimensions(int width, int height);
 		void SetMass(float m);
 		//A method that sets the current location and dimensions using a given FloatRect value.
-		void SetPosition(FloatRect _position);
-		void SetPosition(int x, int y);
+		virtual void SetPosition(FloatRect _position);
+		virtual void SetPosition(int x, int y);
 		//A method that sets the current location and dimensions using given X and Y values.
-		void SetPosition(float x, float y);
-		void SetPosition(Vector2 pos);
+		virtual void SetPosition(float x, float y);
+		virtual void SetPosition(Vector2 pos);
 		//A method which sets the current rotation of the sprite.
 		void SetRotation(float _rotation);
 		//A method which adjusts the scale of the sprite using a Vector2 value.

@@ -8,6 +8,15 @@
 //A struct which represents an onscreen position using an X and Y value.
 struct Vector2
 {
+	Vector2()
+	{
+
+	}
+	Vector2(float x, float y)
+	{
+		X = x;
+		Y = y;
+	}
 	float  X;
 	float  Y;
 	String ToString() const
@@ -55,6 +64,11 @@ struct Vector2
 	bool operator!=(Vector2 other)
 	{
 		return !(*this == other);
+	}
+	Vector2 Normalise()
+	{
+		float h = sqrt(pow(X, 2) + pow(Y, 2));
+		return Vector2(X / h, Y / h);
 	}
 };
 

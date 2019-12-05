@@ -1,7 +1,7 @@
 #ifndef _BorisOperations_H
 #define _BorisOperations_H
 
-#include "Vector2.h"
+#include "Circle.h"
 #include "FloatRect.h"
 #include <cstring>
 #include <sstream>
@@ -61,6 +61,8 @@ namespace BorisOperations
 	//A method which loops until there is no audio playing on
 	//any sdl audio channels.
 	void WaitForMusicToStop();
+
+	bool LineIntersectsCircle(Vector2 lineStartPosition, Vector2 lineDirection, Circle circle);
 }
 
 #endif

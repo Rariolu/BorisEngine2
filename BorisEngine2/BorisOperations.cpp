@@ -183,4 +183,9 @@ namespace BorisOperations
 			}
 		}
 	}
+
+	bool LineIntersectsCircle(Vector2 lineStartPosition, Vector2 lineDirection, Circle circle)
+	{
+		return false;
+	}
 }
