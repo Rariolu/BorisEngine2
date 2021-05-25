@@ -2,7 +2,7 @@
 
 SoundManager* SoundManager::_instance = NULL;
 
-BorisConsoleManager* SoundManager::BorisConsoleManager = BorisConsoleManager::Instance();
+BorisConsoleManager* SoundManager::borisConsoleManager = BorisConsoleManager::Instance();
 
 SoundManager::SoundManager()
 {
@@ -14,13 +14,13 @@ bool SoundManager::Initialise()
 	if (SDL_Init(SDL_INIT_AUDIO) != 0)
 	{
 		String str = "SDL_Init_AUDIO Failed: " + String(SDL_GetError());
-		BorisConsoleManager->Print(str);
+		borisConsoleManager->Print(str);
 		return false;
 	}
 	if (Mix_OpenAudio(MIX_DEFAULT_FREQUENCY, MIX_DEFAULT_FORMAT, 2, 4096) != 0)
 	{
 		String str = "Mix_OpenAudio Failed: " + String(SDL_GetError());
-		BorisConsoleManager->Print(str);
+		borisConsoleManager->Print(str);
 		return false;
 	}
 	return true;
@@ -52,7 +52,7 @@ Sound* SoundManager::GetSound(String soundname)//(LPCSTR soundname)
 	return NULL;
 }
 
-void SoundManager::AddSound(String soundname, LPCSTR filename, SoundType soundtype)
+void SoundManager::AddSound(String soundname, const char *filename, SoundType soundtype)
 {
 	if (!GetSound(soundname))
 	{

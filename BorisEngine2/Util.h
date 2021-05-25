@@ -5,7 +5,7 @@
 #include <SDL_mixer.h>
 #include <string>
 #include <iostream>
-#include <Windows.h>
+/*#include <Windows.h>*/
 #include "BorisConsoleManager.h"
 
 //A class used to contain gameplay information and settings.
@@ -59,7 +59,7 @@ class Util
 		int musicvolume = 75;
 		//A std::string which represents the currently-playing song.
 		String currentMusic;
-		static BorisConsoleManager* BorisConsoleManager;
+		static BorisConsoleManager* borisConsoleManager;
 };
 
 #endif

@@ -41,7 +41,7 @@ class SDL_Window_Manager
 		SDL_Window *mainWindow;
 		//A pointer to the SDL renderer.
 		SDL_Renderer* sdlRenderer;
-		static BorisConsoleManager* BorisConsoleManager;
+		static BorisConsoleManager* borisConsoleManager;
 
 };
 

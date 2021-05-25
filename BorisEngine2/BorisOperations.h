@@ -5,7 +5,7 @@
 #include "FloatRect.h"
 #include <cstring>
 #include <sstream>
-#include <Windows.h>
+/*#include <Windows.h>*/
 #include <SDL.h>
 #include <SDL_mixer.h>
 #include <algorithm>
@@ -15,8 +15,8 @@ namespace BorisOperations
 {
 	//Return "true" if b is true and "false" if b is false.
 	String BoolToString(bool b);
-	//A method which returns an LPCSTR value representing a character.
-	LPCSTR Char_to_LPCSTR(char c);
+	//A method which returns an const char * value representing a character.
+	const char * Char_to_Str(char c);
 	//A method which returns a std::string representing a character.
 	String CharToString(char c);
 	//A method which creates a given directory if
@@ -35,8 +35,8 @@ namespace BorisOperations
 	FloatRect GetFloatRect(SDL_Rect sdlRect);
 	//Get an SDL_Rect value from a given FloatRect value.
 	SDL_Rect GetSDLRect(FloatRect frect);
-	//A method which returns an LPCSTR value representing a given integer.
-	LPCSTR Int_to_LPCSTR(int num);
+	//A method which returns an const char * value representing a given integer.
+	const char * Int_to_Str(int num);
 	float Lerp(float a, float b, float f);
 	Vector2 Lerp(Vector2 a, Vector2 b, float f);
 	FloatRect Lerp(FloatRect a, FloatRect b, float f);
@@ -53,8 +53,8 @@ namespace BorisOperations
 	//Separates a string using a given value to separate the segments.
 	//https://stackoverflow.com/questions/14265581/parse-split-a-string-in-c-using-string-delimiter-standard-c
 	StdVec<String> Split(String str, String delimiter);
-	//A method which returns an LPCSTR value representing a std::string.
-	LPCSTR String_to_LPCSTR(String str);
+	//A method which returns an const char * value representing a std::string.
+	const char * String_to_Str(String str);
 	//Converts a Vector2 into SDL_Point
 	//by rounding the X and Y values.
 	SDL_Point Vector2ToSDLPoint(Vector2 vec2);

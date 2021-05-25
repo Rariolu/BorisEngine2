@@ -2,7 +2,7 @@
 #define _SOUND_H
 
 #include <stdlib.h>
-#include <Windows.h>
+/*#include <Windows.h>*/
 #include <iostream>
 #include <cstdlib>
 #include <SDL.h>
@@ -23,7 +23,7 @@ class Sound
 {
 	public:
 		//Constructor, takes the file path of an audio file and the type of the audio.
-		Sound(LPCSTR filename, SoundType sound_type);
+		Sound(const char *filename, SoundType sound_type);
 		//Destructor method.
 		~Sound();
 		//A method which returns the SoundType of this instance.
@@ -46,7 +46,7 @@ class Sound
 		Mix_Music* music = NULL;
 
 		static int play(void* data);
-		static BorisConsoleManager* BorisConsoleManager;
+		static BorisConsoleManager* borisConsoleManager;
 };
 
 #endif // ! _SOUND_H

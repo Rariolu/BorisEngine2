@@ -14,7 +14,7 @@ BorisConsoleManager* BorisConsoleManager::Instance()
 
 void BorisConsoleManager::Print(String text)
 {
-	Print((char*)BorisOperations::String_to_LPCSTR(text));
+	Print((char*)BorisOperations::String_to_Str(text));
 }
 
 void BorisConsoleManager::Print(char* text)

@@ -8,7 +8,7 @@
 
 // Windows & SDL 
 #include <stdlib.h>
-#include <Windows.h>
+/*#include <Windows.h>*/
 #include <iostream>
 #include <string>
 #include <ctime>
@@ -31,7 +31,7 @@ class Texture
 {
 	public:
 		//Constructor, loads an image from given file path.
-		Texture(LPCSTR theFilename, SDL_Renderer *theRenderer);
+		Texture(const char *filename, SDL_Renderer *theRenderer);
 		//Constructor, sets the sdl texture to the given value.
 		Texture(SDL_Texture* texture, SDL_Renderer* theRenderer);
 		//Constructor, sets the sdl texture to the given value, checks if texture is template or not.

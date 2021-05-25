@@ -1,14 +1,14 @@
 #include "FontManager.h"
 
 FontManager* FontManager::_instance = NULL;
-BorisConsoleManager* FontManager::BorisConsoleManager = BorisConsoleManager::Instance();
+BorisConsoleManager* FontManager::borisConsoleManager = BorisConsoleManager::Instance();
 
 FontManager::FontManager()
 {
 	if (TTF_Init() != 0)
 	{
 		String str = "TTF_Init() Failed: " + String(SDL_GetError());
-		BorisConsoleManager->Print(str);
+		borisConsoleManager->Print(str);
 	}
 }
 

@@ -40,7 +40,8 @@ Sprite::~Sprite()
 
 bool Sprite::CollidesWith(SDL_Rect* boundary)
 {
-	return SDL_HasIntersection(&GetPosition(), boundary) != 0;
+	const SDL_Rect myCurrentPos = GetPosition();
+	return SDL_HasIntersection(&myCurrentPos, boundary) != 0;
 }
 
 bool Sprite::CollidesWith(Sprite* otherSprite)
@@ -49,12 +50,14 @@ bool Sprite::CollidesWith(Sprite* otherSprite)
 	{
 		return false;
 	}
-	return CollidesWith(&BorisOperations::GetExpandedRect(otherSprite->GetPosition(), 2));
+	SDL_Rect expandedRect = BorisOperations::GetExpandedRect(otherSprite->GetPosition(), 2);
+	return CollidesWith(&expandedRect);
 }
 
 bool Sprite::Clicked(SDL_Point* mouseposition)
 {
-	return IsActive() && SDL_PointInRect(mouseposition, &GetPosition());
+	const SDL_Rect myCurrentPos = GetPosition();
+	return IsActive() && SDL_PointInRect(mouseposition, &myCurrentPos);
 }
 
 Vector2 Sprite::Force()
@@ -168,11 +171,13 @@ void Sprite::Render()
 	//RenderRotated(&dimension, &GetPosition());
 	if (!rotation)
 	{
-		Render(&dimension, &GetPosition());
+		SDL_Rect myCurrentPos = GetPosition();
+		Render(&dimension, &myCurrentPos);
 	}
 	else
 	{
-		RenderRotated(&dimension, &GetPosition());
+		SDL_Rect myCurrentPos = GetPosition();
+		RenderRotated(&dimension, &myCurrentPos);
 	}
 }
 
@@ -192,11 +197,13 @@ void Sprite::RenderRotated(SDL_Rect* source, SDL_Rect* dest)
 {
 	if (GetSpriteType() == REGULAR)
 	{
-		texture->Render(source, dest, rotation, &GetCentre());
+		SDL_Point myCurrentCenter = GetCentre();
+		texture->Render(source, dest, rotation, &myCurrentCenter);
 	}
 	else
 	{
-		texture->Render(NULL, NULL, rotation, &GetCentre());
+		SDL_Point myCurrentCenter = GetCentre();
+		texture->Render(NULL, NULL, rotation, &myCurrentCenter);
 	}
 }
 

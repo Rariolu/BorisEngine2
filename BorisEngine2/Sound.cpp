@@ -1,8 +1,8 @@
 #include "Sound.h"
 
-BorisConsoleManager* Sound::BorisConsoleManager = BorisConsoleManager::Instance();
+BorisConsoleManager* Sound::borisConsoleManager = BorisConsoleManager::Instance();
 
-Sound::Sound(LPCSTR filename, SoundType sound_type)
+Sound::Sound(const char *filename, SoundType sound_type)
 {
 	soundType = sound_type;
 	switch (soundType)
@@ -13,29 +13,29 @@ Sound::Sound(LPCSTR filename, SoundType sound_type)
 			if (sound == 0)
 			{
 				String str = "Sound FX '" + String(filename) + "' could not be loaded. " + String(SDL_GetError());
-				BorisConsoleManager->Print(str);
+				borisConsoleManager->Print(str);
 			}
 			else
 			{
 				Mix_VolumeChunk(sound, Util::GetInstance()->GetSFXVolume());
 				String str = "Sound FX '" + String(filename) + "' was successfully loaded. ";
-				BorisConsoleManager->Print(str);
+				borisConsoleManager->Print(str);
 			}
 			break;
 		}
 		case MUSIC:
 		{
 			music = Mix_LoadMUS(filename);
-			BorisConsoleManager->Print(String(Mix_GetError()));
+			borisConsoleManager->Print(String(Mix_GetError()));
 			if (!music)
 			{
 				String str = "Music '" + String(filename) + "' could not be loaded. " + String(SDL_GetError());
-				BorisConsoleManager->Print(str);
+				borisConsoleManager->Print(str);
 			}
 			else
 			{
 				String str = "Music '" + String(filename) + "' was successfully loaded. ";
-				BorisConsoleManager->Print(str);
+				borisConsoleManager->Print(str);
 			}
 			break;
 		}

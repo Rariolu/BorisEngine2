@@ -24,7 +24,7 @@ class FontManager
 		static FontManager* _instance;
 		//A map using std::strings as keys and "Font" pointers as values.
 		Dictionary<String, Font*> fonts;
-		static BorisConsoleManager* BorisConsoleManager;
+		static BorisConsoleManager* borisConsoleManager;
 };
 
 #endif
