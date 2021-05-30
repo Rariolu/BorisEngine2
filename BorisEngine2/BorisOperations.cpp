@@ -189,9 +189,51 @@ namespace BorisOperations
 		}
 	}
 
-	/* FIXME unimplemented! */
 	bool LineIntersectsCircle(Vector2 lineStartPosition, Vector2 lineDirection, Circle circle)
 	{
+		/* first, check if the lineStartPosition point is inside the circle! */
+		float delX = (circle.X - lineStartPosition.X);
+		float delY = (circle.Y - lineStartPosition.Y);
+		float quadrance = (delX*delX) + (delY*delY);
+		if (quadrance < circle.radius*circle*radius) {
+			return true;
+		}
+		float slope = ((float)lineDirection.Y) / lineDirection.X;
+		float orthogonalSlope = ((float) (0 - lineDirection.X) / lineDirection.Y);
+		/* check if the circle's center is in the opposite direction of the ray. */
+		if (orthogonalSlope > 0) {
+			float threshold = (orthogonalSlope*circle.centre.X) - (m*lineStartPosition.X) + lineStartPosition.Y;
+			if (lineDirection.X > 0) {
+				/* the ray is pointed down and to the right (fourth quadrant) */
+				if (circle.centre.Y > threshold) {
+					return false;
+				}
+			} else {
+				/* the ray is pointed up and to the left (second quadrant) */
+				if (circle.centre.y < threshold) {
+					return false;
+				}
+			}
+		} else {
+			float threshold = (orthogonalSlope*circle.centre.X) - (m*lineStartPosition.X) + lineStartPosition.Y;
+			if (lineDirection.X > 0) {
+				/* the ray is pointed up and to the right (first quadrant) */
+				if (circle.centre.Y < threshold) {
+					return false;
+				}
+			} else {
+				/* the ray is pointed down and to the left (third quadrant) */
+				if (circle.centre.y > threshold) {
+					return false;
+				}
+			}
+		}
+		
+		/* now for the hard part: we want to check if the ray actually intersects a circle */
+		/* FIXME unimplemented! */
+		// TODO implement this step
+		
 		return false;
 	}
 }
+
