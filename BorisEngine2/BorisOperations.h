@@ -9,6 +9,7 @@
 #include <SDL.h>
 #include <SDL_mixer.h>
 #include <algorithm>
+#include <filesystem>
 
 //A namespace used to contain a bunch of miscellaneous subroutines.
 namespace BorisOperations

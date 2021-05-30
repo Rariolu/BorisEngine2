@@ -7,7 +7,8 @@ namespace BorisOperations
 		return b ? "true" : "false";
 	}
 
-	LPCSTR Char_to_LPCSTR(char c)
+	/* FIXME memory leak here... T.T */
+	const char *Char_to_Str(char c)
 	{
 		return new char[2] {c, '\0'};
 	}
@@ -25,12 +26,16 @@ namespace BorisOperations
 			return false;
 		}
 		String dir = dirParts[0];
-		for (int i = 1; i < dirParts.size(); i++)
+		for (size_t i = 1; i < dirParts.size(); i++)
 		{
 			dir += "\\" + dirParts[i];
 			if (!FileExists(dir))
 			{
-				if (!CreateDirectory(String_to_LPCSTR(dir), NULL))
+#ifdef _MSC_VER
+				if (!CreateDirectory(String_to_Str(dir), NULL))
+#else
+				if (!std::filesystem::create_directory(String_to_Str(dir)))
+#endif
 				{
 					return false;
 				}
@@ -59,8 +64,9 @@ namespace BorisOperations
 
 	bool FileExists(const String& filename)
 	{
-		struct stat buf;
-		return stat(filename.c_str(), &buf) != -1;
+		std::filesystem::path path_obj(filename);
+		std::filesystem::directory_entry file(path_obj);
+		return std::filesystem::exists(file);
 	}
 
 	float GetDistance(Vector2 a, Vector2 b)
@@ -85,10 +91,10 @@ namespace BorisOperations
 		return{ Round(frect.X),Round(frect.Y),Round(frect.W),Round(frect.H) };
 	}
 
-	LPCSTR Int_to_LPCSTR(int num)
+	const char *Int_to_Str(int num)
 	{
 		//TODO: Optimize this.
-		return String_to_LPCSTR(std::to_string(num));
+		return String_to_Str(std::to_string(num));
 	}
 
 	float Lerp(float a, float b, float f)
@@ -157,11 +163,11 @@ namespace BorisOperations
 		return result;
 	}
 
-	LPCSTR String_to_LPCSTR(String str)
+	const char *String_to_Str(String str)
 	{
 		std::ostringstream ss;
 		ss << str;
-		return _strdup(ss.str().c_str());
+		return strdup(ss.str().c_str());
 	}
 
 	SDL_Point Vector2ToSDLPoint(Vector2 vec2)
@@ -184,6 +190,7 @@ namespace BorisOperations
 		}
 	}
 
+	/* FIXME unimplemented! */
 	bool LineIntersectsCircle(Vector2 lineStartPosition, Vector2 lineDirection, Circle circle)
 	{
 		return false;
