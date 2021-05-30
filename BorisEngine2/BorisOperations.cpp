@@ -64,9 +64,8 @@ namespace BorisOperations
 
 	bool FileExists(const String& filename)
 	{
-		std::filesystem::path path_obj(filename);
-		std::filesystem::directory_entry file(path_obj);
-		return std::filesystem::exists(file);
+		struct stat buf;
+		return stat(filename.c_str(), &buf) != -1;
 	}
 
 	float GetDistance(Vector2 a, Vector2 b)
