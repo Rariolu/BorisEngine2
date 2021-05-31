@@ -195,49 +195,85 @@ namespace BorisOperations
 		float delX = (circle.X - lineStartPosition.X);
 		float delY = (circle.Y - lineStartPosition.Y);
 		float quadrance = (delX*delX) + (delY*delY);
-		if (quadrance < circle.radius*circle*radius) {
+		if (quadrance <= circle.radius*circle.radius) {
 			return true;
 		}
-		float slope = ((float)lineDirection.Y) / lineDirection.X;
-		float orthogonalSlope = ((float) (0 - lineDirection.X) / lineDirection.Y);
-		/* check if the circle's center is in the opposite direction of the ray. */
-		if (orthogonalSlope > 0) {
-			float threshold = (orthogonalSlope*circle.centre.X) - (m*lineStartPosition.X) + lineStartPosition.Y;
-			if (lineDirection.X > 0) {
-				/* the ray is pointed down and to the right (fourth quadrant) */
-				if (circle.centre.Y > threshold) {
+		if (lineDirection.X == 0) {
+			/* check if the circle's center is in the opposite direction of the ray. */
+			if (lineDirection.Y > 0) {
+				if (circle.centre.Y < lineStartPosition.Y) {
+					return false;
+				}
+			} else if (lineDirection.Y < 0) {
+				if (circle.centre.Y > lineStartPosition.Y) {
 					return false;
 				}
 			} else {
-				/* the ray is pointed up and to the left (second quadrant) */
-				if (circle.centre.y < threshold) {
+				return false;
+			}
+
+			/* now for the hard part: we want to check if the ray actually intersects a circle */
+			return (lineStartPosition.X >= (circle.centre.X - radius)) &&
+						 (lineStartPosition.X <= (circle.centre.X + radius));
+		} else if (lineDirection.Y == 0) {
+			/* check if the circle's center is in the opposite direction of the ray. */
+			if (lineDirection.X > 0) {
+				if (circle.centre.X < lineStartPosition.X) {
 					return false;
 				}
+			} else if (lineDirection.X < 0) {
+				if (circle.centre.X > lineStartPosition.X) {
+					return false;
+				}
+			} else {
+				return false;
 			}
+
+			/* now for the hard part: we want to check if the ray actually intersects a circle */
+			return (lineStartPosition.Y >= (circle.centre.Y - radius)) &&
+						 (lineStartPosition.Y <= (circle.centre.Y + radius));
 		} else {
-			float threshold = (orthogonalSlope*circle.centre.X) - (m*lineStartPosition.X) + lineStartPosition.Y;
-			if (lineDirection.X > 0) {
-				/* the ray is pointed up and to the right (first quadrant) */
-				if (circle.centre.Y < threshold) {
-					return false;
+			float slope = ((float)lineDirection.Y) / lineDirection.X;
+			float orthogonalSlope = ((float) (0 - lineDirection.X) / lineDirection.Y);
+			/* check if the circle's center is in the opposite direction of the ray. */
+			if (orthogonalSlope > 0) {
+				float threshold = (orthogonalSlope*circle.centre.X) - (m*lineStartPosition.X) + lineStartPosition.Y;
+				if (lineDirection.X > 0) {
+					/* the ray is pointed down and to the right (fourth quadrant) */
+					if (circle.centre.Y > threshold) {
+						return false;
+					}
+				} else {
+					/* the ray is pointed up and to the left (second quadrant) */
+					if (circle.centre.y < threshold) {
+						return false;
+					}
 				}
 			} else {
-				/* the ray is pointed down and to the left (third quadrant) */
-				if (circle.centre.y > threshold) {
-					return false;
+				float threshold = (orthogonalSlope*circle.centre.X) - (m*lineStartPosition.X) + lineStartPosition.Y;
+				if (lineDirection.X > 0) {
+					/* the ray is pointed up and to the right (first quadrant) */
+					if (circle.centre.Y < threshold) {
+						return false;
+					}
+				} else {
+					/* the ray is pointed down and to the left (third quadrant) */
+					if (circle.centre.y > threshold) {
+						return false;
+					}
 				}
 			}
+			
+			/* now for the hard part: we want to check if the ray actually intersects a circle */
+			float a = slope*slope + 1;
+			float b = 2*slope*(slope*lineStartPosition.X + lineStartPosition.Y - circle.centre.Y) - (2*circle.centre.x);
+			float c = (slope*slope*lineStartPosition.X*lineStartPosition.X) + (lineStartPosition.Y*lineStartPosition.Y) + (circle.centre.Y*circle.centre.Y);
+			c -= 2*slope*lineStartPosition.X*lineStartPosition.Y;
+			c += 2*slope*lineStartPosition.X*circle.centre.Y;
+			c -= 2*lineStartPosition.Y*circle.centre.Y;
+			float discriminant = b*b - (4*a*c);
+			return discriminant >= 0;
 		}
-		
-		/* now for the hard part: we want to check if the ray actually intersects a circle */
-		float a = slope*slope + 1;
-		float b = 2*slope*(slope*lineStartPosition.X + lineStartPosition.Y - circle.centre.Y) - (2*circle.centre.x);
-		float c = (slope*slope*lineStartPosition.X*lineStartPosition.X) + (lineStartPosition.Y*lineStartPosition.Y) + (circle.centre.Y*circle.centre.Y);
-		c -= 2*slope*lineStartPosition.X*lineStartPosition.Y;
-		c += 2*slope*lineStartPosition.X*circle.centre.Y;
-		c -= 2*lineStartPosition.Y*circle.centre.Y;
-		float discriminant = b*b - (4*a*c);
-		return discriminant >= 0;
 	}
 }
 
