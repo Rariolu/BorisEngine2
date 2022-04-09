@@ -5,9 +5,15 @@
 /*#include <Windows.h>*/
 #include <iostream>
 #include <cstdlib>
-#include <SDL.h>
-#include<SDL.h>
-#include<SDL_mixer.h>
+
+#ifdef __linux__
+  #include <SDL2/SDL.h>
+  #include <SDL2/SDL_mixer.h>
+#else
+  #include <SDL.h>
+  #include <SDL_mixer.h>
+#endif
+
 #include <string>
 #include <iostream>
 #include <fstream>

@@ -9,11 +9,19 @@
 #include <ctime>
 #include <cstdlib>
 
-#include <SDL.h>
-// Image Texture loading library
-#include <SDL_image.h>
-// Font loading library
-#include <SDL_ttf.h>
+#ifdef __linux__
+  #include <SDL2/SDL.h>
+
+  // Image Texture loading library
+  #include <SDL2/SDL_image.h>
+
+  // Font loading library
+  #include <SDL2/SDL_ttf.h>
+#else
+  #include <SDL.h>
+  #include <SDL_image.h>
+  #include <SDL_ttf.h>
+#endif
 
 // STL Container & Algorithms
 #include <vector>

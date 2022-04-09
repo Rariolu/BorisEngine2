@@ -1,10 +1,16 @@
 #ifndef _GAME_H
 #define _GAME_H
 
-#include<SDL.h>
-#include<SDL_image.h>
-#include<iostream>
-#include"SceneManager.h"
+#ifdef __linux__
+  #include <SDL2/SDL.h>
+  #include <SDL2/SDL_image.h>
+#else
+  #include <SDL.h>
+  #include <SDL_image.h>
+#endif
+
+#include <iostream>
+#include "SceneManager.h"
 #include "SDL_Window_Manager.h"
 #include "favicon.c"
 

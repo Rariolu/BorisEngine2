@@ -1,10 +1,17 @@
 #ifndef _FONT_H
 #define _FONT_H
 
-#include<SDL_ttf.h>
+#ifdef __linux__
+  #include <SDL2/SDL.h>
+  #include <SDL2/SDL_ttf.h>
+#else
+  #include <SDL.h>
+  #include <SDL_ttf.h>
+#endif
+
 /*#include<Windows.h>*/
-#include<iostream>
-#include"Texture.h"
+#include <iostream>
+#include "Texture.h"
 #include "BorisConsoleManager.h"
 
 //Create an enumeration for the different possible ways of displaying text.
