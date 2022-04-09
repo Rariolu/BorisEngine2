@@ -73,3 +73,5 @@ include_directories(
          ${SDL2_MIXER_INCLUDE_DIR}
          )
 
+install(TARGETS BorisEngine BorisEngine_static)
+
