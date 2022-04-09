@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.1)
 
 project(BorisEngine)
 
-add_library(libBorisEngine SHARED
+add_library(BorisEngine SHARED
             BorisConsoleManager.cpp
             BorisExternalInterface.cpp
             BorisOperations.cpp
@@ -27,7 +27,7 @@ add_library(libBorisEngine SHARED
             ThreadManager.cpp
             Util.cpp)
 
-add_library(libBorisEngine_static STATIC
+add_library(BorisEngine_static STATIC
             BorisConsoleManager.cpp
             BorisExternalInterface.cpp
             BorisOperations.cpp
@@ -57,8 +57,8 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${BorisEngine_SOURCE_DIR}/cmake-find
 # Try uncommenting the following two lines if CMake build fails:
 #SET(CMAKE_CXX_COMPILER /usr/bin/g++)
 
-set_property(TARGET libBorisEngine PROPERTY CXX_STANDARD 17)
-set_property(TARGET libBorisEngine_static PROPERTY CXX_STANDARD 17)
+set_property(TARGET BorisEngine PROPERTY CXX_STANDARD 17)
+set_property(TARGET BorisEngine_static PROPERTY CXX_STANDARD 17)
 
 find_package(SDL2 REQUIRED)
 find_package(SDL2_ttf REQUIRED)
