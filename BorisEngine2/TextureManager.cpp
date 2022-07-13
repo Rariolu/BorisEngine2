@@ -2,7 +2,7 @@
 
 TextureManager* TextureManager::_instance = NULL;
 
-BorisConsoleManager* TextureManager::BorisConsoleManager = BorisConsoleManager::Instance();
+BorisConsoleManager* TextureManager::borisConsoleManager = BorisConsoleManager::Instance();
 
 TextureManager::TextureManager()
 {
@@ -23,7 +23,7 @@ TextureManager* TextureManager::getInstance()
 	return _instance;
 }
 
-Texture* TextureManager::AddTexture(String textureName, LPCSTR filename)//(LPCSTR textureName, LPCSTR filename)
+Texture* TextureManager::AddTexture(String textureName, const char *filename)//(LPCSTR textureName, LPCSTR filename)
 {
 	Texture* texture = new Texture(filename, sdlRenderer);
 	return AddTexture(textureName, texture);
@@ -38,7 +38,7 @@ Texture* TextureManager::AddTexture(String textureName, Texture* texture)//(LPCS
 		return texture;
 	}
 	String str = "Unable to add" + textureName + "because a texture of that name has already been added.";
-	BorisConsoleManager->Print(str);
+	borisConsoleManager->Print(str);
 	return texture;
 }
 

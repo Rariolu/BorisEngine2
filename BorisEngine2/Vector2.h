@@ -2,7 +2,13 @@
 #define _VECTOR2_H
 
 #include "Aliases.h"
-#include "SDL.h"
+
+#ifdef __linux__
+  #include <SDL2/SDL.h>
+#else
+  #include <SDL.h>
+#endif
+
 #include "string"
 
 //A struct which represents an onscreen position using an X and Y value.

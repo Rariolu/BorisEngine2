@@ -1,8 +1,13 @@
 #ifndef  _SOUNDWRAP_H
 #define _SOUNDWRAP_H
 
-#include<SDL.h>
-#include<SDL_mixer.h>
+#ifdef __linux__
+  #include <SDL2/SDL.h>
+  #include <SDL2/SDL_mixer.h>
+#else
+  #include <SDL.h>
+  #include <SDL_mixer.h>
+#endif
 
 //An enumeration which represents the 2 different types of audio.
 enum SoundType { SFX, MUSIC };

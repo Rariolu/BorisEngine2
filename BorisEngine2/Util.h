@@ -1,11 +1,17 @@
 #ifndef _UTIL_H
 #define _UTIL_H
 
-#include <SDL.h>
-#include <SDL_mixer.h>
+#ifdef __linux__
+  #include <SDL2/SDL.h>
+  #include <SDL2/SDL_mixer.h>
+#else
+  #include <SDL.h>
+  #include <SDL_mixer.h>
+#endif
+
 #include <string>
 #include <iostream>
-#include <Windows.h>
+/*#include <Windows.h>*/
 #include "BorisConsoleManager.h"
 
 //A class used to contain gameplay information and settings.
@@ -59,7 +65,7 @@ class Util
 		int musicvolume = 75;
 		//A std::string which represents the currently-playing song.
 		String currentMusic;
-		static BorisConsoleManager* BorisConsoleManager;
+		static BorisConsoleManager* borisConsoleManager;
 };
 
 #endif

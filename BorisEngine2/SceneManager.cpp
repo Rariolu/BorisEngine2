@@ -2,7 +2,7 @@
 
 SceneManager* SceneManager::_instance = NULL;
 
-BorisConsoleManager* SceneManager::BorisConsoleManager = BorisConsoleManager::Instance();
+BorisConsoleManager* SceneManager::borisConsoleManager = BorisConsoleManager::Instance();
 
 SceneManager::SceneManager()
 {
@@ -41,6 +41,6 @@ void SceneManager::AddScene(String scenename, Scene* scene)
 	}
 	if (scenename == "")
 	{
-		BorisConsoleManager->Print("Using an empty std::string for a scene name is illegal as this would create a runtime error. Please use a substantive name.");
+		borisConsoleManager->Print("Using an empty std::string for a scene name is illegal as this would create a runtime error. Please use a substantive name.");
 	}
 }

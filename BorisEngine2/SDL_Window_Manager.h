@@ -1,8 +1,14 @@
 #ifndef  _SDLWINDOWMANAGER_H
 #define _SDLWINDOWMANAGER_H
 
-#include <SDL.h>
-#include <SDL_image.h>
+#ifdef __linux__
+  #include <SDL2/SDL.h>
+  #include <SDL2/SDL_image.h>
+#else
+  #include <SDL.h>
+  #include <SDL_image.h>
+#endif
+
 #include "favicon.c"
 #include "BorisConsoleManager.h"
 #include "BorisOperations.h"
@@ -41,7 +47,7 @@ class SDL_Window_Manager
 		SDL_Window *mainWindow;
 		//A pointer to the SDL renderer.
 		SDL_Renderer* sdlRenderer;
-		static BorisConsoleManager* BorisConsoleManager;
+		static BorisConsoleManager* borisConsoleManager;
 
 };
 

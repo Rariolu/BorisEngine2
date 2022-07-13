@@ -7,7 +7,8 @@ namespace BorisOperations
 		return b ? "true" : "false";
 	}
 
-	LPCSTR Char_to_LPCSTR(char c)
+	/* FIXME memory leak here... T.T */
+	const char *Char_to_Str(char c)
 	{
 		return new char[2] {c, '\0'};
 	}
@@ -25,12 +26,16 @@ namespace BorisOperations
 			return false;
 		}
 		String dir = dirParts[0];
-		for (int i = 1; i < dirParts.size(); i++)
+		for (size_t i = 1; i < dirParts.size(); i++)
 		{
 			dir += "\\" + dirParts[i];
 			if (!FileExists(dir))
 			{
-				if (!CreateDirectory(String_to_LPCSTR(dir), NULL))
+#ifdef _MSC_VER
+				if (!CreateDirectory(String_to_Str(dir), NULL))
+#else
+				if (!std::filesystem::create_directory(String_to_Str(dir)))
+#endif
 				{
 					return false;
 				}
@@ -85,10 +90,10 @@ namespace BorisOperations
 		return{ Round(frect.X),Round(frect.Y),Round(frect.W),Round(frect.H) };
 	}
 
-	LPCSTR Int_to_LPCSTR(int num)
+	const char *Int_to_Str(int num)
 	{
 		//TODO: Optimize this.
-		return String_to_LPCSTR(std::to_string(num));
+		return String_to_Str(std::to_string(num));
 	}
 
 	float Lerp(float a, float b, float f)
@@ -157,11 +162,11 @@ namespace BorisOperations
 		return result;
 	}
 
-	LPCSTR String_to_LPCSTR(String str)
+	const char *String_to_Str(String str)
 	{
 		std::ostringstream ss;
 		ss << str;
-		return _strdup(ss.str().c_str());
+		return strdup(ss.str().c_str());
 	}
 
 	SDL_Point Vector2ToSDLPoint(Vector2 vec2)
@@ -186,6 +191,89 @@ namespace BorisOperations
 
 	bool LineIntersectsCircle(Vector2 lineStartPosition, Vector2 lineDirection, Circle circle)
 	{
-		return false;
+		/* first, check if the lineStartPosition point is inside the circle! */
+		float delX = (circle.centre.X - lineStartPosition.X);
+		float delY = (circle.centre.Y - lineStartPosition.Y);
+		float quadrance = (delX*delX) + (delY*delY);
+		if (quadrance <= circle.radius*circle.radius) {
+			return true;
+		}
+		if (lineDirection.X == 0) {
+			/* check if the circle's center is in the opposite direction of the ray. */
+			if (lineDirection.Y > 0) {
+				if (circle.centre.Y < lineStartPosition.Y) {
+					return false;
+				}
+			} else if (lineDirection.Y < 0) {
+				if (circle.centre.Y > lineStartPosition.Y) {
+					return false;
+				}
+			} else {
+				return false;
+			}
+
+			/* now for the hard part: we want to check if the ray actually intersects a circle */
+			return (lineStartPosition.X >= (circle.centre.X - circle.radius)) &&
+						 (lineStartPosition.X <= (circle.centre.X + circle.radius));
+		} else if (lineDirection.Y == 0) {
+			/* check if the circle's center is in the opposite direction of the ray. */
+			if (lineDirection.X > 0) {
+				if (circle.centre.X < lineStartPosition.X) {
+					return false;
+				}
+			} else if (lineDirection.X < 0) {
+				if (circle.centre.X > lineStartPosition.X) {
+					return false;
+				}
+			} else {
+				return false;
+			}
+
+			/* now for the hard part: we want to check if the ray actually intersects a circle */
+			return (lineStartPosition.Y >= (circle.centre.Y - circle.radius)) &&
+						 (lineStartPosition.Y <= (circle.centre.Y + circle.radius));
+		} else {
+			float slope = ((float)lineDirection.Y) / lineDirection.X;
+			float orthogonalSlope = ((float) (0 - lineDirection.X) / lineDirection.Y);
+			/* check if the circle's center is in the opposite direction of the ray. */
+			if (orthogonalSlope > 0) {
+				float threshold = (orthogonalSlope*circle.centre.X) - (slope*lineStartPosition.X) + lineStartPosition.Y;
+				if (lineDirection.X > 0) {
+					/* the ray is pointed down and to the right (fourth quadrant) */
+					if (circle.centre.Y > threshold) {
+						return false;
+					}
+				} else {
+					/* the ray is pointed up and to the left (second quadrant) */
+					if (circle.centre.Y < threshold) {
+						return false;
+					}
+				}
+			} else {
+				float threshold = (orthogonalSlope*circle.centre.X) - (slope*lineStartPosition.X) + lineStartPosition.Y;
+				if (lineDirection.X > 0) {
+					/* the ray is pointed up and to the right (first quadrant) */
+					if (circle.centre.Y < threshold) {
+						return false;
+					}
+				} else {
+					/* the ray is pointed down and to the left (third quadrant) */
+					if (circle.centre.Y > threshold) {
+						return false;
+					}
+				}
+			}
+			
+			/* now for the hard part: we want to check if the ray actually intersects a circle */
+			float a = slope*slope + 1;
+			float b = 2*slope*(slope*lineStartPosition.X + lineStartPosition.Y - circle.centre.Y) - (2*circle.centre.X);
+			float c = (slope*slope*lineStartPosition.X*lineStartPosition.X) + (lineStartPosition.Y*lineStartPosition.Y) + (circle.centre.Y*circle.centre.Y);
+			c -= 2*slope*lineStartPosition.X*lineStartPosition.Y;
+			c += 2*slope*lineStartPosition.X*circle.centre.Y;
+			c -= 2*lineStartPosition.Y*circle.centre.Y;
+			float discriminant = b*b - (4*a*c);
+			return discriminant >= 0;
+		}
 	}
 }
+

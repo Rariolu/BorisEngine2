@@ -1,11 +1,16 @@
 #ifndef  _SPRITE_H
 #define _SPRITE_H
 
-#include<SDL.h>
-#include"Texture.h"
+#ifdef __linux__
+  #include <SDL2/SDL.h>
+#else
+  #include <SDL.h>
+#endif
+
+#include "Texture.h"
 #include "TextureManager.h"
-#include"BorisOperations.h"
-#include"Util.h"
+#include "BorisOperations.h"
+#include "Util.h"
 #include "SoundManager.h"
 #include "Renderable.h"
 #include "Animation.h"

@@ -2,7 +2,7 @@
 
 Util* Util::_instance = NULL;
 
-BorisConsoleManager* Util::BorisConsoleManager = BorisConsoleManager::Instance();
+BorisConsoleManager* Util::borisConsoleManager = BorisConsoleManager::Instance();
 
 Util::Util()
 {
@@ -48,7 +48,7 @@ int Util::GetSFXVolume()
 void Util::SetSFXVolume(int volume)
 {
 	sfxvolume = volume;
-	BorisConsoleManager->Print("SFX volume has been set to " + std::to_string(volume) + ".");
+	borisConsoleManager->Print("SFX volume has been set to " + std::to_string(volume) + ".");
 }
 
 int Util::GetMusicVolume()
@@ -60,7 +60,7 @@ void Util::SetMusicVolume(int volume)
 {
 	musicvolume = volume;
 	Mix_VolumeMusic(volume);
-	BorisConsoleManager->Print("Music volume has been set to " + std::to_string(volume));
+	borisConsoleManager->Print("Music volume has been set to " + std::to_string(volume));
 }
 
 String Util::GetCurrentMusic()
@@ -80,7 +80,7 @@ void Util::IncreaseHealth(double amount)
 	(
 		health < 0 ? 0 : health
 	);
-	BorisConsoleManager->Print("Current health is: " + std::to_string(health) + ".");
+	borisConsoleManager->Print("Current health is: " + std::to_string(health) + ".");
 }
 
 double Util::GetHealth()

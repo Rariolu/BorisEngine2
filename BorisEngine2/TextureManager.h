@@ -3,23 +3,33 @@
 
 // Windows & SDL 
 #include <stdlib.h>
-#include <Windows.h>
+/*#include <Windows.h>*/
 #include <iostream>
 #include <string>
 #include <ctime>
 #include <cstdlib>
-#include <SDL.h>
-// Image Texture loading library
-#include <SDL_image.h>
-// Font loading library
-#include <SDL_ttf.h>
+
+#ifdef __linux__
+  #include <SDL2/SDL.h>
+
+  // Image Texture loading library
+  #include <SDL2/SDL_image.h>
+
+  // Font loading library
+  #include <SDL2/SDL_ttf.h>
+#else
+  #include <SDL.h>
+  #include <SDL_image.h>
+  #include <SDL_ttf.h>
+#endif
 
 // STL Container & Algorithms
 #include <vector>
 #include <map>
 #include <algorithm>
 
-#include"Texture.h"
+#include "BorisConsoleManager.h"
+#include "Texture.h"
 
 //Create a class used to store pointers to instances of "Texture" so that they can be easily accessed when necessary.
 class TextureManager
@@ -30,7 +40,7 @@ class TextureManager
 		static TextureManager* getInstance();
 		//A method which adds a texture by loading one from
 		//a given file path.
-		Texture* AddTexture(String texturename, LPCSTR theFilename);
+		Texture* AddTexture(String texturename, const char *filename);
 		//A method which adds a given texture.
 		Texture* AddTexture(String texturename, Texture* texture);
 		//A method which returns a pointer to an instance
@@ -58,7 +68,7 @@ class TextureManager
 		Dictionary<String, Texture*> textureList;
 		//The SDL renderer.
 		SDL_Renderer* sdlRenderer;
-		static BorisConsoleManager* BorisConsoleManager;
+		static BorisConsoleManager* borisConsoleManager;
 };
 
 #endif

@@ -1,13 +1,13 @@
 #include "Font.h"
 
-BorisConsoleManager* Font::BorisConsoleManager = BorisConsoleManager::Instance();
+BorisConsoleManager* Font::borisConsoleManager = BorisConsoleManager::Instance();
 
-Font::Font(LPCSTR filename, int fontSize,SDL_Renderer* _renderer) : Font(filename,fontSize,_renderer,{0,0,0,0},{255,255,255,255})
+Font::Font(const char *filename, int fontSize,SDL_Renderer* _renderer) : Font(filename,fontSize,_renderer,{0,0,0,0},{255,255,255,255})
 {
 
 }
 
-Font::Font(LPCSTR filename, int fontSize, SDL_Renderer* _renderer, SDL_Color text_colour, SDL_Color background_colour)
+Font::Font(const char *filename, int fontSize, SDL_Renderer* _renderer, SDL_Color text_colour, SDL_Color background_colour)
 {
 	renderer = _renderer;
 	ttfFont = TTF_OpenFont(filename, fontSize);
@@ -17,7 +17,7 @@ Font::Font(LPCSTR filename, int fontSize, SDL_Renderer* _renderer, SDL_Color tex
 	{
 		ttfFont = {};
 		String str = " Failed to load \"" + String(filename) + "\" font : " + String(SDL_GetError());
-		BorisConsoleManager->Print(str);
+		borisConsoleManager->Print(str);
 	}
 }
 
@@ -27,7 +27,7 @@ Font::~Font()
 	ttfFont = NULL;
 }
 
-Texture* Font::CreateTextTexture(LPCSTR text, TextType text_type)
+Texture* Font::CreateTextTexture(const char *text, TextType text_type)
 {
 	SDL_Surface* surface = NULL;
 	if (ttfFont)
@@ -59,7 +59,7 @@ Texture* Font::CreateTextTexture(LPCSTR text, TextType text_type)
 
 Texture* Font::CreateTextTexture(String text, TextType text_type)
 {
-	return CreateTextTexture(BorisOperations::String_to_LPCSTR(text), text_type);
+	return CreateTextTexture(BorisOperations::String_to_Str(text), text_type);
 }
 
 TTF_Font* Font::GetFont()

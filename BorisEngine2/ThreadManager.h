@@ -1,7 +1,12 @@
 #ifndef _THREAD_MANAGER_H
 #define _THREAD_MANAGER_H
 
-#include "SDL.h"
+#ifdef __linux__
+  #include <SDL2/SDL.h>
+#else
+  #include <SDL.h>
+#endif
+
 #include "BorisOperations.h"
 #include <iostream>
 #include <vector>

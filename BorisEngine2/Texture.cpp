@@ -2,7 +2,7 @@
 
 BorisConsoleManager* Texture::borisConsoleManager = BorisConsoleManager::Instance();
 
-Texture::Texture(LPCSTR filename, SDL_Renderer* renderer) : Texture(IMG_LoadTexture(renderer,filename),renderer)
+Texture::Texture(const char *filename, SDL_Renderer* renderer) : Texture(IMG_LoadTexture(renderer,filename),renderer)
 {
 
 }

@@ -8,16 +8,25 @@
 
 // Windows & SDL 
 #include <stdlib.h>
-#include <Windows.h>
+/*#include <Windows.h>*/
 #include <iostream>
 #include <string>
 #include <ctime>
 #include <cstdlib>
-#include <SDL.h>
-// Image Texture loading library
-#include <SDL_image.h>
-// Font loading library
-#include <SDL_ttf.h>
+
+#ifdef __linux__
+  #include <SDL2/SDL.h>
+
+  // Image Texture loading library
+  #include <SDL2/SDL_image.h>
+
+  // Font loading library
+  #include <SDL2/SDL_ttf.h>
+#else
+  #include <SDL.h>
+  #include <SDL_image.h>
+  #include <SDL_ttf.h>
+#endif
 
 // STL Container & Algorithms
 #include <vector>
@@ -31,7 +40,7 @@ class Texture
 {
 	public:
 		//Constructor, loads an image from given file path.
-		Texture(LPCSTR theFilename, SDL_Renderer *theRenderer);
+		Texture(const char *filename, SDL_Renderer *theRenderer);
 		//Constructor, sets the sdl texture to the given value.
 		Texture(SDL_Texture* texture, SDL_Renderer* theRenderer);
 		//Constructor, sets the sdl texture to the given value, checks if texture is template or not.
